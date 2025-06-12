@@ -50,24 +50,4 @@ namespace Project.Core.Card
             IsSelection = false;
         }
     }
-
-    public class CardHealth
-    {
-        public void TakeDamage(int damage)
-        {
-
-        }
-    }
-
-    public class CardModel
-    { 
-        public readonly CardHealth Health;
-        public readonly EnemyCardSelectionHandler Handler;
-
-        public CardModel(CardHealth health, EnemyCardSelectionHandler handler)
-        {
-            Health = health;
-            Handler = handler;
-        }
-    }
 }

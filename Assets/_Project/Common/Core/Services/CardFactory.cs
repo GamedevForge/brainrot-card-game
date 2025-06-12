@@ -27,9 +27,4 @@ namespace Project.Core.Sevices
             return data;
         }
     }
-
-    public class CardObjectPool
-    {
-        
-    }
 }

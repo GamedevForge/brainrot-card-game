@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.Core.Sevices
 {
-    public struct CardCreatedData
+    public class CardCreatedData
     {
         public GameObject CardGameObject;
         public EnemyCardSelectionHandler SelectionHandler;
