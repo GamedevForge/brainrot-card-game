@@ -7,8 +7,9 @@ namespace Project.Core.Sevices
     {
         public GameObject CardGameObject;
         public EnemyCardSelectionHandler SelectionHandler;
-        public CardModel CardModel;
         public CardComponents CardComponents;
         public CardStats CardStats;
+        public CardHealth Health;
+        public Vector3 StartPosition;
     }
 }

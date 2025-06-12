@@ -1,50 +1,75 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using Project.Core.Card;
 
 namespace Project.Core.Sevices
 {
     public class CardHandlerRepository : IDisposable
     {
-        public event Action<CardModel> OnAttack;
+        public event Action<CardCreatedData> OnAttack;
         
-        private readonly List<EnemyCardSelectionHandler> _selectionHanlders = new();
-        
+        private readonly List<CardCreatedData> _selectionHanlders = new();
+
+        public CardCreatedData CurrentCardModel { get; private set; }
+
         public void Dispose()
         {
-            foreach (EnemyCardSelectionHandler selectionHandler in _selectionHanlders)
+            foreach (CardCreatedData selectionHandler in _selectionHanlders)
             {
-                selectionHandler.OnAttack -= SendAttackedCard;
-                selectionHandler.OnSelect -= ResetAllSelectedCard;
+                selectionHandler.SelectionHandler.OnAttack -= SendAttackedCard;
+                selectionHandler.SelectionHandler.OnSelect -= ResetAllSelectedCard;
             }
         }
 
-        public void Add(EnemyCardSelectionHandler selectionHandler)
+        public void Add(CardCreatedData selectionHandler)
         {
             _selectionHanlders.Add(selectionHandler);
-            selectionHandler.OnAttack += SendAttackedCard;
-            selectionHandler.OnSelect += ResetAllSelectedCard;
+            selectionHandler.SelectionHandler.OnAttack += SendAttackedCard;
+            selectionHandler.SelectionHandler.OnSelect += ResetAllSelectedCard;
         }
 
-        public void Remove(EnemyCardSelectionHandler selectionHandler)
+        public void Remove(CardCreatedData selectionHandler)
         {
             _selectionHanlders.Remove(selectionHandler);
-            selectionHandler.OnAttack -= SendAttackedCard;
-            selectionHandler.OnSelect -= ResetAllSelectedCard;
+            selectionHandler.SelectionHandler.OnAttack -= SendAttackedCard;
+            selectionHandler.SelectionHandler.OnSelect -= ResetAllSelectedCard;
         }
 
-        public void ResetAllSelectedCard(CardModel currentSelectionHandler)
+        public void ResetAllSelectedCard(CardCreatedData currentSelectionHandler)
         {
-            foreach (EnemyCardSelectionHandler selectionHandler in _selectionHanlders)
+            foreach (CardCreatedData selectionHandler in _selectionHanlders)
             {
-                if (selectionHandler == currentSelectionHandler.Handler)
+                if (selectionHandler == currentSelectionHandler)
                     continue;
-                else if (selectionHandler.IsSelection)
-                    selectionHandler.ResetSelect();
+                else if (selectionHandler.SelectionHandler.IsSelection)
+                    selectionHandler.SelectionHandler.ResetSelect();
             }
         }
 
-        private void SendAttackedCard(CardModel currentSelectionHandler) =>
+        public async UniTask AsyncWaitToAttack(CancellationToken cancellationToken = default)
+        {
+            var tcs = new UniTaskCompletionSource();
+
+            void OnDone(object _)
+            {
+                OnAttack -= OnDone;
+                tcs.TrySetResult();
+            }
+
+            OnAttack += OnDone;
+            try
+            {
+                await tcs.Task.AttachExternalCancellation(cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+        }
+
+        private void SendAttackedCard(CardCreatedData currentSelectionHandler) =>
             OnAttack?.Invoke(currentSelectionHandler);
     }
 }

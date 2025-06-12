@@ -6,16 +6,20 @@ namespace Project.Core.UI
 {
     public class MoveAnimation
     {
-        public async UniTask Move(
+        private readonly float _duration;
+
+        public MoveAnimation(float duration) =>
+            _duration = duration;
+
+        public async UniTask MoveAsync(
             RectTransform target, 
             Vector3 startPosition, 
-            Vector3 endPosition,
-            float duration)
+            Vector3 endPosition)
         {
             Tween tween;
             
             target.anchoredPosition3D = startPosition;
-            tween = target.DOAnchorPos3D(endPosition, duration);
+            tween = target.DOAnchorPos3D(endPosition, _duration);
             await tween.AsyncWaitForCompletion();
         }
     }

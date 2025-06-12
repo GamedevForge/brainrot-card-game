@@ -26,7 +26,7 @@ namespace Project.Core.Sevices
                 cardComponents.MainSprite = cardData.Sprite;
                 cardComponents.DamageTextIndex.text = cardData.Damage.ToString();
                 cardComponents.HealthTextIndex.text = cardData.Health.ToString();
-                _handlerRepository.Add(createdCard.CardModel.Handler);
+                _handlerRepository.Add(createdCard);
                 cardDatasList.Add(createdCard);
             }
 

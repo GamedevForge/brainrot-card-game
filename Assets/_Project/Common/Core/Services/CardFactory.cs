@@ -19,8 +19,8 @@ namespace Project.Core.Sevices
             data.CardGameObject = GameObject.Instantiate(_basePrefab);
             data.SelectionHandler = new EnemyCardSelectionHandler(
                 data.CardGameObject.GetComponent<Button>(),
-                data.CardModel);
-            data.CardModel = new CardModel(new CardHealth(), data.SelectionHandler);
+                data);
+            data.Health = new CardHealth();
             data.CardComponents = data.CardGameObject.GetComponent<CardComponents>();
             data.CardStats = new CardStats();
 

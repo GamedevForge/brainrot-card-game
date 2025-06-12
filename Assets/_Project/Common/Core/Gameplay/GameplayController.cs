@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Project.Ai;
 using Project.Configs;
+using Project.Core.Card;
 using Project.Core.Sevices;
 using Project.Core.UI;
-using UnityEngine;
 
 namespace Project.Core.Gameplay
 {
@@ -31,6 +31,16 @@ namespace Project.Core.Gameplay
 
             foreach (CardCreatedData cardCreatedData in _currentWave.CardCreatedDatas)
                 await _cardSlots.Add(cardCreatedData.CardGameObject);
+        }
+
+        public async UniTask GoToNextWave()
+        {
+
+        }
+
+        public void ReleaseAllCardOnCurrentWave()
+        {
+
         }
 
         private void CreateLevel() =>

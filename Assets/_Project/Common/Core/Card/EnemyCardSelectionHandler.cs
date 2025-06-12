@@ -1,4 +1,5 @@
 using System;
+using Project.Core.Sevices;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 
@@ -6,17 +7,17 @@ namespace Project.Core.Card
 {
     public class EnemyCardSelectionHandler : IInitializable, IDisposable
     {
-        public event Action<CardModel> OnSelect;
-        public event Action<CardModel> OnAttack;
+        public event Action<CardCreatedData> OnSelect;
+        public event Action<CardCreatedData> OnAttack;
 
         private readonly Button _button;
-        private readonly CardModel _character;
+        private readonly CardCreatedData _character;
 
         private int _clickCount;
 
         public bool IsSelection { get; private set; } = false; 
 
-        public EnemyCardSelectionHandler(Button button, CardModel character)
+        public EnemyCardSelectionHandler(Button button, CardCreatedData character)
         {
             _button = button;
             _character = character;

@@ -23,7 +23,7 @@ namespace Project.Core.Card
         public void Dispose() =>
             _enemyHandlerRepository.OnAttack -= Attack;
 
-        public void Attack(CardModel cardModel) =>
+        public void Attack(CardCreatedData cardModel) =>
             cardModel.Health.TakeDamage(_playerCardStats.Damage);
     }
 }
