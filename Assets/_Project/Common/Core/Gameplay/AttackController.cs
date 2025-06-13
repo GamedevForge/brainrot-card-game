@@ -46,9 +46,23 @@ namespace Project.Core.Gameplay
                 _playerCard.StartPosition);
         }
 
-        public async UniTask AttackPlayer()
+        public async UniTask AttackPlayer(CardCreatedData enemyCard)
         {
+            RectTransform enemyCardRectTransform = enemyCard
+                .CardGameObject
+                .GetComponent<RectTransform>();
 
+            await _moveAnimation.MoveAsync(
+                enemyCardRectTransform,
+                enemyCardRectTransform.anchoredPosition3D,
+                _playerCardRectTransform.anchoredPosition3D);
+            
+            _playerCard.Health.TakeDamage(enemyCard.CardStats.Damage);
+
+            await _moveAnimation.MoveAsync(
+                enemyCardRectTransform,
+                enemyCardRectTransform.anchoredPosition3D,
+                enemyCard.StartPosition);
         }
     }
 }

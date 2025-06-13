@@ -12,6 +12,8 @@ namespace Project.Core.Sevices.StateMachine
 
         private IState _current;
 
+        public BaseStateController() { }
+
         public BaseStateController(
             IState[] states,
             ITransition[] transitions,

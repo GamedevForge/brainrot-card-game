@@ -13,7 +13,21 @@ namespace Project.Core.Gameplay
         private readonly UpgradeControllerView _upgradeControllerView;
         private readonly InputController _inputController;
         private readonly GameplayController _gameplayController;
-        
+
+        public NextWaveState(
+            BaseStateController baseStateController, 
+            UpgradeController upgradeController, 
+            UpgradeControllerView upgradeControllerView, 
+            InputController inputController, 
+            GameplayController gameplayController)
+        {
+            _baseStateController = baseStateController;
+            _upgradeController = upgradeController;
+            _upgradeControllerView = upgradeControllerView;
+            _inputController = inputController;
+            _gameplayController = gameplayController;
+        }
+
         public async UniTask AsyncEnter()
         {
             _gameplayController.ReleaseAllCardOnCurrentWave();

@@ -6,11 +6,11 @@ namespace Project.Core.UI
 {
     public class CardSlots
     {
-        private readonly GridLayoutGroup _layoutGroup;
+        private readonly RectTransform _gridLayoutTransform;
 
-        public CardSlots(GridLayoutGroup layoutGroup)
+        public CardSlots(RectTransform gridLayoutTransform)
         {
-            _layoutGroup = layoutGroup;
+            _gridLayoutTransform = gridLayoutTransform;
         }
 
         public async UniTask Add(GameObject cardGameObject)
