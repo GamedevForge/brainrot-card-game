@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using Project.Core.Sevices;
 
 namespace Project.Core.UI
 {

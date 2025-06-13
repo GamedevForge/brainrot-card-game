@@ -1,17 +1,23 @@
 ﻿using System;
+using Project.Core.Sevices;
 using UnityEngine;
 
 namespace Project.Core.Card
 {
     public class CardHealth
     {
-        public event Action OnDead;
+        public event Action<CardCreatedData> OnDead;
         public event Action<int> OnTakedGamage;
+
+        private readonly CardCreatedData _cardCreatedData;
         
         private int _health;
         private int _maxHealth;
 
         public bool IsAlive { get; private set; } = true;
+        
+        public CardHealth(CardCreatedData cardCreatedData) =>
+            _cardCreatedData = cardCreatedData;
         
         public void SetMaxHealth(int maxHealth) =>
             _maxHealth = maxHealth;
@@ -28,7 +34,7 @@ namespace Project.Core.Card
             OnTakedGamage?.Invoke(_health);
 
             if (_health == 0) 
-                OnDead?.Invoke();
+                OnDead?.Invoke(_cardCreatedData);
         }
     }
 }

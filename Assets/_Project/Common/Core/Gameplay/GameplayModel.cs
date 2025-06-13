@@ -6,10 +6,10 @@ namespace Project.Core.Gameplay
 {
     public class GameplayModel
     {
-        public LevelData CurrentLevelData { get; }
-        public List<WaveModel> LevelModel { get; }
-        public WaveModel CurrentWave { get; }
-        public CardCreatedData PlayerCard { get; }
+        public LevelData CurrentLevelData { get; set; }
+        public List<WaveModel> LevelModel { get; set; }
+        public WaveModel CurrentWave { get; set; }
+        public CardCreatedData PlayerCard { get; set; }
 
         public bool AllEnemyCardDead()
         {

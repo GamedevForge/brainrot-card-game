@@ -20,7 +20,7 @@ namespace Project.Core.Sevices
             data.SelectionHandler = new EnemyCardSelectionHandler(
                 data.CardGameObject.GetComponent<Button>(),
                 data);
-            data.Health = new CardHealth();
+            data.Health = new CardHealth(data);
             data.CardComponents = data.CardGameObject.GetComponent<CardComponents>();
             data.CardStats = new CardStats();
 

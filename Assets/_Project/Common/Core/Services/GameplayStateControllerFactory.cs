@@ -6,7 +6,7 @@ using Project.Core.UpgradeSystem;
 
 namespace Project.Core.Sevices
 {
-    public class GameplayStateController
+    public class GameplayStateControllerFactory
     {
         private readonly AttackController _attackController;
         private readonly InputController _inputController;
@@ -18,7 +18,7 @@ namespace Project.Core.Sevices
         private readonly GameplayController _gameplayController;
         private readonly BaseStateController _gameCycleStateController;
 
-        public GameplayStateController(
+        public GameplayStateControllerFactory(
             AttackController attackController, 
             InputController inputController, 
             GameplayModel gameplayModel, 
@@ -60,13 +60,19 @@ namespace Project.Core.Sevices
                         _attackController),
                     new EndLevelState(
                         _gameplayModel,
-                        _gameCycleStateController),
+                        _gameCycleStateController,
+                        _inputController),
                     new NextWaveState(
                         stateController,
                         _upgradeController,
                         _upgradeControllerView,
                         _inputController,
-                        _gameplayController)
+                        _gameplayController),
+                    new StartLevelState(
+                        _gameplayController,
+                        new Configs.LevelsData(),
+                        stateController,
+                        _inputController)
                 },
                 new ITransition[]
                 { 
@@ -75,7 +81,8 @@ namespace Project.Core.Sevices
                     new Transition<PlayerTurnState, EndLevelState>(),
                     new Transition<EnemyTurnState, PlayerTurnState>(),
                     new Transition<EnemyTurnState, EndLevelState>(),
-                    new Transition<NextWaveState, PlayerTurnState>()
+                    new Transition<NextWaveState, PlayerTurnState>(),
+                    new Transition<PlayerTurnState, EndLevelState>()
                 },
                 typeof(PlayerTurnState));
 

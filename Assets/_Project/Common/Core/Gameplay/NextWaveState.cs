@@ -30,7 +30,6 @@ namespace Project.Core.Gameplay
 
         public async UniTask AsyncEnter()
         {
-            _gameplayController.ReleaseAllCardOnCurrentWave();
             await _upgradeControllerView.ShowUpgrades();
             _inputController.EnableInput();
             await _upgradeController.AsyncWaitToUpgrade();
@@ -39,7 +38,10 @@ namespace Project.Core.Gameplay
             _baseStateController.Translate(typeof(PlayerTurnState)).Forget();
         }
 
-        public UniTask AsyncExit() =>
+        public async UniTask AsyncExit()
+        {
+            await _gameplayController.AddOnSlotAllCardFromCurrentWave();
             _gameplayController.GoToNextWave();
+        }
     }
 }

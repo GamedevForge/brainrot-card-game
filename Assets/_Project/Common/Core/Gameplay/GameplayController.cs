@@ -1,61 +1,104 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Project.Ai;
 using Project.Configs;
-using Project.Core.Card;
 using Project.Core.Sevices;
 using Project.Core.UI;
 
 namespace Project.Core.Gameplay
 {
-    public class GameplayController
+    public class GameplayController : IDisposable
     {
         private readonly LevelFactory _levelFactory;
         private readonly CardSlots _cardSlots;
-        private readonly AiActor _aiActor;
-        
-        private LevelData _currentLevelData;
-        private List<WaveModel> _levelModel;
-        private WaveModel _currentWave;
+        private readonly GameplayModel _gameplayModel;
+        private readonly CardHandlerRepository _cardHandlerRepository;
 
-        public void SetCurrentLevel(LevelData levelData)
-        { 
-            _currentLevelData = levelData; 
+        private readonly List<CardCreatedData> _subscribedCards = new(); 
+
+        private int _currentWaveIndex = 0;
+
+        public GameplayController(
+            LevelFactory levelFactory, 
+            CardSlots cardSlots, 
+            GameplayModel gameplayModel, 
+            CardHandlerRepository cardHandlerRepository)
+        {
+            _levelFactory = levelFactory;
+            _cardSlots = cardSlots;
+            _gameplayModel = gameplayModel;
+            _cardHandlerRepository = cardHandlerRepository;
         }
 
-        public async UniTask StartLevel()
+        public void Dispose()
         {
-            CreateLevel();
-            _currentWave = _levelModel[0];
-            DeactivateAllCardsWithoutCurrent();
+            foreach (var card in _subscribedCards) 
+                card.Health.OnDead -= RemoveCardOnDead;
+        }
 
-            foreach (CardCreatedData cardCreatedData in _currentWave.CardCreatedDatas)
+        public void SetCurrentLevel(LevelData levelData)
+        {
+            _gameplayModel.CurrentLevelData = levelData; 
+        }
+
+        public void StartLevel()
+        {
+            _currentWaveIndex = 0;
+            CreateLevel();
+            SubscribeOnAllDaedEvent();
+            _gameplayModel.CurrentWave = _gameplayModel.LevelModel[_currentWaveIndex];
+            DeactivateAllCardsWithoutCurrent();
+        }
+
+        public void GoToNextWave()
+        {
+            _currentWaveIndex++;
+
+            if (_currentWaveIndex >= _gameplayModel.LevelModel.Count)
+                return;
+
+            _gameplayModel.CurrentWave = _gameplayModel.LevelModel[_currentWaveIndex];
+        }
+
+        public async UniTask AddOnSlotAllCardFromCurrentWave()
+        {
+            foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
                 await _cardSlots.Add(cardCreatedData.CardGameObject);
         }
 
-        public async UniTask GoToNextWave()
+        private async void RemoveCardOnDead(CardCreatedData card)
         {
-
-        }
-
-        public void ReleaseAllCardOnCurrentWave()
-        {
-
+            _cardHandlerRepository.Remove(card);
+            await _cardSlots.Remove(card.CardGameObject);
+            card.Health.OnDead -= RemoveCardOnDead;
+            _subscribedCards.Remove(card);
         }
 
         private void CreateLevel() =>
-            _levelModel = _levelFactory.Create(_currentLevelData);
+            _gameplayModel.LevelModel = _levelFactory.Create(_gameplayModel.CurrentLevelData);
 
         private void DeactivateAllCardsWithoutCurrent()
         {
-            foreach (WaveModel waveModel in _levelModel)
+            foreach (WaveModel waveModel in _gameplayModel.LevelModel)
             {
-                if (waveModel == _currentWave)
+                if (waveModel == _gameplayModel.CurrentWave)
                     continue;
                 else
                 {
                     foreach(CardCreatedData cardCreatedData in waveModel.CardCreatedDatas)
                         cardCreatedData.CardGameObject.SetActive(false);
+                }
+            }
+        }
+
+        private void SubscribeOnAllDaedEvent()
+        {
+            foreach (WaveModel waveModel in _gameplayModel.LevelModel)
+            {
+                foreach (CardCreatedData cardCreatedData in waveModel.CardCreatedDatas)
+                {
+                    cardCreatedData.Health.OnDead += RemoveCardOnDead;
+                    _subscribedCards.Add(cardCreatedData);
                 }
             }
         }

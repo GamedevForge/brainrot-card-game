@@ -28,6 +28,8 @@ namespace Project.Core.Sevices
                 cardComponents.HealthTextIndex.text = cardData.Health.ToString();
                 _handlerRepository.Add(createdCard);
                 cardDatasList.Add(createdCard);
+                createdCard.Health.SetMaxHealth(cardData.Health);
+                createdCard.Health.Revive();
             }
 
             return cardDatasList;
