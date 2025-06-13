@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Project.Core.UI
+namespace Project.Core.UI.Animtions
 {
     public class MoveAnimation
     {

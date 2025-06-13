@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace Project.Core.UI
+namespace Project.Core.UI.Popup
 {
     public class ShadowPopup
     {

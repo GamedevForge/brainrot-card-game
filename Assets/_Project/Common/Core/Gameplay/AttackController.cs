@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Project.Core.Sevices;
-using Project.Core.UI;
+using Project.Core.UI.Animtions;
 using UnityEngine;
 
 namespace Project.Core.Gameplay
