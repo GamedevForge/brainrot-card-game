@@ -1,23 +1,28 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine;
+using UnityEngine.UI;
 
 namespace Project.Core.UI.Windows
 {
-    public class MenuWindowController
+    public class MenuWindowController : BaseWindowController
     {
-        public async UniTask Show()
-        {
+        private readonly MenuWindowModel _menuWindowModel;
 
+        public MenuWindowController(
+            MenuWindowModel menuWindowModel,
+            Button playButton) : base(menuWindowModel, playButton)
+        {
+            _menuWindowModel = menuWindowModel;
         }
 
-        public async UniTask Hide()
+        public override async UniTask Show()
         {
-
         }
-    }
 
-    public class MenuWindowModel
-    {
-        public GameObject MenuWindowGameObject { get; } 
+        public override async UniTask Hide()
+        {
+        }
+
+        protected override void OnClick() =>
+            TriggerEvent();
     }
 }

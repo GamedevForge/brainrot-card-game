@@ -30,14 +30,14 @@ namespace Project.Core.GameCycle
         }
     }
 
-    public class LoseState
+    public class LoseState : IAsyncEnterState
     {
-
-    }
-
-    public class MenuState
-    {
-
+        
+        
+        public async UniTask AsyncEnter()
+        {
+        
+        }
     }
 
     public class WinState
