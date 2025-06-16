@@ -19,10 +19,10 @@ namespace Project.Core.UI.Windows
         }
 
         public override UniTask HideAsync() =>
-            _animation.PlayAnimation(_model.CanvasGroup, 0f);
+            _animation.PlayAnimationAsync(_model.CanvasGroup, 0f);
 
         public override UniTask ShowAsync() =>
-            _animation.PlayAnimation(_model.CanvasGroup, 1f);
+            _animation.PlayAnimationAsync(_model.CanvasGroup, 1f);
         
         protected override void OnClick() =>
             TriggerEvent();

@@ -1,5 +1,4 @@
 ﻿using Project.Core.Gameplay;
-using Project.Core.UI;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ namespace Project.Core.Sevices
                 _cardHandlerRepository,
                 _playerCard);
             data.GameplayModel = new GameplayModel();
-            data.CardSlots = new CardSlots(_cardSlotParent);
+            //data.CardSlots = new CardSlots(_cardSlotParent);
             data.GameplayController = new GameplayController(
                 _levelFactory,
                 data.CardSlots,

@@ -11,7 +11,7 @@ namespace Project.Core.UI.Animtions
         public AlphaAnimation(float duration) =>
             _duration = duration;
 
-        public async UniTask PlayAnimation(CanvasGroup target, float endValue) =>
+        public async UniTask PlayAnimationAsync(CanvasGroup target, float endValue) =>
             await target
             .DOFade(endValue, _duration)
             .AsyncWaitForCompletion();

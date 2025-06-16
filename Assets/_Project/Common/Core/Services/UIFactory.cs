@@ -35,7 +35,9 @@ namespace Project.Core.Sevices
             data.MenuWindowController = new MenuWindowController(
                 data.MenuWindowModel,
                 data.MenuWindowGameObject.GetComponent<BaseWindowComponents>().Button,
-                new BaseWindowAnimtion());
+                new BaseWindowAnimtion(
+                    data.MenuWindowGameObject.GetComponentInChildren<CanvasGroup>(),
+                    new AlphaAnimation(_windowAnimationDuration)));
 
             data.WinWindowModel = new WinWindowModel(
                 data.WinWindowGameObject,

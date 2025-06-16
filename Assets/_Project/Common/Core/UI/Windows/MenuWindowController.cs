@@ -17,13 +17,11 @@ namespace Project.Core.UI.Windows
             _animtion = animtion;
         }
 
-        public override async UniTask ShowAsync()
-        {
-        }
+        public override UniTask ShowAsync() =>
+            _animtion.PlayShowAnimationAsync();
 
-        public override async UniTask HideAsync()
-        {
-        }
+        public override UniTask HideAsync() =>
+            _animtion.PlayHideAnimationAsync();       
 
         protected override void OnClick() =>
             TriggerEvent();
