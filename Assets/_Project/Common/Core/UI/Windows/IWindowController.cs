@@ -4,7 +4,7 @@ namespace Project.Core.UI.Windows
 {
     public interface IWindowController
     {
-        UniTask Show();
-        UniTask Hide();
+        UniTask ShowAsync();
+        UniTask HideAsync();
     }
 }

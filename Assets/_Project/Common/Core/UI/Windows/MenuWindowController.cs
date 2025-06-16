@@ -6,19 +6,22 @@ namespace Project.Core.UI.Windows
     public class MenuWindowController : BaseWindowController
     {
         private readonly MenuWindowModel _menuWindowModel;
+        private readonly BaseWindowAnimtion _animtion;
 
         public MenuWindowController(
             MenuWindowModel menuWindowModel,
-            Button playButton) : base(menuWindowModel, playButton)
+            Button playButton,
+            BaseWindowAnimtion animtion) : base(menuWindowModel, playButton)
         {
             _menuWindowModel = menuWindowModel;
+            _animtion = animtion;
         }
 
-        public override async UniTask Show()
+        public override async UniTask ShowAsync()
         {
         }
 
-        public override async UniTask Hide()
+        public override async UniTask HideAsync()
         {
         }
 

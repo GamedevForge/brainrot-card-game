@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Project.Core.UI.Windows
@@ -31,10 +30,10 @@ namespace Project.Core.UI.Windows
         public void Dispose() =>
             _button.onClick.AddListener(OnClick);
 
-        public void EnableMenuWindowGameObject() =>
+        public void EnableWindowGameObject() =>
             _model.WindowGameObject.SetActive(true);
 
-        public void DisableMenuWindowGameObject() =>
+        public void DisableWindowGameObject() =>
             _model.WindowGameObject.SetActive(false);
 
         public async UniTask AsyncWaitToClickOnGameplayButton(CancellationToken cancellationToken = default)
@@ -58,9 +57,9 @@ namespace Project.Core.UI.Windows
             }
         }
 
-        public abstract UniTask Hide();
+        public abstract UniTask HideAsync();
 
-        public abstract UniTask Show();
+        public abstract UniTask ShowAsync();
 
         protected abstract void OnClick();
 

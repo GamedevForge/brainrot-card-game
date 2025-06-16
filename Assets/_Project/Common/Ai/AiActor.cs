@@ -6,7 +6,10 @@ namespace Project.Ai
 {
     public class AiActor
     {
-        private readonly CardStats _playerCard;
+        //private readonly CardStats _playerCard;
+
+        //public AiActor(CardStats playerCard) =>
+        //    _playerCard = playerCard;
 
         public CardCreatedData GetCardForAttackPlayer(CardCreatedData[] enemyCardDatas) =>
             GetRandomCard(enemyCardDatas);

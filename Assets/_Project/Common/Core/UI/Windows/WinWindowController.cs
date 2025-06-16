@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 namespace Project.Core.UI.Windows
 {
-    public class LoseWindowController : BaseWindowController
+    public class WinWindowController : BaseWindowController
     {
-        private readonly LoseWindowModel _model;
+        private readonly WinWindowModel _model;
         private readonly AlphaAnimation _animation;
 
-        public LoseWindowController(
-            LoseWindowModel model,
+        public WinWindowController(
+            WinWindowModel model,
             Button goToMenu,
             AlphaAnimation animation) : base(model, goToMenu)
         {
@@ -23,7 +23,7 @@ namespace Project.Core.UI.Windows
 
         public override UniTask ShowAsync() =>
             _animation.PlayAnimation(_model.CanvasGroup, 1f);
-        
+
         protected override void OnClick() =>
             TriggerEvent();
     }

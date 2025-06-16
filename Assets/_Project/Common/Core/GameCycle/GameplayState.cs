@@ -29,19 +29,4 @@ namespace Project.Core.GameCycle
             await _gameplayStateController.Translate(typeof(StartLevelState));
         }
     }
-
-    public class LoseState : IAsyncEnterState
-    {
-        
-        
-        public async UniTask AsyncEnter()
-        {
-        
-        }
-    }
-
-    public class WinState
-    {
-
-    }
 }

@@ -13,9 +13,21 @@ namespace Project.Core.GameCycle
         private readonly InputController _inputController;
         private readonly BaseStateController _gameCycleStateController;
 
+        public MenuState(
+            MenuWindowController menuWindowController, 
+            ShadowPopup shadowPopup, 
+            InputController inputController, 
+            BaseStateController gameCycleStateController)
+        {
+            _menuWindowController = menuWindowController;
+            _shadowPopup = shadowPopup;
+            _inputController = inputController;
+            _gameCycleStateController = gameCycleStateController;
+        }
+
         public async UniTask AsyncEnter()
         {
-            _menuWindowController.EnableMenuWindowGameObject();
+            _menuWindowController.EnableWindowGameObject();
             await _shadowPopup.HidePopup();
             _inputController.EnableInput();
             await _menuWindowController.AsyncWaitToClickOnGameplayButton();
@@ -25,9 +37,9 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncExit()
         {
-            await _menuWindowController.Hide();
+            await _menuWindowController.HideAsync();
             await _shadowPopup.ShowPopup();
-            _menuWindowController.DisableMenuWindowGameObject();
+            _menuWindowController.DisableWindowGameObject();
         }
     }
 }

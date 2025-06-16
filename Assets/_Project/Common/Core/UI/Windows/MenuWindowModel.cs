@@ -1,5 +1,4 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Project.Core.UI.Windows
@@ -7,18 +6,12 @@ namespace Project.Core.UI.Windows
     public class MenuWindowModel : IWindowModel
     {
         public GameObject WindowGameObject { get; } 
-    }
-
-    public class WinWindowController : IWindowController
-    {
-        public UniTask Hide()
+        
+        public MenuWindowModel(GameObject windowGameObject)
         {
-            throw new System.NotImplementedException();
+            WindowGameObject = windowGameObject;
         }
 
-        public UniTask Show()
-        {
-            throw new System.NotImplementedException();
-        }
+
     }
 }
