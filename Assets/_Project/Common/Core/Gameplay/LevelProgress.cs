@@ -6,7 +6,12 @@ namespace Project.Core.Gameplay
     {
         private readonly LevelsData _levelsData;
 
-        public int CurrentLevelIndex { get; private set; }
+        public LevelProgress(LevelsData levelsData)
+        {
+            _levelsData = levelsData;
+        }
+
+        public int CurrentLevelIndex { get; private set; } = 0;
 
         public void SetCurrentLevelIndex(int levelIndex) =>
             CurrentLevelIndex = levelIndex;

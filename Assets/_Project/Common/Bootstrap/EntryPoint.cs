@@ -22,6 +22,7 @@ namespace Project.Bootstrap
         [SerializeField] private GameObject _cardSlotsPrefab;
         [SerializeField] private GraphicRaycaster _graphicRaycaster;
         [SerializeField] private RectTransform _cardSlotsParent;
+        [SerializeField] private RectTransform _playerParent;
 
         [Header("UI:")]
         [SerializeField] private GameObject _menuWindowPrefab;
@@ -33,6 +34,7 @@ namespace Project.Bootstrap
 
         [Header("Other:")]
         [SerializeField] private GameObject _gameplayBackgroundGameObject;
+        [SerializeField] private GameObject _saveLoadSystemPrefab;
 
         private readonly CardHandlerRepository _cardHandlerRepository = new();
 
@@ -54,9 +56,17 @@ namespace Project.Bootstrap
         private UICreateData _uICreateData;
         private ShadowPopupFactory _shadowPopupFactory;
         private ShadowPopupCraeteData _shadowPopupCraeteData;
+        private SaveLoadSystemFactory _saveLoadSystemFactory;
+        private SaveLoadSystemCreateData _saveLoadSystemCreateData;
+        private PlayerCardFactory _playerCardFactory;
+        private CardObjectPool _cardObjectPool;
 
         private void Start() 
         {
+            _saveLoadSystemFactory = new SaveLoadSystemFactory(
+                _saveLoadSystemPrefab,
+                _levelsData);
+            _saveLoadSystemCreateData = _saveLoadSystemFactory.Create();
             _uIFactory = new UIFactory(
                 _menuWindowPrefab, 
                 _loseWindowPrefab, 
@@ -72,11 +82,16 @@ namespace Project.Bootstrap
             _inputController = new InputController(_graphicRaycaster);
             _cardSlotsGameObject = GameObject.Instantiate(_cardSlotsPrefab, _cardSlotsParent);
             _cardFactory = new CardFactory(_cardPrefab);
+            _cardObjectPool = new CardObjectPool(_cardFactory, _gameData.MaxCardPoolSize);
             _levelFactory = new LevelFactory(
                 new WaveFactory(
-                    new CardObjectPool(_cardFactory, _gameData.MaxCardPoolSize),
+                    _cardObjectPool,
                     _cardHandlerRepository));
-            _playerCard = _cardFactory.Create();
+            _playerCardFactory = new PlayerCardFactory(
+                _cardFactory,
+                _playerParent,
+                _playerData.DefualtCardData);
+            _playerCard = _playerCardFactory.Create();
             _upgradeControllerFactory = new UpgradeControllerFactory(_playerCard.CardStats);
             _upgradeControllerCreateData = _upgradeControllerFactory.Create();
             _aiActor = new AiActor();
@@ -86,7 +101,8 @@ namespace Project.Bootstrap
                 _playerCard,
                 _levelFactory,
                 _cardSlotsGameObject.GetComponent<RectTransform>(),
-                _cardHandlerRepository);
+                _cardHandlerRepository,
+                _cardObjectPool);
             _gameplayControllerCreateData = _gameplayControllerFactory.Create();
             _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
                 _uICreateData.MenuWindowController,
@@ -94,7 +110,9 @@ namespace Project.Bootstrap
                 _uICreateData.LoseWindowController,
                 _shadowPopupCraeteData.ShadowPopup,
                 _inputController,
-                _gameplayBackgroundGameObject);
+                _gameplayBackgroundGameObject,
+                _levelsData,
+                _saveLoadSystemCreateData.LevelProgress);
             _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameplayStateControllerFactory = new GameplayStateControllerFactory(
                 _gameplayControllerCreateData.AttackController,
@@ -105,7 +123,8 @@ namespace Project.Bootstrap
                 _upgradeControllerCreateData.UpgradeController,
                 _upgradeControllerCreateData.UpgradeControllerView,
                 _gameplayControllerCreateData.GameplayController,
-                _gameCycleStateController);
+                _gameCycleStateController,
+                _saveLoadSystemCreateData.LevelProgress);
             _gameplayStateController = _gameplayStateControllerFactory.Create();
             _gameCycleStateControllerFactory.SetGameplayStateController(_gameplayStateController);
 
@@ -122,6 +141,7 @@ namespace Project.Bootstrap
             _uICreateData.WinWindowController.Dispose();
             _uICreateData.LoseWindowController.Dispose();
             _cardHandlerRepository.Dispose();
+            _playerCardFactory.Dispose();
         }
     }
 }

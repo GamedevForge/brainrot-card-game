@@ -1,4 +1,6 @@
-﻿using Project.Core.GameCycle;
+﻿using Project.Configs;
+using Project.Core.GameCycle;
+using Project.Core.Gameplay;
 using Project.Core.Sevices.StateMachine;
 using Project.Core.UI.Popup;
 using Project.Core.UI.Windows;
@@ -14,6 +16,8 @@ namespace Project.Core.Sevices
         private readonly ShadowPopup _shadowPopup;
         private readonly InputController _inputController;
         private readonly GameObject _backgorundGameObject;
+        private readonly LevelsData _levelsData;
+        private readonly LevelProgress _levelProgress;
 
         private GameplayState _gameplayState;
 
@@ -23,7 +27,9 @@ namespace Project.Core.Sevices
             LoseWindowController loseWindowController,
             ShadowPopup shadowPopup,
             InputController inputController,
-            GameObject backgorundGameObject)
+            GameObject backgorundGameObject,
+            LevelsData levelsData,
+            LevelProgress levelProgress)
         {
             _menuWindowController = menuWindowController;
             _winWindowController = winWindowController;
@@ -31,6 +37,8 @@ namespace Project.Core.Sevices
             _shadowPopup = shadowPopup;
             _inputController = inputController;
             _backgorundGameObject = backgorundGameObject;
+            _levelsData = levelsData;
+            _levelProgress = levelProgress;
         }
 
         public BaseStateController Create()
@@ -50,7 +58,9 @@ namespace Project.Core.Sevices
                     _winWindowController,
                     _backgorundGameObject,
                     _inputController,
-                    _shadowPopup),
+                    _shadowPopup,
+                    _levelProgress,
+                    _levelsData),
                 new LoseState(
                     _loseWindowController,
                     _backgorundGameObject,

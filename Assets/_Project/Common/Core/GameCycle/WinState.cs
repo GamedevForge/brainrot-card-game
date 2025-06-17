@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Project.Configs;
+using Project.Core.Gameplay;
 using Project.Core.Sevices;
 using Project.Core.Sevices.StateMachine;
 using Project.Core.UI.Popup;
@@ -13,19 +15,25 @@ namespace Project.Core.GameCycle
         private readonly GameObject _gamePlayBackground;
         private readonly InputController _inputController;
         private readonly ShadowPopup _shadowPopup;
+        private readonly LevelProgress _levelProgress;
+        private readonly LevelsData _levelsData;
         
         private BaseStateController _gameCycleStateController;
 
         public WinState(
-            WinWindowController winWindowController, 
-            GameObject gamePlayBackground, 
-            InputController inputController, 
-            ShadowPopup shadowPopup)
+            WinWindowController winWindowController,
+            GameObject gamePlayBackground,
+            InputController inputController,
+            ShadowPopup shadowPopup,
+            LevelProgress levelProgress,
+            LevelsData levelsData)
         {
             _winWindowController = winWindowController;
             _gamePlayBackground = gamePlayBackground;
             _inputController = inputController;
             _shadowPopup = shadowPopup;
+            _levelProgress = levelProgress;
+            _levelsData = levelsData;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -33,6 +41,11 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncEnter()
         {
+            if (_levelsData.LevelDatas.Length - 1 == _levelProgress.CurrentLevelIndex) 
+                _levelProgress.SetCurrentLevelIndex(0);
+            else
+                _levelProgress.SetCurrentLevelIndex(_levelProgress.CurrentLevelIndex + 1);
+            
             _inputController.DisableInput();
             _winWindowController.EnableWindowGameObject();
             await _winWindowController.ShowAsync();

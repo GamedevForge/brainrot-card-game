@@ -8,19 +8,19 @@ namespace Project.Core.Gameplay
     public class StartLevelState : IAsyncEnterState, ISetableState<BaseStateController>
     {
         private readonly GameplayController _gameplayController;
-        private readonly LevelsData _levelData;
+        private readonly LevelProgress _levelProgress;
         private readonly InputController _inputController;
 
         private BaseStateController _gameplayStateController;
-        
+
         public StartLevelState(
             GameplayController gameplayController,
-            LevelsData levelData,
-            InputController inputController)
+            InputController inputController,
+            LevelProgress levelProgress)
         {
             _gameplayController = gameplayController;
-            _levelData = levelData;
             _inputController = inputController;
+            _levelProgress = levelProgress;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -29,7 +29,7 @@ namespace Project.Core.Gameplay
         public async UniTask AsyncEnter()
         {
             _inputController.DisableInput();
-            _gameplayController.SetCurrentLevel(_levelData.LevelDatas[0]);
+            _gameplayController.SetCurrentLevel(_levelProgress.GetCurrentLevelData());
             _gameplayController.StartLevel();
             await _gameplayController.AddOnSlotAllCardFromCurrentWave();
             await _gameplayStateController.Translate(typeof(PlayerTurnState));

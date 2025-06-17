@@ -1,5 +1,4 @@
-﻿using Project.Configs;
-using Project.Core.Card;
+﻿using Project.Core.Card;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +22,7 @@ namespace Project.Core.Sevices
             data.Health = new CardHealth(data);
             data.CardComponents = data.CardGameObject.GetComponent<CardComponents>();
             data.CardStats = new CardStats();
+            data.CardView = new UI.CardView(data);
 
             return data;
         }

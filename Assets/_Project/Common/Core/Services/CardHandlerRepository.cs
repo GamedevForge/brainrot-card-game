@@ -69,7 +69,10 @@ namespace Project.Core.Sevices
             }
         }
 
-        private void SendAttackedCard(CardCreatedData currentSelectionHandler) =>
-            OnAttack?.Invoke(currentSelectionHandler);
+        private void SendAttackedCard(CardCreatedData currentSelectionHandler)
+        {
+            CurrentCardModel = currentSelectionHandler;
+            OnAttack?.Invoke(CurrentCardModel);
+        }
     }
 }

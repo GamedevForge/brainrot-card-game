@@ -1,4 +1,5 @@
 ﻿using Project.Core.Gameplay;
+using Project.Core.UI;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Project.Core.Sevices
         private readonly LevelFactory _levelFactory;
         private readonly RectTransform _cardSlotParent;
         private readonly CardHandlerRepository _cardHandlerRepository;
+        private readonly CardObjectPool _cardObjectPool;
 
         public GameplayControllerFactory(
             RectTransform playerCardRectTransform,
@@ -19,7 +21,8 @@ namespace Project.Core.Sevices
             CardCreatedData playerCard,
             LevelFactory levelFactory,
             RectTransform cardSlotParent,
-            CardHandlerRepository cardHandlerRepository)
+            CardHandlerRepository cardHandlerRepository,
+            CardObjectPool cardObjectPool)
         {
             _playerCardRectTransform = playerCardRectTransform;
             _moveAnimation = moveAnimation;
@@ -27,6 +30,7 @@ namespace Project.Core.Sevices
             _levelFactory = levelFactory;
             _cardSlotParent = cardSlotParent;
             _cardHandlerRepository = cardHandlerRepository;
+            _cardObjectPool = cardObjectPool;
         }
 
         public GameplayControllerCreateData Create()
@@ -38,13 +42,17 @@ namespace Project.Core.Sevices
                 _moveAnimation,
                 _cardHandlerRepository,
                 _playerCard);
-            data.GameplayModel = new GameplayModel();
-            //data.CardSlots = new CardSlots(_cardSlotParent);
+            data.GameplayModel = new GameplayModel(_playerCard);
+            data.CardSlots = new CardSlots(
+                _cardSlotParent,
+                new MoveAnimation(0.1f),
+                new AlphaAnimation(0.1f));
             data.GameplayController = new GameplayController(
                 _levelFactory,
                 data.CardSlots,
                 data.GameplayModel,
-                _cardHandlerRepository);
+                _cardHandlerRepository,
+                _cardObjectPool);
 
             return data;
         }

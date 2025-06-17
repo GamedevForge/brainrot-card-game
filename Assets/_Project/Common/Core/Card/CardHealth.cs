@@ -30,7 +30,7 @@ namespace Project.Core.Card
         
         public void TakeDamage(int damage)
         {
-            Mathf.Max(_health - damage, 0);
+            _health = Mathf.Max(_health - damage, 0);
             OnTakedGamage?.Invoke(_health);
 
             if (_health == 0) 

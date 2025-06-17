@@ -1,4 +1,5 @@
 ﻿using Project.Core.Card;
+using Project.Core.UI;
 using UnityEngine;
 
 namespace Project.Core.Sevices
@@ -11,5 +12,6 @@ namespace Project.Core.Sevices
         public CardStats CardStats;
         public CardHealth Health;
         public Vector3 StartPosition;
+        public CardView CardView;
     }
 }

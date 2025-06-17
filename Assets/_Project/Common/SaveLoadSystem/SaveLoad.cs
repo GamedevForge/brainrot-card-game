@@ -5,20 +5,20 @@ namespace Project.SaveLoadSystem
 {
     public class SaveLoad
     {
-        private readonly string FilePath;
+        private readonly string _filePath;
 
         public SaveLoad() =>
-            FilePath = Application.persistentDataPath + "/PlayerData.json";
+            _filePath = Path.Combine(Application.persistentDataPath, "PlayerData.txt");
 
         public void Save(PlayerSaveData playerSaveData)
         {
             string playerSaveDataJson = JsonUtility.ToJson(playerSaveData);
-            File.WriteAllText(FilePath, playerSaveDataJson);
+            File.WriteAllText(_filePath, playerSaveDataJson);
         }
 
         public PlayerSaveData Load()
         {
-            string playerSaveDataJson = File.ReadAllText(FilePath);
+            string playerSaveDataJson = File.ReadAllText(_filePath);
             return JsonUtility.FromJson<PlayerSaveData>(playerSaveDataJson);
         }
     }

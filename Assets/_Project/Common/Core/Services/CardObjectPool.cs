@@ -23,13 +23,17 @@
         private void OnRelease(CardCreatedData createdData) =>
             createdData.CardGameObject.SetActive(false);
 
-        private void OnDestroy(CardCreatedData createdData) =>
+        private void OnDestroy(CardCreatedData createdData)
+        {
             createdData.SelectionHandler.Dispose();
+            createdData.CardView.Dispose();
+        }
 
         private CardCreatedData OnCreate()
         {
             CardCreatedData cardCreated = _factory.Create();
             cardCreated.SelectionHandler.Initialize();
+            cardCreated.CardView.Initialize();
             return cardCreated;
         }
 

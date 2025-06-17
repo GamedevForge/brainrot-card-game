@@ -17,17 +17,19 @@ namespace Project.Core.Sevices
         private readonly UpgradeControllerView _upgradeControllerView;
         private readonly GameplayController _gameplayController;
         private readonly BaseStateController _gameCycleStateController;
+        private readonly LevelProgress _levelProgress;
 
         public GameplayStateControllerFactory(
-            AttackController attackController, 
-            InputController inputController, 
-            GameplayModel gameplayModel, 
-            CardHandlerRepository cardHandlerRepository, 
-            AiActor aiActor, 
-            UpgradeController upgradeController, 
-            UpgradeControllerView upgradeControllerView, 
-            GameplayController gameplayController, 
-            BaseStateController gameCycleStateController)
+            AttackController attackController,
+            InputController inputController,
+            GameplayModel gameplayModel,
+            CardHandlerRepository cardHandlerRepository,
+            AiActor aiActor,
+            UpgradeController upgradeController,
+            UpgradeControllerView upgradeControllerView,
+            GameplayController gameplayController,
+            BaseStateController gameCycleStateController,
+            LevelProgress levelProgress)
         {
             _attackController = attackController;
             _inputController = inputController;
@@ -38,6 +40,7 @@ namespace Project.Core.Sevices
             _upgradeControllerView = upgradeControllerView;
             _gameplayController = gameplayController;
             _gameCycleStateController = gameCycleStateController;
+            _levelProgress = levelProgress;
         }
 
         public BaseStateController Create()
@@ -64,8 +67,8 @@ namespace Project.Core.Sevices
                         _gameplayController),
                     new StartLevelState(
                         _gameplayController,
-                        new Configs.LevelsData(),
-                        _inputController)
+                        _inputController,
+                        _levelProgress)
             };
             
             BaseStateController stateController = new(

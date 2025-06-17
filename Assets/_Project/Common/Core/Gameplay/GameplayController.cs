@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Project.Configs;
 using Project.Core.Sevices;
 using Project.Core.UI;
+using UnityEngine;
 
 namespace Project.Core.Gameplay
 {
@@ -13,21 +14,24 @@ namespace Project.Core.Gameplay
         private readonly CardSlots _cardSlots;
         private readonly GameplayModel _gameplayModel;
         private readonly CardHandlerRepository _cardHandlerRepository;
+        private readonly CardObjectPool _cardObjectPool;
 
         private readonly List<CardCreatedData> _subscribedCards = new(); 
 
         private int _currentWaveIndex = 0;
 
         public GameplayController(
-            LevelFactory levelFactory, 
-            CardSlots cardSlots, 
-            GameplayModel gameplayModel, 
-            CardHandlerRepository cardHandlerRepository)
+            LevelFactory levelFactory,
+            CardSlots cardSlots,
+            GameplayModel gameplayModel,
+            CardHandlerRepository cardHandlerRepository,
+            CardObjectPool cardObjectPool)
         {
             _levelFactory = levelFactory;
             _cardSlots = cardSlots;
             _gameplayModel = gameplayModel;
             _cardHandlerRepository = cardHandlerRepository;
+            _cardObjectPool = cardObjectPool;
         }
 
         public void Dispose()
@@ -64,6 +68,9 @@ namespace Project.Core.Gameplay
         {
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
                 await _cardSlots.Add(cardCreatedData.CardGameObject);
+
+            foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
+                cardCreatedData.StartPosition = cardCreatedData.CardGameObject.GetComponent<RectTransform>().anchoredPosition;  
         }
 
         private async void RemoveCardOnDead(CardCreatedData card)
@@ -72,6 +79,9 @@ namespace Project.Core.Gameplay
             await _cardSlots.Remove(card.CardGameObject);
             card.Health.OnDead -= RemoveCardOnDead;
             _subscribedCards.Remove(card);
+            _cardObjectPool.Release(card);
+            _gameplayModel.CurrentWave.CardCreatedDatas.Remove(card);
+
         }
 
         private void CreateLevel() =>

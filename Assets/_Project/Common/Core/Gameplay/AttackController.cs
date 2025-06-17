@@ -28,7 +28,7 @@ namespace Project.Core.Gameplay
         {
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
-                _playerCardRectTransform.anchoredPosition3D,
+                _playerCardRectTransform.anchoredPosition,
                 _handlerRepository
                     .CurrentCardModel
                     .CardGameObject
@@ -42,7 +42,7 @@ namespace Project.Core.Gameplay
 
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
-                _playerCardRectTransform.anchoredPosition3D,
+                _playerCardRectTransform.anchoredPosition,
                 _playerCard.StartPosition);
         }
 
@@ -54,14 +54,14 @@ namespace Project.Core.Gameplay
 
             await _moveAnimation.MoveAsync(
                 enemyCardRectTransform,
-                enemyCardRectTransform.anchoredPosition3D,
-                _playerCardRectTransform.anchoredPosition3D);
+                enemyCardRectTransform.anchoredPosition,
+                _playerCardRectTransform.anchoredPosition);
             
             _playerCard.Health.TakeDamage(enemyCard.CardStats.Damage);
 
             await _moveAnimation.MoveAsync(
                 enemyCardRectTransform,
-                enemyCardRectTransform.anchoredPosition3D,
+                enemyCardRectTransform.anchoredPosition,
                 enemyCard.StartPosition);
         }
     }
