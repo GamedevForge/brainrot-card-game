@@ -23,7 +23,7 @@ namespace Project.Core.Sevices
             {
                 CardCreatedData createdCard = _cardPool.Get();
                 CardComponents cardComponents = createdCard.CardComponents;
-                cardComponents.MainSprite = cardData.Sprite;
+                cardComponents.MainImage.sprite = cardData.Sprite;
                 cardComponents.DamageTextIndex.text = cardData.Damage.ToString();
                 cardComponents.HealthTextIndex.text = cardData.Health.ToString();
                 _handlerRepository.Add(createdCard);

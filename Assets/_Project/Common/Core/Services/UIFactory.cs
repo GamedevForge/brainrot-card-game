@@ -9,27 +9,30 @@ namespace Project.Core.Sevices
         private readonly GameObject _menuWindowPrefab;
         private readonly GameObject _loseWindowPrefab;
         private readonly GameObject _winWindowPrefab;
+        private readonly RectTransform _windowsParent;
         private readonly float _windowAnimationDuration;
 
         public UIFactory(
-            GameObject menuWindowPrefab, 
-            GameObject loseWindowPrefab, 
-            GameObject winWindowPrefab, 
-            float windowAnimationDuration)
+            GameObject menuWindowPrefab,
+            GameObject loseWindowPrefab,
+            GameObject winWindowPrefab,
+            float windowAnimationDuration,
+            RectTransform windowsParent)
         {
             _menuWindowPrefab = menuWindowPrefab;
             _loseWindowPrefab = loseWindowPrefab;
             _winWindowPrefab = winWindowPrefab;
             _windowAnimationDuration = windowAnimationDuration;
+            _windowsParent = windowsParent;
         }
 
         public UICreateData Create()
         {
             UICreateData data = new();
 
-            data.MenuWindowGameObject = GameObject.Instantiate(_menuWindowPrefab);
-            data.LoseWindowGameObject = GameObject.Instantiate(_loseWindowPrefab);
-            data.WinWindowGameObject = GameObject.Instantiate(_winWindowPrefab);
+            data.MenuWindowGameObject = GameObject.Instantiate(_menuWindowPrefab, _windowsParent);
+            data.LoseWindowGameObject = GameObject.Instantiate(_loseWindowPrefab, _windowsParent);
+            data.WinWindowGameObject = GameObject.Instantiate(_winWindowPrefab, _windowsParent);
 
             data.MenuWindowModel = new MenuWindowModel(data.MenuWindowGameObject);
             data.MenuWindowController = new MenuWindowController(

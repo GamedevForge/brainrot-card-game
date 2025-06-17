@@ -21,11 +21,13 @@ namespace Project.Bootstrap
         [SerializeField] private GameObject _cardPrefab;
         [SerializeField] private GameObject _cardSlotsPrefab;
         [SerializeField] private GraphicRaycaster _graphicRaycaster;
+        [SerializeField] private RectTransform _cardSlotsParent;
 
         [Header("UI:")]
-        [SerializeField] private GameObject _menuWindowGameObject;
-        [SerializeField] private GameObject _winWindowGameObject;
-        [SerializeField] private GameObject _loseWindowGameObject;
+        [SerializeField] private GameObject _menuWindowPrefab;
+        [SerializeField] private GameObject _winWindowPrefab;
+        [SerializeField] private GameObject _loseWindowPrefab;
+        [SerializeField] private RectTransform _windowsParent;
 
         [Header("Other:")]
         [SerializeField] private GameObject _gameplayBackgroundGameObject;
@@ -52,15 +54,16 @@ namespace Project.Bootstrap
         private void Start() 
         {
             _uIFactory = new UIFactory(
-                _menuWindowGameObject, 
-                _loseWindowGameObject, 
-                _winWindowGameObject, 
-                _animationsData.WindowAnimationDuration);
+                _menuWindowPrefab, 
+                _loseWindowPrefab, 
+                _winWindowPrefab, 
+                _animationsData.WindowAnimationDuration,
+                _windowsParent);
             _uICreateData = _uIFactory.Create();
             _gameCycleStateController = new BaseStateController();
             _gameplayStateController = new BaseStateController();
             _inputController = new InputController(_graphicRaycaster);
-            _cardSlotsGameObject = GameObject.Instantiate(_cardSlotsPrefab);
+            _cardSlotsGameObject = GameObject.Instantiate(_cardSlotsPrefab, _cardSlotsParent);
             _cardFactory = new CardFactory(_cardPrefab);
             _levelFactory = new LevelFactory(
                 new WaveFactory(
