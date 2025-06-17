@@ -69,8 +69,6 @@ namespace Project.Bootstrap
                 _animationsData.PopupShowAndHideDuration);
             _shadowPopupCraeteData = _shadowPopupFactory.Create();
             _uICreateData = _uIFactory.Create();
-            _gameCycleStateController = new BaseStateController();
-            _gameplayStateController = new BaseStateController();
             _inputController = new InputController(_graphicRaycaster);
             _cardSlotsGameObject = GameObject.Instantiate(_cardSlotsPrefab, _cardSlotsParent);
             _cardFactory = new CardFactory(_cardPrefab);
@@ -90,6 +88,14 @@ namespace Project.Bootstrap
                 _cardSlotsGameObject.GetComponent<RectTransform>(),
                 _cardHandlerRepository);
             _gameplayControllerCreateData = _gameplayControllerFactory.Create();
+            _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
+                _uICreateData.MenuWindowController,
+                _uICreateData.WinWindowController,
+                _uICreateData.LoseWindowController,
+                _shadowPopupCraeteData.ShadowPopup,
+                _inputController,
+                _gameplayBackgroundGameObject);
+            _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameplayStateControllerFactory = new GameplayStateControllerFactory(
                 _gameplayControllerCreateData.AttackController,
                 _inputController,
@@ -100,16 +106,8 @@ namespace Project.Bootstrap
                 _upgradeControllerCreateData.UpgradeControllerView,
                 _gameplayControllerCreateData.GameplayController,
                 _gameCycleStateController);
-            _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
-                _uICreateData.MenuWindowController,
-                _uICreateData.WinWindowController,
-                _uICreateData.LoseWindowController,
-                _shadowPopupCraeteData.ShadowPopup,
-                _inputController,
-                _gameplayBackgroundGameObject,
-                _gameplayStateController);
-            _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameplayStateController = _gameplayStateControllerFactory.Create();
+            _gameCycleStateControllerFactory.SetGameplayStateController(_gameplayStateController);
 
             _uICreateData.MenuWindowController.Initialize();
             _uICreateData.WinWindowController.Initialize();

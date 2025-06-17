@@ -14,16 +14,16 @@ namespace Project.Core.Sevices
         private readonly ShadowPopup _shadowPopup;
         private readonly InputController _inputController;
         private readonly GameObject _backgorundGameObject;
-        private readonly BaseStateController _gameplayStateController;
+
+        private GameplayState _gameplayState;
 
         public GameCycleStateControllerFactory(
-            MenuWindowController menuWindowController, 
-            WinWindowController winWindowController, 
-            LoseWindowController loseWindowController, 
-            ShadowPopup shadowPopup, 
-            InputController inputController, 
-            GameObject backgorundGameObject, 
-            BaseStateController gameplayStateController)
+            MenuWindowController menuWindowController,
+            WinWindowController winWindowController,
+            LoseWindowController loseWindowController,
+            ShadowPopup shadowPopup,
+            InputController inputController,
+            GameObject backgorundGameObject)
         {
             _menuWindowController = menuWindowController;
             _winWindowController = winWindowController;
@@ -31,38 +31,35 @@ namespace Project.Core.Sevices
             _shadowPopup = shadowPopup;
             _inputController = inputController;
             _backgorundGameObject = backgorundGameObject;
-            _gameplayStateController = gameplayStateController;
         }
 
         public BaseStateController Create()
         {
-            BaseStateController stateController = new();
+            _gameplayState = new GameplayState(
+                    _shadowPopup,
+                    _backgorundGameObject);
 
-            stateController = new(
-                new IState[]
-                {
-                    new MenuState(
-                        _menuWindowController,
-                        _shadowPopup,
-                        _inputController,
-                        stateController),
-                    new GameplayState(
-                        _gameplayStateController,
-                        _shadowPopup,
-                        _backgorundGameObject),
-                    new WinState(
-                        _winWindowController,
-                        _backgorundGameObject,
-                        _inputController,
-                        stateController,
-                        _shadowPopup),
-                    new LoseState(
-                        _loseWindowController,
-                        _backgorundGameObject,
-                        _inputController,
-                        stateController,
-                        _shadowPopup),
-                },
+            IState[] states = new IState[]
+            {
+                new MenuState(
+                    _menuWindowController,
+                    _shadowPopup,
+                    _inputController),
+                _gameplayState,
+                new WinState(
+                    _winWindowController,
+                    _backgorundGameObject,
+                    _inputController,
+                    _shadowPopup),
+                new LoseState(
+                    _loseWindowController,
+                    _backgorundGameObject,
+                    _inputController,
+                    _shadowPopup),
+            };
+
+            BaseStateController stateController = new(
+                states,
                 new ITransition[]
                 {
                     new Transition<MenuState, GameplayState>(),
@@ -73,7 +70,16 @@ namespace Project.Core.Sevices
                 },
                 typeof(MenuState));
 
+            foreach (var state in states)
+            {
+                if (state is ISetableState<BaseStateController> setableState)
+                    setableState.Set(stateController);
+            }
+
             return stateController;
         }
+
+        public void SetGameplayStateController(BaseStateController stateController) =>
+            _gameplayState.SetGameplayStateController(stateController);
     }
 }

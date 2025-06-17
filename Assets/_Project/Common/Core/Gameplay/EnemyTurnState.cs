@@ -5,24 +5,26 @@ using Project.Core.Sevices.StateMachine;
 
 namespace Project.Core.Gameplay
 {
-    public class EnemyTurnState : IAsyncEnterState
+    public class EnemyTurnState : IAsyncEnterState, ISetableState<BaseStateController>
     {
         private readonly AiActor _aiActor;
-        private readonly BaseStateController _stateController;
         private readonly GameplayModel _gameplayModel;
         private readonly AttackController _attackController;
+        
+        private BaseStateController _gameplayStateController;
 
         public EnemyTurnState(
             AiActor aiActor, 
-            BaseStateController stateController, 
             GameplayModel gameplayModel, 
             AttackController attackController)
         {
             _aiActor = aiActor;
-            _stateController = stateController;
             _gameplayModel = gameplayModel;
             _attackController = attackController;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameplayStateController = stateController;
 
         public async UniTask AsyncEnter()
         {
@@ -35,9 +37,9 @@ namespace Project.Core.Gameplay
             await _attackController.AttackPlayer(enemyCard);
 
             if (_gameplayModel.PlayerCard.Health.IsAlive)
-                _stateController.Translate(typeof(PlayerTurnState)).Forget();
+                _gameplayStateController.Translate(typeof(PlayerTurnState)).Forget();
             else
-                _stateController.Translate(typeof(EndLevelState)).Forget();
+                _gameplayStateController.Translate(typeof(EndLevelState)).Forget();
         }
     }
 }

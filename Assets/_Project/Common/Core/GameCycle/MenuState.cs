@@ -6,24 +6,26 @@ using Project.Core.UI.Windows;
 
 namespace Project.Core.GameCycle
 {
-    public class MenuState : IAsyncEnterState, IAsyncExitState
+    public class MenuState : IAsyncEnterState, IAsyncExitState, ISetableState<BaseStateController>
     {
         private readonly MenuWindowController _menuWindowController;
         private readonly ShadowPopup _shadowPopup;   
         private readonly InputController _inputController;
-        private readonly BaseStateController _gameCycleStateController;
+        
+        private BaseStateController _gameCycleStateController;
 
         public MenuState(
             MenuWindowController menuWindowController, 
             ShadowPopup shadowPopup, 
-            InputController inputController, 
-            BaseStateController gameCycleStateController)
+            InputController inputController)
         {
             _menuWindowController = menuWindowController;
             _shadowPopup = shadowPopup;
             _inputController = inputController;
-            _gameCycleStateController = gameCycleStateController;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameCycleStateController = stateController;
 
         public async UniTask AsyncEnter()
         {

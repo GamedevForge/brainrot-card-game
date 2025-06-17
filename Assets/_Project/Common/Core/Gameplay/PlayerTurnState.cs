@@ -4,27 +4,29 @@ using Project.Core.Sevices.StateMachine;
 
 namespace Project.Core.Gameplay
 {
-    public class PlayerTurnState : IAsyncEnterState
+    public class PlayerTurnState : IAsyncEnterState, ISetableState<BaseStateController>
     {
         private readonly AttackController _attackController;
         private readonly CardHandlerRepository _cardHandlerRepository;
         private readonly InputController _inputController;
-        private readonly BaseStateController _baseStateController;
         private readonly GameplayModel _gameplayModel;
+        
+        private BaseStateController _gameplayStateController;
 
         public PlayerTurnState(
             AttackController attackController,
             InputController inputController,
-            BaseStateController baseStateController,
             GameplayModel gameplayModel,
             CardHandlerRepository cardHandlerRepository)
         {
             _attackController = attackController;
             _inputController = inputController;
-            _baseStateController = baseStateController;
             _gameplayModel = gameplayModel;
             _cardHandlerRepository = cardHandlerRepository;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameplayStateController = stateController;
 
         public async UniTask AsyncEnter()
         {           
@@ -35,14 +37,14 @@ namespace Project.Core.Gameplay
             await _attackController.AttackEnemy();
 
             if (_gameplayModel.AllEnemyCardDead())
-                _baseStateController.Translate(typeof(NextWaveState)).Forget();
+                _gameplayStateController.Translate(typeof(NextWaveState)).Forget();
             else if (_gameplayModel.CurrentWave !=
                 _gameplayModel.LevelModel[_gameplayModel.LevelModel.Count - 1])
             {
-                _baseStateController.Translate(typeof(EnemyTurnState)).Forget();
+                _gameplayStateController.Translate(typeof(EnemyTurnState)).Forget();
             }
             else
-                _baseStateController.Translate(typeof(EndLevelState)).Forget();
+                _gameplayStateController.Translate(typeof(EndLevelState)).Forget();
         }
     }
 }

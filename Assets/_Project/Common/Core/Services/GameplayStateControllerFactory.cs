@@ -42,20 +42,15 @@ namespace Project.Core.Sevices
 
         public BaseStateController Create()
         {
-            BaseStateController stateController = new();
-
-            stateController = new(
-                new IState[] 
-                { 
-                    new PlayerTurnState(
+            IState[] states = new IState[] 
+            {
+                new PlayerTurnState(
                         _attackController,
                         _inputController,
-                        stateController,
                         _gameplayModel,
                         _cardHandlerRepository),
                     new EnemyTurnState(
                         _aiActor,
-                        stateController,
                         _gameplayModel,
                         _attackController),
                     new EndLevelState(
@@ -63,7 +58,6 @@ namespace Project.Core.Sevices
                         _gameCycleStateController,
                         _inputController),
                     new NextWaveState(
-                        stateController,
                         _upgradeController,
                         _upgradeControllerView,
                         _inputController,
@@ -71,11 +65,15 @@ namespace Project.Core.Sevices
                     new StartLevelState(
                         _gameplayController,
                         new Configs.LevelsData(),
-                        stateController,
                         _inputController)
-                },
+            };
+            
+            BaseStateController stateController = new(
+                states,
                 new ITransition[]
                 { 
+                    new Transition<StartLevelState, StartLevelState>(),
+                    new Transition<StartLevelState, PlayerTurnState>(),
                     new Transition<PlayerTurnState, EnemyTurnState>(),
                     new Transition<PlayerTurnState, NextWaveState>(),
                     new Transition<PlayerTurnState, EndLevelState>(),
@@ -85,6 +83,12 @@ namespace Project.Core.Sevices
                     new Transition<PlayerTurnState, EndLevelState>()
                 },
                 typeof(PlayerTurnState));
+
+            foreach (var state in states)
+            {
+                if (state is ISetableState<BaseStateController> setableState)
+                    setableState.Set(stateController);
+            }
 
             return stateController;
         }

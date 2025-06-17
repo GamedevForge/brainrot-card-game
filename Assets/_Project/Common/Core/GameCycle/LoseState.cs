@@ -7,27 +7,29 @@ using UnityEngine;
 
 namespace Project.Core.GameCycle
 {
-    public class LoseState : IAsyncEnterState, IAsyncExitState
+    public class LoseState : IAsyncEnterState, IAsyncExitState, ISetableState<BaseStateController>
     {
         private readonly LoseWindowController _loseWindowController;
         private readonly GameObject _gamePlayBackground;
         private readonly InputController _inputController;
-        private readonly BaseStateController _gameCycleStateController;
         private readonly ShadowPopup _shadowPopup;
+        
+        private BaseStateController _gameCycleStateController;
 
         public LoseState(
             LoseWindowController loseWindowController, 
             GameObject gamePlayBackground, 
             InputController inputController, 
-            BaseStateController gameCycleStateController, 
             ShadowPopup shadowPopup)
         {
             _loseWindowController = loseWindowController;
             _gamePlayBackground = gamePlayBackground;
             _inputController = inputController;
-            _gameCycleStateController = gameCycleStateController;
             _shadowPopup = shadowPopup;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameCycleStateController = stateController;
 
         public async UniTask AsyncEnter()
         {

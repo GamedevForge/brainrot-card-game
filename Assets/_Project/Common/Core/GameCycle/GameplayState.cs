@@ -8,16 +8,15 @@ namespace Project.Core.GameCycle
 {
     public class GameplayState : IAsyncEnterState
     {
-        private readonly BaseStateController _gameplayStateController;
         private readonly ShadowPopup _shadowPopup;
         private readonly GameObject _gamePlayBackground;
+        
+        private BaseStateController _gameplayStateController;
 
         public GameplayState(
-            BaseStateController gameplayStateController, 
             ShadowPopup shadowPopup, 
             GameObject gamePlayBackground)
         {
-            _gameplayStateController = gameplayStateController;
             _shadowPopup = shadowPopup;
             _gamePlayBackground = gamePlayBackground;
         }
@@ -28,5 +27,8 @@ namespace Project.Core.GameCycle
             await _shadowPopup.HidePopup();
             await _gameplayStateController.Translate(typeof(StartLevelState));
         }
+
+        public void SetGameplayStateController(BaseStateController gameplayStateController) =>
+            _gameplayStateController = gameplayStateController;
     }
 }

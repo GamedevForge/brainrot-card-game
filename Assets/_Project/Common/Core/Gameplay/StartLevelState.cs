@@ -5,24 +5,26 @@ using Project.Core.Sevices.StateMachine;
 
 namespace Project.Core.Gameplay
 {
-    public class StartLevelState : IAsyncEnterState
+    public class StartLevelState : IAsyncEnterState, ISetableState<BaseStateController>
     {
         private readonly GameplayController _gameplayController;
         private readonly LevelsData _levelData;
-        private readonly BaseStateController _gameplayStateController;
         private readonly InputController _inputController;
 
+        private BaseStateController _gameplayStateController;
+        
         public StartLevelState(
             GameplayController gameplayController,
             LevelsData levelData,
-            BaseStateController gameplayStateController,
             InputController inputController)
         {
             _gameplayController = gameplayController;
             _levelData = levelData;
-            _gameplayStateController = gameplayStateController;
             _inputController = inputController;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameplayStateController = stateController;
 
         public async UniTask AsyncEnter()
         {

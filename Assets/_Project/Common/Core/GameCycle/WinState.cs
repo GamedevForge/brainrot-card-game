@@ -7,27 +7,29 @@ using UnityEngine;
 
 namespace Project.Core.GameCycle
 {
-    public class WinState : IAsyncEnterState, IAsyncExitState
+    public class WinState : IAsyncEnterState, IAsyncExitState, ISetableState<BaseStateController>
     {
         private readonly WinWindowController _winWindowController;
         private readonly GameObject _gamePlayBackground;
         private readonly InputController _inputController;
-        private readonly BaseStateController _gameCycleStateController;
         private readonly ShadowPopup _shadowPopup;
+        
+        private BaseStateController _gameCycleStateController;
 
         public WinState(
             WinWindowController winWindowController, 
             GameObject gamePlayBackground, 
             InputController inputController, 
-            BaseStateController gameCycleStateController, 
             ShadowPopup shadowPopup)
         {
             _winWindowController = winWindowController;
             _gamePlayBackground = gamePlayBackground;
             _inputController = inputController;
-            _gameCycleStateController = gameCycleStateController;
             _shadowPopup = shadowPopup;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameCycleStateController = stateController;
 
         public async UniTask AsyncEnter()
         {

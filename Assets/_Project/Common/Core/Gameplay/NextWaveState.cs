@@ -6,27 +6,29 @@ using Project.Core.UpgradeSystem;
 
 namespace Project.Core.Gameplay
 {
-    public class NextWaveState : IAsyncEnterState, IAsyncExitState
+    public class NextWaveState : IAsyncEnterState, IAsyncExitState, ISetableState<BaseStateController>
     {
-        private readonly BaseStateController _baseStateController;
         private readonly UpgradeController _upgradeController;
         private readonly UpgradeControllerView _upgradeControllerView;
         private readonly InputController _inputController;
         private readonly GameplayController _gameplayController;
+        
+        private BaseStateController _gameplayStateController;
 
         public NextWaveState(
-            BaseStateController baseStateController, 
             UpgradeController upgradeController, 
             UpgradeControllerView upgradeControllerView, 
             InputController inputController, 
             GameplayController gameplayController)
         {
-            _baseStateController = baseStateController;
             _upgradeController = upgradeController;
             _upgradeControllerView = upgradeControllerView;
             _inputController = inputController;
             _gameplayController = gameplayController;
         }
+
+        public void Set(BaseStateController stateController) =>
+            _gameplayStateController = stateController;
 
         public async UniTask AsyncEnter()
         {
@@ -35,7 +37,7 @@ namespace Project.Core.Gameplay
             await _upgradeController.AsyncWaitToUpgrade();
             _inputController.DisableInput();
             await _upgradeControllerView.HideUpgrades();
-            _baseStateController.Translate(typeof(PlayerTurnState)).Forget();
+            _gameplayStateController.Translate(typeof(PlayerTurnState)).Forget();
         }
 
         public async UniTask AsyncExit()
