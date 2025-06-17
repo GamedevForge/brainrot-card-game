@@ -25,7 +25,7 @@ namespace Project.Core.Sevices.StateMachine
         }
 
         public void Initialize() =>
-            Translate(_initialState);
+            Translate(_initialState).Forget();
 
         public void Dispose()
         {

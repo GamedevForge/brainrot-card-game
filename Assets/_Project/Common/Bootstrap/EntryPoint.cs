@@ -28,6 +28,8 @@ namespace Project.Bootstrap
         [SerializeField] private GameObject _winWindowPrefab;
         [SerializeField] private GameObject _loseWindowPrefab;
         [SerializeField] private RectTransform _windowsParent;
+        [SerializeField] private GameObject _shadowPopupPrefab;
+        [SerializeField] private RectTransform _shadowPopupGameObjectParent;
 
         [Header("Other:")]
         [SerializeField] private GameObject _gameplayBackgroundGameObject;
@@ -50,6 +52,8 @@ namespace Project.Bootstrap
         private UpgradeControllerCreateData _upgradeControllerCreateData;
         private UIFactory _uIFactory;
         private UICreateData _uICreateData;
+        private ShadowPopupFactory _shadowPopupFactory;
+        private ShadowPopupCraeteData _shadowPopupCraeteData;
 
         private void Start() 
         {
@@ -59,6 +63,11 @@ namespace Project.Bootstrap
                 _winWindowPrefab, 
                 _animationsData.WindowAnimationDuration,
                 _windowsParent);
+            _shadowPopupFactory = new ShadowPopupFactory(
+                _shadowPopupPrefab,
+                _shadowPopupGameObjectParent,
+                _animationsData.PopupShowAndHideDuration);
+            _shadowPopupCraeteData = _shadowPopupFactory.Create();
             _uICreateData = _uIFactory.Create();
             _gameCycleStateController = new BaseStateController();
             _gameplayStateController = new BaseStateController();
@@ -91,16 +100,30 @@ namespace Project.Bootstrap
                 _upgradeControllerCreateData.UpgradeControllerView,
                 _gameplayControllerCreateData.GameplayController,
                 _gameCycleStateController);
-            _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
                 _uICreateData.MenuWindowController,
                 _uICreateData.WinWindowController,
                 _uICreateData.LoseWindowController,
-                new ShadowPopup(),
+                _shadowPopupCraeteData.ShadowPopup,
                 _inputController,
                 _gameplayBackgroundGameObject,
                 _gameplayStateController);
+            _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameplayStateController = _gameplayStateControllerFactory.Create();
+
+            _uICreateData.MenuWindowController.Initialize();
+            _uICreateData.WinWindowController.Initialize();
+            _uICreateData.LoseWindowController.Initialize();
+            _uIFactory.Initialize();
+            _gameCycleStateController.Initialize();
+        }
+
+        private void OnDestroy()
+        {
+            _uICreateData.MenuWindowController.Dispose();
+            _uICreateData.WinWindowController.Dispose();
+            _uICreateData.LoseWindowController.Dispose();
+            _cardHandlerRepository.Dispose();
         }
     }
 }

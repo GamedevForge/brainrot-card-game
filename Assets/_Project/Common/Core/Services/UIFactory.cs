@@ -1,16 +1,19 @@
 ﻿using Project.Core.UI.Animtions;
 using Project.Core.UI.Windows;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Project.Core.Sevices
 {
-    public class UIFactory
+    public class UIFactory : IInitializable
     {
         private readonly GameObject _menuWindowPrefab;
         private readonly GameObject _loseWindowPrefab;
         private readonly GameObject _winWindowPrefab;
         private readonly RectTransform _windowsParent;
         private readonly float _windowAnimationDuration;
+
+        private UICreateData _data;
 
         public UIFactory(
             GameObject menuWindowPrefab,
@@ -26,39 +29,46 @@ namespace Project.Core.Sevices
             _windowsParent = windowsParent;
         }
 
+        public void Initialize()
+        {
+            _data.MenuWindowGameObject.SetActive(false);
+            _data.LoseWindowGameObject.SetActive(false);
+            _data.WinWindowGameObject.SetActive(false);
+        }
+        
         public UICreateData Create()
         {
-            UICreateData data = new();
+            _data = new UICreateData();
 
-            data.MenuWindowGameObject = GameObject.Instantiate(_menuWindowPrefab, _windowsParent);
-            data.LoseWindowGameObject = GameObject.Instantiate(_loseWindowPrefab, _windowsParent);
-            data.WinWindowGameObject = GameObject.Instantiate(_winWindowPrefab, _windowsParent);
+            _data.MenuWindowGameObject = GameObject.Instantiate(_menuWindowPrefab, _windowsParent);
+            _data.LoseWindowGameObject = GameObject.Instantiate(_loseWindowPrefab, _windowsParent);
+            _data.WinWindowGameObject = GameObject.Instantiate(_winWindowPrefab, _windowsParent);
 
-            data.MenuWindowModel = new MenuWindowModel(data.MenuWindowGameObject);
-            data.MenuWindowController = new MenuWindowController(
-                data.MenuWindowModel,
-                data.MenuWindowGameObject.GetComponent<BaseWindowComponents>().Button,
+            _data.MenuWindowModel = new MenuWindowModel(_data.MenuWindowGameObject);
+            _data.MenuWindowController = new MenuWindowController(
+                _data.MenuWindowModel,
+                _data.MenuWindowGameObject.GetComponent<BaseWindowComponents>().Button,
                 new BaseWindowAnimtion(
-                    data.MenuWindowGameObject.GetComponentInChildren<CanvasGroup>(),
+                    _data.MenuWindowGameObject.GetComponentInChildren<CanvasGroup>(),
                     new AlphaAnimation(_windowAnimationDuration)));
 
-            data.WinWindowModel = new WinWindowModel(
-                data.WinWindowGameObject,
-                data.WinWindowGameObject.GetComponentInChildren<CanvasGroup>());
-            data.WinWindowController = new WinWindowController(
-                data.WinWindowModel,
-                data.WinWindowGameObject.GetComponent<BaseWindowComponents>().Button,
+            _data.WinWindowModel = new WinWindowModel(
+                _data.WinWindowGameObject,
+                _data.WinWindowGameObject.GetComponentInChildren<CanvasGroup>());
+            _data.WinWindowController = new WinWindowController(
+                _data.WinWindowModel,
+                _data.WinWindowGameObject.GetComponent<BaseWindowComponents>().Button,
                 new AlphaAnimation(_windowAnimationDuration));
 
-            data.LoseWindowModel = new LoseWindowModel(
-                data.LoseWindowGameObject, 
-                data.LoseWindowGameObject.GetComponentInChildren<CanvasGroup>());
-            data.LoseWindowController = new LoseWindowController(
-                data.LoseWindowModel,
-                data.LoseWindowGameObject.GetComponent<BaseWindowComponents>().Button,
+            _data.LoseWindowModel = new LoseWindowModel(
+                _data.LoseWindowGameObject,
+                _data.LoseWindowGameObject.GetComponentInChildren<CanvasGroup>());
+            _data.LoseWindowController = new LoseWindowController(
+                _data.LoseWindowModel,
+                _data.LoseWindowGameObject.GetComponent<BaseWindowComponents>().Button,
                 new AlphaAnimation(_windowAnimationDuration));
 
-            return data;
+            return _data;
         }
     }
 }
