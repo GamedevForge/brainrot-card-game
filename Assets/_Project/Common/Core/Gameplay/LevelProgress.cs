@@ -1,27 +1,20 @@
-﻿using System;
-using Project.Configs;
-using Unity.VisualScripting;
+﻿using Project.Configs;
 
 namespace Project.Core.Gameplay
 {
-    public class LevelProgress : IInitializable, IDisposable
+    public class LevelProgress
     {
-        public void Initialize()
-        {
-            throw new NotImplementedException();
-        }
-        
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        private readonly LevelsData _levelsData;
 
-        public LevelData GetCurrentLevelData()
-        { throw new NotImplementedException(); }
+        public int CurrentLevelIndex { get; private set; }
 
-        public void SaveCurrentProgress()
-        {
+        public void SetCurrentLevelIndex(int levelIndex) =>
+            CurrentLevelIndex = levelIndex;
 
-        }
+        public LevelData GetCurrentLevelData() =>
+            _levelsData.LevelDatas[CurrentLevelIndex];
+
+        public int GetCurrentLevelIndex() =>
+            CurrentLevelIndex;
     }
 }

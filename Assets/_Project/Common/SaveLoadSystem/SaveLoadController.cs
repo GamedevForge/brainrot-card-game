@@ -1,22 +1,41 @@
-using System.IO;
+﻿using Project.Core.Gameplay;
 using UnityEngine;
 
 namespace Project.SaveLoadSystem
 {
-    public class SaveLoadController
+    public class SaveLoadController : MonoBehaviour 
     {
-        private string FilePath => Application.persistentDataPath + "/PlayerData.json";
+        private readonly SaveLoad _saveLoad = new();
 
-        public void Save(PlayerSaveData playerSaveData)
+        private LevelProgress _levelProgress;
+        private PlayerSaveData _currentSaveData;
+
+        public void Initilialize(
+            LevelProgress levelProgress)
         {
-            string playerSaveDataJson = JsonUtility.ToJson(playerSaveData);
-            File.WriteAllText(FilePath, playerSaveDataJson);
+            _levelProgress = levelProgress;
+            _currentSaveData = _saveLoad.Load();
+
+            if (_currentSaveData == null) 
+                _currentSaveData = new PlayerSaveData();
+
+            _levelProgress.SetCurrentLevelIndex(_currentSaveData.CurrentLevel);
         }
 
-        public PlayerSaveData Load()
+        private void OnApplicationQuit()
         {
-            string playerSaveDataJson = File.ReadAllText(FilePath);
-            return JsonUtility.FromJson<PlayerSaveData>(playerSaveDataJson);
+            Save();
+        }
+
+        private void OnDestroy()
+        {
+            Save();
+        }
+
+        public void Save()
+        {
+            _currentSaveData.CurrentLevel = _levelProgress.GetCurrentLevelIndex();
+            _saveLoad.Save(_currentSaveData);
         }
     }
 }
