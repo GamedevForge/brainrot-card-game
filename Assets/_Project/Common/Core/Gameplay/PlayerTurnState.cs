@@ -36,15 +36,20 @@ namespace Project.Core.Gameplay
 
             await _attackController.AttackEnemy();
 
-            if (_gameplayModel.AllEnemyCardDead())
-                _gameplayStateController.Translate(typeof(NextWaveState)).Forget();
-            else if (_gameplayModel.CurrentWave !=
-                _gameplayModel.LevelModel[_gameplayModel.LevelModel.Count - 1])
+            if (_gameplayModel.CurrentWave.CardCreatedDatas.Count == 0)
             {
-                _gameplayStateController.Translate(typeof(EnemyTurnState)).Forget();
+                if (_gameplayModel.CurrentWave !=
+                    _gameplayModel.LevelModel[_gameplayModel.LevelModel.Count - 1])
+                {
+                    _gameplayStateController.Translate(typeof(NextWaveState)).Forget();
+                }
+                else
+                {
+                    _gameplayStateController.Translate(typeof(EndLevelState)).Forget();
+                }
             }
             else
-                _gameplayStateController.Translate(typeof(EndLevelState)).Forget();
+                _gameplayStateController.Translate(typeof(EnemyTurnState)).Forget();
         }
     }
 }

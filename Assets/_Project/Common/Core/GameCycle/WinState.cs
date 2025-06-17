@@ -58,7 +58,9 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncExit()
         {
-            await _shadowPopup.HidePopup();
+            await _winWindowController.HideAsync();
+            await _shadowPopup.ShowPopup();
+            _winWindowController.DisableWindowGameObject();
             _gamePlayBackground.SetActive(false);
         }
     }

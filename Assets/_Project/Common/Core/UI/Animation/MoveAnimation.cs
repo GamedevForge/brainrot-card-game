@@ -18,8 +18,8 @@ namespace Project.Core.UI.Animtions
         {
             Tween tween;
             
-            target.anchoredPosition3D = startPosition;
-            tween = target.DOAnchorPos3D(endPosition, _duration);
+            target.position = startPosition;
+            tween = target.DOMove(endPosition, _duration);
             await tween.AsyncWaitForCompletion();
         }
     }

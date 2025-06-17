@@ -33,8 +33,11 @@ namespace Project.Core.Card
             _health = Mathf.Max(_health - damage, 0);
             OnTakedGamage?.Invoke(_health);
 
-            if (_health == 0) 
+            if (_health == 0)
+            {
+                IsAlive = false;
                 OnDead?.Invoke(_cardCreatedData);
+            }
         }
     }
 }

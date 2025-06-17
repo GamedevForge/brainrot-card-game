@@ -32,18 +32,18 @@ namespace Project.Core.Gameplay
 
         public async UniTask AsyncEnter()
         {
-            await _upgradeControllerView.ShowUpgrades();
+            //await _upgradeControllerView.ShowUpgrades();
             _inputController.EnableInput();
-            await _upgradeController.AsyncWaitToUpgrade();
+            //await _upgradeController.AsyncWaitToUpgrade();
             _inputController.DisableInput();
-            await _upgradeControllerView.HideUpgrades();
+            //await _upgradeControllerView.HideUpgrades();
             _gameplayStateController.Translate(typeof(PlayerTurnState)).Forget();
         }
 
         public async UniTask AsyncExit()
         {
-            await _gameplayController.AddOnSlotAllCardFromCurrentWave();
             _gameplayController.GoToNextWave();
+            await _gameplayController.AddOnSlotAllCardFromCurrentWave();
         }
     }
 }

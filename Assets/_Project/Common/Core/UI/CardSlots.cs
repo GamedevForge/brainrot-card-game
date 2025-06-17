@@ -27,10 +27,10 @@ namespace Project.Core.UI
             cardRectTransform.SetParent(_gridLayoutTransform);
             cardRectTransform.SetParent(null);
 
-            await _moveAnimation.MoveAsync(
-                cardRectTransform, 
-                cardRectTransform.anchoredPosition3D - new Vector3(0f, 30f, 0f),
-                cardRectTransform.anchoredPosition3D);
+            //await _moveAnimation.MoveAsync(
+            //    cardRectTransform, 
+            //    cardRectTransform.anchoredPosition3D - new Vector3(0f, 30f, 0f),
+            //    cardRectTransform.anchoredPosition3D);
 
             cardRectTransform.SetParent(_gridLayoutTransform);
         }

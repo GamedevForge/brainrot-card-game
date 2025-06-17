@@ -40,7 +40,7 @@ namespace Project.Core.Sevices
             _playerCard.StartPosition = _playerCard
                 .CardGameObject
                 .GetComponent<RectTransform>()
-                .anchoredPosition3D;
+                .position;
             _playerCard.CardStats = new CardStats();
             _playerCard.CardStats.Health = _cardData.Health;
             _playerCard.CardStats.Damage = _cardData.Damage;
@@ -51,6 +51,8 @@ namespace Project.Core.Sevices
             _playerCard.CardComponents.DamageTextIndex.text = _cardData.Damage.ToString();
             _playerCard.CardComponents.HealthTextIndex.text = _cardData.Health.ToString();
             _playerCard.Health = new CardHealth(_playerCard);
+            _playerCard.Health.SetMaxHealth(_cardData.Health);
+            _playerCard.Health.Revive();
             _playerCard.CardView.Initialize();
 
             return _playerCard;

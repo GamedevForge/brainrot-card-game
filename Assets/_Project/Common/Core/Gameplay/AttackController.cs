@@ -26,14 +26,16 @@ namespace Project.Core.Gameplay
 
         public async UniTask AttackEnemy()
         {
+            Vector3 playerCardStartPosition = _playerCardRectTransform.position;
+
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
-                _playerCardRectTransform.anchoredPosition,
+                playerCardStartPosition,
                 _handlerRepository
                     .CurrentCardModel
                     .CardGameObject
                     .GetComponent<RectTransform>()
-                    .anchoredPosition);
+                    .position);
 
             _handlerRepository
                 .CurrentCardModel
@@ -42,8 +44,8 @@ namespace Project.Core.Gameplay
 
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
-                _playerCardRectTransform.anchoredPosition,
-                _playerCard.StartPosition);
+                _playerCardRectTransform.position,
+                playerCardStartPosition);
         }
 
         public async UniTask AttackPlayer(CardCreatedData enemyCard)
@@ -52,17 +54,19 @@ namespace Project.Core.Gameplay
                 .CardGameObject
                 .GetComponent<RectTransform>();
 
+            Vector3 startPosition = enemyCardRectTransform.position;
+
             await _moveAnimation.MoveAsync(
                 enemyCardRectTransform,
-                enemyCardRectTransform.anchoredPosition,
-                _playerCardRectTransform.anchoredPosition);
+                startPosition,
+                _playerCardRectTransform.position);
             
             _playerCard.Health.TakeDamage(enemyCard.CardStats.Damage);
 
             await _moveAnimation.MoveAsync(
                 enemyCardRectTransform,
-                enemyCardRectTransform.anchoredPosition,
-                enemyCard.StartPosition);
+                enemyCardRectTransform.position,
+                startPosition);
         }
     }
 }

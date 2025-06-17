@@ -67,10 +67,13 @@ namespace Project.Core.Gameplay
         public async UniTask AddOnSlotAllCardFromCurrentWave()
         {
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
+            {
+                cardCreatedData.CardGameObject.SetActive(true);
                 await _cardSlots.Add(cardCreatedData.CardGameObject);
+            }
 
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
-                cardCreatedData.StartPosition = cardCreatedData.CardGameObject.GetComponent<RectTransform>().anchoredPosition;  
+                cardCreatedData.StartPosition = cardCreatedData.CardGameObject.GetComponent<RectTransform>().position;  
         }
 
         private async void RemoveCardOnDead(CardCreatedData card)
