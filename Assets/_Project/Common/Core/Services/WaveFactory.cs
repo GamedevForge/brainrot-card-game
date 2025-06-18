@@ -24,14 +24,13 @@ namespace Project.Core.Sevices
                 CardCreatedData createdCard = _cardPool.Get();
                 CardComponents cardComponents = createdCard.CardComponents;
                 cardComponents.MainImage.sprite = cardData.Sprite;
-                cardComponents.DamageTextIndex.text = cardData.Damage.ToString();
-                cardComponents.HealthTextIndex.text = cardData.Health.ToString();
+                cardComponents.CardForceIndex.text = cardData.CardForce.ToString();
                 _handlerRepository.Add(createdCard);
                 cardDatasList.Add(createdCard);
-                createdCard.Health.SetMaxHealth(cardData.Health);
+                createdCard.Health.SetMaxHealth(cardData.CardForce);
                 createdCard.Health.Revive();
-                createdCard.CardStats.Damage = cardData.Damage;
-                createdCard.CardStats.Health = cardData.Health;
+                createdCard.CardStats.Damage = cardData.CardForce;
+                createdCard.CardStats.Health = cardData.CardForce;
             }
 
             return cardDatasList;

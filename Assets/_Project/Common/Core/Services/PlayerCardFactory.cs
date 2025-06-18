@@ -42,16 +42,15 @@ namespace Project.Core.Sevices
                 .GetComponent<RectTransform>()
                 .position;
             _playerCard.CardStats = new CardStats();
-            _playerCard.CardStats.Health = _cardData.Health;
-            _playerCard.CardStats.Damage = _cardData.Damage;
+            _playerCard.CardStats.Health = _cardData.CardForce;
+            _playerCard.CardStats.Damage = _cardData.CardForce;
             _playerCard.CardComponents = _playerCard
                 .CardGameObject
                 .GetComponent<CardComponents>();
             _playerCard.CardComponents.MainImage.sprite = _cardData.Sprite;
-            _playerCard.CardComponents.DamageTextIndex.text = _cardData.Damage.ToString();
-            _playerCard.CardComponents.HealthTextIndex.text = _cardData.Health.ToString();
+            _playerCard.CardComponents.CardForceIndex.text = _cardData.CardForce.ToString();
             _playerCard.Health = new CardHealth(_playerCard);
-            _playerCard.Health.SetMaxHealth(_cardData.Health);
+            _playerCard.Health.SetMaxHealth(_cardData.CardForce);
             _playerCard.Health.Revive();
             _playerCard.CardView.Initialize();
 

@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: DefualtCard
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 0}
-  <Health>k__BackingField: 5
-  <Damage>k__BackingField: 5
+  <CardForce>k__BackingField: 5

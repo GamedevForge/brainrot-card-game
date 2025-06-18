@@ -19,6 +19,7 @@ namespace Project.Core.Sevices
         private readonly LevelsData _levelsData;
         private readonly LevelProgress _levelProgress;
         private readonly GameplayController _gameplayController;
+        private readonly CardCreatedData _playerCard;
 
         private GameplayState _gameplayState;
 
@@ -31,7 +32,8 @@ namespace Project.Core.Sevices
             GameObject backgorundGameObject,
             LevelsData levelsData,
             LevelProgress levelProgress,
-            GameplayController gameplayController)
+            GameplayController gameplayController,
+            CardCreatedData playerCard)
         {
             _menuWindowController = menuWindowController;
             _winWindowController = winWindowController;
@@ -42,13 +44,15 @@ namespace Project.Core.Sevices
             _levelsData = levelsData;
             _levelProgress = levelProgress;
             _gameplayController = gameplayController;
+            _playerCard = playerCard;
         }
 
         public BaseStateController Create()
         {
             _gameplayState = new GameplayState(
                     _shadowPopup,
-                    _backgorundGameObject);
+                    _backgorundGameObject,
+                    _playerCard);
 
             IState[] states = new IState[]
             {
@@ -69,7 +73,8 @@ namespace Project.Core.Sevices
                     _loseWindowController,
                     _backgorundGameObject,
                     _inputController,
-                    _shadowPopup),
+                    _shadowPopup,
+                    _gameplayController),
             };
 
             BaseStateController stateController = new(

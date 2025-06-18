@@ -8,6 +8,7 @@ namespace Project.Core.Card
     {
         public event Action<CardCreatedData> OnDead;
         public event Action<int> OnTakedGamage;
+        public event Action<int> OnRevive;
 
         private readonly CardCreatedData _cardCreatedData;
         
@@ -26,6 +27,7 @@ namespace Project.Core.Card
         {
             IsAlive = true;
             _health = _maxHealth;
+            OnRevive?.Invoke(_health);
         }
         
         public void TakeDamage(int damage)

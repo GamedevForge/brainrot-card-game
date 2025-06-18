@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Project.Core.Gameplay;
 using Project.Core.Sevices;
 using Project.Core.Sevices.StateMachine;
 using Project.Core.UI.Popup;
@@ -13,19 +14,22 @@ namespace Project.Core.GameCycle
         private readonly GameObject _gamePlayBackground;
         private readonly InputController _inputController;
         private readonly ShadowPopup _shadowPopup;
+        private readonly GameplayController _gameplayController;
         
         private BaseStateController _gameCycleStateController;
 
         public LoseState(
-            LoseWindowController loseWindowController, 
-            GameObject gamePlayBackground, 
-            InputController inputController, 
-            ShadowPopup shadowPopup)
+            LoseWindowController loseWindowController,
+            GameObject gamePlayBackground,
+            InputController inputController,
+            ShadowPopup shadowPopup,
+            GameplayController gameplayController)
         {
             _loseWindowController = loseWindowController;
             _gamePlayBackground = gamePlayBackground;
             _inputController = inputController;
             _shadowPopup = shadowPopup;
+            _gameplayController = gameplayController;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -45,6 +49,7 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncExit()
         {
+            await _gameplayController.RemoveAllCardOnCurrentWave();
             await _loseWindowController.HideAsync();
             await _shadowPopup.ShowPopup();
             _loseWindowController.DisableWindowGameObject();

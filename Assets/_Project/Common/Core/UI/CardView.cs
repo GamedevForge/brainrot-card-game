@@ -13,14 +13,20 @@ namespace Project.Core.UI
             _currentCard = currentCard;
         }
 
-        public void Initialize() =>
+        public void Initialize()
+        {
             _currentCard.Health.OnTakedGamage += DrawCurrentHealth;
+            _currentCard.Health.OnRevive += DrawCurrentHealth;
+        }
         
-        public void Dispose() =>
+        public void Dispose()
+        {
             _currentCard.Health.OnTakedGamage -= DrawCurrentHealth;
+            _currentCard.Health.OnRevive -= DrawCurrentHealth;
+        }
 
         private void DrawCurrentHealth(int health) =>
-            _currentCard.CardComponents.DamageTextIndex.text = health.ToString();
+            _currentCard.CardComponents.CardForceIndex.text = health.ToString();
 
     }
 }

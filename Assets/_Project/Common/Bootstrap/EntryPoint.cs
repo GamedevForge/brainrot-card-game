@@ -113,7 +113,8 @@ namespace Project.Bootstrap
                 _gameplayBackgroundGameObject,
                 _levelsData,
                 _saveLoadSystemCreateData.LevelProgress,
-                _gameplayControllerCreateData.GameplayController);
+                _gameplayControllerCreateData.GameplayController,
+                _playerCard);
             _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameplayStateControllerFactory = new GameplayStateControllerFactory(
                 _gameplayControllerCreateData.AttackController,
