@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89edad64228489b44b686ae72e68dad6, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <DefualtCardData>k__BackingField: {fileID: 11400000, guid: c712a0731f549f04a9c726eb9fd5635c, type: 2}
+  <DefualtCardData>k__BackingField:
+    Sprite: {fileID: 0}
+    CardForce: 4

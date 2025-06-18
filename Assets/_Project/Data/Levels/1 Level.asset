@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WaveConfigs>k__BackingField:
   - CardDatas:
-    - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
-    - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
+    - Sprite: {fileID: 0}
+      CardForce: 6
+    - Sprite: {fileID: 0}
+      CardForce: 1
     UpgradeRangeConfig:
       From:
         Value: 5
@@ -24,8 +26,10 @@ MonoBehaviour:
         Value: 2
         Type: 1
   - CardDatas:
-    - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
-    - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
+    - Sprite: {fileID: 0}
+      CardForce: 5
+    - Sprite: {fileID: 0}
+      CardForce: 5
     UpgradeRangeConfig:
       From:
         Value: 5
@@ -34,8 +38,10 @@ MonoBehaviour:
         Value: 10
         Type: 0
   - CardDatas:
-    - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
-    - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
+    - Sprite: {fileID: 0}
+      CardForce: 5
+    - Sprite: {fileID: 0}
+      CardForce: 5
     UpgradeRangeConfig:
       From:
         Value: 0

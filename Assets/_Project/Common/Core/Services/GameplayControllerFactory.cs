@@ -45,8 +45,8 @@ namespace Project.Core.Sevices
             data.GameplayModel = new GameplayModel(_playerCard);
             data.CardSlots = new CardSlots(
                 _cardSlotParent,
-                new MoveAnimation(0.1f),
-                new AlphaAnimation(0.1f));
+                new MoveAnimation(0.3f),
+                new AlphaAnimation(0.3f));
             data.GameplayController = new GameplayController(
                 _levelFactory,
                 data.CardSlots,
