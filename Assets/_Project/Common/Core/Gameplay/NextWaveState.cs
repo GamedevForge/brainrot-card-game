@@ -42,6 +42,7 @@ namespace Project.Core.Gameplay
 
         public async UniTask AsyncExit()
         {
+            await _gameplayController.RemoveAllCardOnCurrentWave();
             _gameplayController.GoToNextWave();
             await _gameplayController.AddOnSlotAllCardFromCurrentWave();
         }

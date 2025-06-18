@@ -36,7 +36,8 @@ namespace Project.Core.Gameplay
 
             await _attackController.AttackEnemy();
 
-            if (_gameplayModel.CurrentWave.CardCreatedDatas.Count == 0)
+            if (_gameplayModel.CurrentWave.CardCreatedDatas.Count < 
+                _gameplayModel.CurrentWaveConfig.CardDatas.Length)
             {
                 if (_gameplayModel.CurrentWave !=
                     _gameplayModel.LevelModel[_gameplayModel.LevelModel.Count - 1])

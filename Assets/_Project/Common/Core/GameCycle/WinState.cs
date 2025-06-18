@@ -17,6 +17,7 @@ namespace Project.Core.GameCycle
         private readonly ShadowPopup _shadowPopup;
         private readonly LevelProgress _levelProgress;
         private readonly LevelsData _levelsData;
+        private readonly GameplayController _gameplayController;
         
         private BaseStateController _gameCycleStateController;
 
@@ -26,7 +27,8 @@ namespace Project.Core.GameCycle
             InputController inputController,
             ShadowPopup shadowPopup,
             LevelProgress levelProgress,
-            LevelsData levelsData)
+            LevelsData levelsData,
+            GameplayController gameplayController)
         {
             _winWindowController = winWindowController;
             _gamePlayBackground = gamePlayBackground;
@@ -34,6 +36,7 @@ namespace Project.Core.GameCycle
             _shadowPopup = shadowPopup;
             _levelProgress = levelProgress;
             _levelsData = levelsData;
+            _gameplayController = gameplayController;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -48,6 +51,7 @@ namespace Project.Core.GameCycle
             
             _inputController.DisableInput();
             _winWindowController.EnableWindowGameObject();
+            await _gameplayController.RemoveAllCardOnCurrentWave();
             await _winWindowController.ShowAsync();
             _inputController.EnableInput();
             await _winWindowController.AsyncWaitToClickOnGameplayButton();

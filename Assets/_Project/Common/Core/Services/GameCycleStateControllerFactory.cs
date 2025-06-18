@@ -18,6 +18,7 @@ namespace Project.Core.Sevices
         private readonly GameObject _backgorundGameObject;
         private readonly LevelsData _levelsData;
         private readonly LevelProgress _levelProgress;
+        private readonly GameplayController _gameplayController;
 
         private GameplayState _gameplayState;
 
@@ -29,7 +30,8 @@ namespace Project.Core.Sevices
             InputController inputController,
             GameObject backgorundGameObject,
             LevelsData levelsData,
-            LevelProgress levelProgress)
+            LevelProgress levelProgress,
+            GameplayController gameplayController)
         {
             _menuWindowController = menuWindowController;
             _winWindowController = winWindowController;
@@ -39,6 +41,7 @@ namespace Project.Core.Sevices
             _backgorundGameObject = backgorundGameObject;
             _levelsData = levelsData;
             _levelProgress = levelProgress;
+            _gameplayController = gameplayController;
         }
 
         public BaseStateController Create()
@@ -60,7 +63,8 @@ namespace Project.Core.Sevices
                     _inputController,
                     _shadowPopup,
                     _levelProgress,
-                    _levelsData),
+                    _levelsData,
+                    _gameplayController),
                 new LoseState(
                     _loseWindowController,
                     _backgorundGameObject,

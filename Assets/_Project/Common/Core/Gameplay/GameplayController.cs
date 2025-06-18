@@ -51,6 +51,7 @@ namespace Project.Core.Gameplay
             CreateLevel();
             SubscribeOnAllDaedEvent();
             _gameplayModel.CurrentWave = _gameplayModel.LevelModel[_currentWaveIndex];
+            _gameplayModel.CurrentWaveConfig = _gameplayModel.CurrentLevelData.WaveConfigs[_currentWaveIndex];
             DeactivateAllCardsWithoutCurrent();
         }
 
@@ -62,6 +63,15 @@ namespace Project.Core.Gameplay
                 return;
 
             _gameplayModel.CurrentWave = _gameplayModel.LevelModel[_currentWaveIndex];
+            _gameplayModel.CurrentWaveConfig = _gameplayModel.CurrentLevelData.WaveConfigs[_currentWaveIndex];
+        }
+
+        public async UniTask RemoveAllCardOnCurrentWave()
+        {
+            foreach (var card in _gameplayModel.CurrentWave.CardCreatedDatas)
+                await RemoveCard(card);
+
+            _gameplayModel.CurrentWave.CardCreatedDatas.Clear();
         }
 
         public async UniTask AddOnSlotAllCardFromCurrentWave()
@@ -78,13 +88,17 @@ namespace Project.Core.Gameplay
 
         private async void RemoveCardOnDead(CardCreatedData card)
         {
+            await RemoveCard(card);
+            _gameplayModel.CurrentWave.CardCreatedDatas.Remove(card);
+        }
+
+        private async UniTask RemoveCard(CardCreatedData card)
+        {
             _cardHandlerRepository.Remove(card);
             await _cardSlots.Remove(card.CardGameObject);
             card.Health.OnDead -= RemoveCardOnDead;
             _subscribedCards.Remove(card);
             _cardObjectPool.Release(card);
-            _gameplayModel.CurrentWave.CardCreatedDatas.Remove(card);
-
         }
 
         private void CreateLevel() =>
