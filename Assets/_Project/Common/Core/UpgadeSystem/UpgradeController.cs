@@ -14,15 +14,9 @@ namespace Project.Core.UpgradeSystem
         public UpgradeController(CardStats playerCardStats) =>
             _playerCardStats = playerCardStats;
 
-        public void UpgradeHealth(int health)
-        {
-            _playerCardStats.Health += health;
-            OnUpgrade?.Invoke();
-        }
-
         public void UpgradeDamage(int damage)
         {
-            _playerCardStats.Damage += damage;
+            _playerCardStats.CardForce += damage;
             OnUpgrade?.Invoke();
         }
 

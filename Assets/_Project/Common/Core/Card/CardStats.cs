@@ -2,7 +2,6 @@
 {
     public class CardStats
     {
-        public int Damage;
-        public int Health;
+        public int CardForce;
     }
 }

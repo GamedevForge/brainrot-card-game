@@ -40,7 +40,7 @@ namespace Project.Core.Gameplay
             _handlerRepository
                 .CurrentCardModel
                 .Health
-                .TakeDamage(_playerCard.CardStats.Damage);
+                .TakeDamage(_playerCard.CardStats.CardForce);
 
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
@@ -61,7 +61,7 @@ namespace Project.Core.Gameplay
                 startPosition,
                 _playerCardRectTransform.position);
             
-            _playerCard.Health.TakeDamage(enemyCard.CardStats.Damage);
+            _playerCard.Health.TakeDamage(enemyCard.CardStats.CardForce);
 
             await _moveAnimation.MoveAsync(
                 enemyCardRectTransform,

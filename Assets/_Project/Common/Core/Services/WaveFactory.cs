@@ -29,8 +29,7 @@ namespace Project.Core.Sevices
                 cardDatasList.Add(createdCard);
                 createdCard.Health.SetMaxHealth(cardData.CardForce);
                 createdCard.Health.Revive();
-                createdCard.CardStats.Damage = cardData.CardForce;
-                createdCard.CardStats.Health = cardData.CardForce;
+                createdCard.CardStats.CardForce = cardData.CardForce;
             }
 
             return cardDatasList;

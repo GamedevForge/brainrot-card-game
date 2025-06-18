@@ -42,8 +42,7 @@ namespace Project.Core.Sevices
                 .GetComponent<RectTransform>()
                 .position;
             _playerCard.CardStats = new CardStats();
-            _playerCard.CardStats.Health = _cardData.CardForce;
-            _playerCard.CardStats.Damage = _cardData.CardForce;
+            _playerCard.CardStats.CardForce = _cardData.CardForce;
             _playerCard.CardComponents = _playerCard
                 .CardGameObject
                 .GetComponent<CardComponents>();
