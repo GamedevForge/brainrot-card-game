@@ -13,5 +13,6 @@ namespace Project.Core.Sevices
         public CardHealth Health;
         public Vector3 StartPosition;
         public CardView CardView;
+        public CardSelectionView CardSelectionView;
     }
 }

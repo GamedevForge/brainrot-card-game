@@ -23,6 +23,9 @@ namespace Project.Core.Sevices
             data.CardComponents = data.CardGameObject.GetComponent<CardComponents>();
             data.CardStats = new CardStats();
             data.CardView = new UI.CardView(data);
+            data.CardSelectionView = new UI.CardSelectionView(
+                data.CardComponents.OutLineGameObject,
+                data.SelectionHandler);
 
             return data;
         }

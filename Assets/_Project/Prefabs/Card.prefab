@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2410984998085832343}
   - component: {fileID: 5172116272755647648}
   - component: {fileID: 1027786350930022486}
+  - component: {fileID: 6277756537070869929}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MainImage>k__BackingField: {fileID: 2338148891210004600}
   <CardForceIndex>k__BackingField: {fileID: 2954528056632299878}
+  <OutLineGameObject>k__BackingField: {fileID: 6277756537070869929}
 --- !u!225 &5172116272755647648
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -149,6 +151,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6277756537070869929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769670924833643359}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.7056604, g: 0.5570766, b: 0.3075614, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 0
 --- !u!1 &6572494913909156778
 GameObject:
   m_ObjectHideFlags: 0

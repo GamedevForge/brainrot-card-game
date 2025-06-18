@@ -9,6 +9,7 @@ namespace Project.Core.Card
     {
         public event Action<CardCreatedData> OnSelect;
         public event Action<CardCreatedData> OnAttack;
+        public event Action OnReset;
 
         private readonly Button _button;
         private readonly CardCreatedData _character;
@@ -49,6 +50,7 @@ namespace Project.Core.Card
         {
             _clickCount = 0;
             IsSelection = false;
+            OnReset?.Invoke();
         }
     }
 }

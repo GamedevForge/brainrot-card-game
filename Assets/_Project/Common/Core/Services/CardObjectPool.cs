@@ -1,4 +1,6 @@
-﻿namespace Project.Core.Sevices
+﻿using System.Collections.Generic;
+
+namespace Project.Core.Sevices
 {
     public class CardObjectPool
     {
@@ -27,6 +29,7 @@
         {
             createdData.SelectionHandler.Dispose();
             createdData.CardView.Dispose();
+            createdData.SelectionHandler.Dispose();
         }
 
         private CardCreatedData OnCreate()
@@ -34,6 +37,7 @@
             CardCreatedData cardCreated = _factory.Create();
             cardCreated.SelectionHandler.Initialize();
             cardCreated.CardView.Initialize();
+            cardCreated.CardSelectionView.Initialize();
             return cardCreated;
         }
 
