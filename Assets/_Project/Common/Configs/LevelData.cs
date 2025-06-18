@@ -19,7 +19,20 @@ namespace Project.Configs
     [Serializable]
     public class UpgradeRangeConfig
     {
-        public int From;
-        public int To;
+        public UpgradeValueConfig From;
+        public UpgradeValueConfig To;
+    }
+
+    [Serializable]
+    public class UpgradeValueConfig
+    {
+        public int Value;
+        public UpgradeValueType Type;
+    }
+
+    public enum UpgradeValueType
+    {
+        Addition,
+        Multiplication
     }
 }

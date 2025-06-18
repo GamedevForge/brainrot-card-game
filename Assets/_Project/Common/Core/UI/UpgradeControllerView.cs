@@ -68,9 +68,16 @@ namespace Project.Core.UI
 
         public async UniTask ShowUpgrades()
         {
-            _leftUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeFrom}";
-            _rightUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeTo}";
+            if (_upgradeModel.UpgradeFrom.Type == Configs.UpgradeValueType.Addition)
+                _leftUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeFrom.Value}";
+            else
+                _leftUIElement.UIElementComponents.UpgradeIndexText.text = $"*{_upgradeModel.UpgradeFrom.Value}";
 
+            if (_upgradeModel.UpgradeTo.Type == Configs.UpgradeValueType.Addition)
+                _rightUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeTo.Value}";
+            else
+                _rightUIElement.UIElementComponents.UpgradeIndexText.text = $"*{_upgradeModel.UpgradeTo.Value}";
+            
             await UniTask.WhenAll(
                 _moveAnimation.MoveAsync(
                     _leftUIElementRectTransform, 

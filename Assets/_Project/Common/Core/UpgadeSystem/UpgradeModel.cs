@@ -1,8 +1,10 @@
-﻿namespace Project.Core.UpgradeSystem
+﻿using Project.Configs;
+
+namespace Project.Core.UpgradeSystem
 {
     public class UpgradeModel
     {
-        public int UpgradeFrom;
-        public int UpgradeTo;
+        public UpgradeValueConfig UpgradeFrom;
+        public UpgradeValueConfig UpgradeTo;
     }
 }
