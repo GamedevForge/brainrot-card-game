@@ -8,5 +8,6 @@ namespace Project.Configs
         [field: SerializeField] public float CardMoveDuration { get; private set; }
         [field: SerializeField] public float PopupShowAndHideDuration { get; private set; }
         [field: SerializeField] public float WindowAnimationDuration { get; private set; }
+        [field: SerializeField] public float UpgradeUIElementsShowAndHideDuration { get; private set; }
     }
 }

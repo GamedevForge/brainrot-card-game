@@ -12,19 +12,22 @@ namespace Project.Core.Gameplay
         private readonly UpgradeControllerView _upgradeControllerView;
         private readonly InputController _inputController;
         private readonly GameplayController _gameplayController;
+        private readonly GameplayModel _gameplayModel;
         
         private BaseStateController _gameplayStateController;
 
         public NextWaveState(
-            UpgradeController upgradeController, 
-            UpgradeControllerView upgradeControllerView, 
-            InputController inputController, 
-            GameplayController gameplayController)
+            UpgradeController upgradeController,
+            UpgradeControllerView upgradeControllerView,
+            InputController inputController,
+            GameplayController gameplayController,
+            GameplayModel gameplayModel)
         {
             _upgradeController = upgradeController;
             _upgradeControllerView = upgradeControllerView;
             _inputController = inputController;
             _gameplayController = gameplayController;
+            _gameplayModel = gameplayModel;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -32,6 +35,9 @@ namespace Project.Core.Gameplay
 
         public async UniTask AsyncEnter()
         {
+            _upgradeController.SetFromTo(
+                _gameplayModel.CurrentWaveConfig.UpgradeRangeConfig.To,
+                _gameplayModel.CurrentWaveConfig.UpgradeRangeConfig.From);
             await _upgradeControllerView.ShowUpgrades();
             _inputController.EnableInput();
             await _upgradeController.AsyncWaitToUpgrade();

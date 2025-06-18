@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   <MaxCardPoolSize>k__BackingField: 10
+  <MaxUpgradeUIElementsPoolSize>k__BackingField: 8

@@ -7,5 +7,6 @@ namespace Project.Core.Sevices
     {
         public UpgradeController UpgradeController;
         public UpgradeControllerView UpgradeControllerView;
+        public UpgradeModel UpgradeModel;
     }
 }

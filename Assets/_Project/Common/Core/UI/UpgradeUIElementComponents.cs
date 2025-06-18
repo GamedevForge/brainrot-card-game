@@ -7,5 +7,6 @@ namespace Project.Core.UI
     {
         [field: SerializeField] public Image MainImage { get; private set; }
         [field: SerializeField] public TMPro.TMP_Text UpgradeIndexText { get; private set; }
+        [field: SerializeField] public Button UpgradeButton { get; private set; }
     }
 }

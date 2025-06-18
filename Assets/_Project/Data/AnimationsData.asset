@@ -15,3 +15,4 @@ MonoBehaviour:
   <CardMoveDuration>k__BackingField: 0.8
   <PopupShowAndHideDuration>k__BackingField: 0.6
   <WindowAnimationDuration>k__BackingField: 0.3
+  <UpgradeUIElementsShowAndHideDuration>k__BackingField: 0.5

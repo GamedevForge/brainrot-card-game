@@ -16,9 +16,18 @@ MonoBehaviour:
   - CardDatas:
     - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
     - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
+    UpgradeRangeConfig:
+      From: 2
+      To: 3
   - CardDatas:
     - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
     - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
+    UpgradeRangeConfig:
+      From: 1
+      To: 4
   - CardDatas:
     - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
     - {fileID: 11400000, guid: ad0975820ed8c824488802e9c716033e, type: 2}
+    UpgradeRangeConfig:
+      From: 2
+      To: 5

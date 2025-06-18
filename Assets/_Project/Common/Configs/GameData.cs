@@ -6,5 +6,6 @@ namespace Project.Configs
     public class GameData : ScriptableObject
     {
         [field: SerializeField] public int MaxCardPoolSize { get; private set; }
+        [field: SerializeField] public int MaxUpgradeUIElementsPoolSize { get; private set; }
     }
 }

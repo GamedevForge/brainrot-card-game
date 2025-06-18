@@ -64,7 +64,8 @@ namespace Project.Core.Sevices
                         _upgradeController,
                         _upgradeControllerView,
                         _inputController,
-                        _gameplayController),
+                        _gameplayController,
+                        _gameplayModel),
                     new StartLevelState(
                         _gameplayController,
                         _inputController,

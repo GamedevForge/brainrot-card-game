@@ -3,7 +3,6 @@ using Project.Configs;
 using Project.Core.Sevices;
 using Project.Core.Sevices.StateMachine;
 using Project.Core.UI.Animtions;
-using Project.Core.UI.Popup;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +30,12 @@ namespace Project.Bootstrap
         [SerializeField] private RectTransform _windowsParent;
         [SerializeField] private GameObject _shadowPopupPrefab;
         [SerializeField] private RectTransform _shadowPopupGameObjectParent;
+        [SerializeField] private GameObject _upgradeUIElementPrefab;
+        [SerializeField] private RectTransform _upgradeUIElementsParent;
+        [SerializeField] private RectTransform _leftUIElementStartPositionRectTransform;
+        [SerializeField] private RectTransform _leftUIElementEndPositionRectTransform;
+        [SerializeField] private RectTransform _rightUIElementStartPositionRectTransform;
+        [SerializeField] private RectTransform _rightUIElementEndPositionRectTransform;
 
         [Header("Other:")]
         [SerializeField] private GameObject _gameplayBackgroundGameObject;
@@ -92,7 +97,16 @@ namespace Project.Bootstrap
                 _playerParent,
                 _playerData.DefualtCardData);
             _playerCard = _playerCardFactory.Create();
-            _upgradeControllerFactory = new UpgradeControllerFactory(_playerCard.CardStats);
+            _upgradeControllerFactory = new UpgradeControllerFactory(
+                _playerCard,
+                _gameData.MaxUpgradeUIElementsPoolSize,
+                _upgradeUIElementPrefab,
+                _upgradeUIElementsParent,
+                _animationsData.UpgradeUIElementsShowAndHideDuration,
+                _leftUIElementStartPositionRectTransform.position,
+                _leftUIElementEndPositionRectTransform.position,
+                _rightUIElementStartPositionRectTransform.position,
+                _rightUIElementEndPositionRectTransform.position);
             _upgradeControllerCreateData = _upgradeControllerFactory.Create();
             _aiActor = new AiActor();
             _gameplayControllerFactory = new GameplayControllerFactory(
@@ -135,6 +149,7 @@ namespace Project.Bootstrap
             _uICreateData.LoseWindowController.Initialize();
             _uIFactory.Initialize();
             _gameCycleStateController.Initialize();
+            _upgradeControllerCreateData.UpgradeControllerView.Initialize();
         }
 
         private void OnDestroy()
@@ -144,6 +159,7 @@ namespace Project.Bootstrap
             _uICreateData.LoseWindowController.Dispose();
             _cardHandlerRepository.Dispose();
             _playerCardFactory.Dispose();
+            _upgradeControllerCreateData.UpgradeControllerView.Dispose();
         }
     }
 }

@@ -1,22 +1,28 @@
 using System;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using Project.Core.Card;
+using Project.Core.Sevices;
 
 namespace Project.Core.UpgradeSystem
 {
-    public partial class UpgradeController
+    public class UpgradeController
     {
         public event Action OnUpgrade;
         
-        private readonly CardStats _playerCardStats;
+        private readonly CardCreatedData _playerCard;
+        private readonly UpgradeModel _upgradeModel;
 
-        public UpgradeController(CardStats playerCardStats) =>
-            _playerCardStats = playerCardStats;
-
-        public void UpgradeDamage(int damage)
+        public UpgradeController(
+            CardCreatedData playerCard, 
+            UpgradeModel upgradeModel)
         {
-            _playerCardStats.CardForce += damage;
+            _playerCard = playerCard;
+            _upgradeModel = upgradeModel;
+        }
+
+        public void UpgradeForce(int force)
+        {
+            _playerCard.Health.SetHealth(_playerCard.CardStats.CardForce + force);
             OnUpgrade?.Invoke();
         }
 
@@ -39,6 +45,12 @@ namespace Project.Core.UpgradeSystem
             {
                 throw;
             }
+        }
+
+        public void SetFromTo(int from, int to)
+        {
+            _upgradeModel.UpgradeFrom = from;
+            _upgradeModel.UpgradeTo = to;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Project.Core.Sevices
             UpgradeUIElementsCreateData data = new();
 
             data.UIELementGameObject = GameObject.Instantiate(_basePrefab, _uiElementsParent);
-            data.UIElementComponents = data.UIELementGameObject.GetComponent<UpgradeUIElementComponents>()
+            data.UIElementComponents = data.UIELementGameObject.GetComponent<UpgradeUIElementComponents>();
 
             return data;
         }

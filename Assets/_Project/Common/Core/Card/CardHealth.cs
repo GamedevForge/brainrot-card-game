@@ -20,6 +20,14 @@ namespace Project.Core.Card
         public CardHealth(CardCreatedData cardCreatedData) =>
             _cardCreatedData = cardCreatedData;
         
+        public void SetHealth(int health)
+        {
+            _health = health;
+            if (_health > _maxHealth)
+                _maxHealth = _health;
+            _cardCreatedData.CardStats.CardForce = _health;
+        }
+
         public void SetMaxHealth(int maxHealth)
         {
             _maxHealth = maxHealth;
