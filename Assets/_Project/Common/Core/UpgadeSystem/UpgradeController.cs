@@ -5,7 +5,7 @@ using Project.Core.Card;
 
 namespace Project.Core.UpgradeSystem
 {
-    public class UpgradeController
+    public partial class UpgradeController
     {
         public event Action OnUpgrade;
         

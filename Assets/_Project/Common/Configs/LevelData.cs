@@ -13,5 +13,13 @@ namespace Project.Configs
     public class WaveConfig
     {
         public CardData[] CardDatas;
+        public UpgradeRangeConfig UpgradeRangeConfig;
+    }
+
+    [Serializable]
+    public class UpgradeRangeConfig
+    {
+        public int From;
+        public int To;
     }
 }

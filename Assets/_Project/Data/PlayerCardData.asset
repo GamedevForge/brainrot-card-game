@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerCardData
   m_EditorClassIdentifier: 
   <Sprite>k__BackingField: {fileID: 0}
-  <CardForce>k__BackingField: 3
+  <CardForce>k__BackingField: 4
