@@ -9,14 +9,14 @@ namespace Project.Core.Sevices
     {
         private readonly CardFactory _cardFactory;
         private readonly RectTransform _playerCardParent;
-        private readonly CardData _cardData;
+        private readonly EnemyCardConfig _cardData;
 
         private CardCreatedData _playerCard;
 
         public PlayerCardFactory(
             CardFactory cardFactory, 
             RectTransform playerCardParent, 
-            CardData cardData)
+            EnemyCardConfig cardData)
         {
             _cardFactory = cardFactory;
             _playerCardParent = playerCardParent;
@@ -46,7 +46,7 @@ namespace Project.Core.Sevices
             _playerCard.CardComponents = _playerCard
                 .CardGameObject
                 .GetComponent<CardComponents>();
-            _playerCard.CardComponents.MainImage.sprite = _cardData.Sprite;
+            _playerCard.CardComponents.MainImage.sprite = _cardData.EnemyCardData.CardSprite;
             _playerCard.CardComponents.CardForceIndex.text = _cardData.CardForce.ToString();
             _playerCard.Health = new CardHealth(_playerCard);
             _playerCard.Health.SetMaxHealth(_cardData.CardForce);

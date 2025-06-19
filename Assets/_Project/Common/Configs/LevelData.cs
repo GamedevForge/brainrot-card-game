@@ -12,7 +12,7 @@ namespace Project.Configs
     [Serializable]
     public class WaveConfig
     {
-        public CardData[] CardDatas;
+        public EnemyCardConfig[] CardDatas;
         public UpgradeRangeConfig UpgradeRangeConfig;
     }
 
@@ -26,6 +26,7 @@ namespace Project.Configs
     [Serializable]
     public class UpgradeValueConfig
     {
+        public UpgradeCardData UpgradeCardData;
         public int Value;
         public UpgradeValueType Type;
     }

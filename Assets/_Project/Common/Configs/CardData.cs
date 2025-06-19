@@ -1,12 +1,10 @@
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Project.Configs
 {
-    [Serializable]
-    public class CardData
+    [CreateAssetMenu(fileName = "CardData", menuName = "Project/CardData")]
+    public class CardData : BaseCardData
     {
-        public Sprite Sprite;
-        public int CardForce;
+
     }
 }

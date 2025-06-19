@@ -72,11 +72,13 @@ namespace Project.Core.UI
                 _leftUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeFrom.Value}";
             else
                 _leftUIElement.UIElementComponents.UpgradeIndexText.text = $"*{_upgradeModel.UpgradeFrom.Value}";
+            _leftUIElement.UIElementComponents.MainImage.sprite = _upgradeModel.UpgradeFrom.UpgradeCardData.CardSprite;
 
             if (_upgradeModel.UpgradeTo.Type == Configs.UpgradeValueType.Addition)
                 _rightUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeTo.Value}";
             else
                 _rightUIElement.UIElementComponents.UpgradeIndexText.text = $"*{_upgradeModel.UpgradeTo.Value}";
+            _rightUIElement.UIElementComponents.MainImage.sprite = _upgradeModel.UpgradeTo.UpgradeCardData.CardSprite;
             
             await UniTask.WhenAll(
                 _moveAnimation.MoveAsync(
@@ -103,12 +105,14 @@ namespace Project.Core.UI
         {
             _upgradeController.UpgradeForce(_upgradeModel.UpgradeFrom);
             _playerCard.CardComponents.CardForceIndex.text = _playerCard.CardStats.CardForce.ToString();
+            _playerCard.CardComponents.MainImage.sprite = _upgradeModel.UpgradeFrom.UpgradeCardData.UpgradeCardTo.CardSprite;
         }
 
         private void UpgradeFromRightButton()
         {
             _upgradeController.UpgradeForce((_upgradeModel.UpgradeTo));
             _playerCard.CardComponents.CardForceIndex.text = _playerCard.CardStats.CardForce.ToString();
+            _playerCard.CardComponents.MainImage.sprite = _upgradeModel.UpgradeTo.UpgradeCardData.UpgradeCardTo.CardSprite;
         }
     }
 }

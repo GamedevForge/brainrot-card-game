@@ -19,11 +19,11 @@ namespace Project.Core.Sevices
         {
             List<CardCreatedData> cardDatasList = new();
             
-            foreach(CardData cardData in waveConfig.CardDatas)
+            foreach(EnemyCardConfig cardData in waveConfig.CardDatas)
             {
                 CardCreatedData createdCard = _cardPool.Get();
                 CardComponents cardComponents = createdCard.CardComponents;
-                cardComponents.MainImage.sprite = cardData.Sprite;
+                cardComponents.MainImage.sprite = cardData.EnemyCardData.CardSprite;
                 cardComponents.CardForceIndex.text = cardData.CardForce.ToString();
                 _handlerRepository.Add(createdCard);
                 cardDatasList.Add(createdCard);
