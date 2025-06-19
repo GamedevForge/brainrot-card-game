@@ -37,10 +37,18 @@ namespace Project.Core.Gameplay
                     .GetComponent<RectTransform>()
                     .position);
 
-            _handlerRepository
-                .CurrentCardModel
-                .Health
-                .TakeDamage(_playerCard.CardStats.CardForce);
+            if (_handlerRepository.CurrentCardModel.CardStats.CardForce >
+                _playerCard.CardStats.CardForce)
+            {
+                _playerCard.Health.TakeDamage(_handlerRepository.CurrentCardModel.CardStats.CardForce);
+            }
+            else
+            {
+                _handlerRepository
+                    .CurrentCardModel
+                    .Health
+                    .TakeDamage(_playerCard.CardStats.CardForce);
+            }
 
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,

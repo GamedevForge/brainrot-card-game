@@ -140,7 +140,8 @@ namespace Project.Bootstrap
                 _upgradeControllerCreateData.UpgradeControllerView,
                 _gameplayControllerCreateData.GameplayController,
                 _gameCycleStateController,
-                _saveLoadSystemCreateData.LevelProgress);
+                _saveLoadSystemCreateData.LevelProgress,
+                _playerCard);
             _gameplayStateController = _gameplayStateControllerFactory.Create();
             _gameCycleStateControllerFactory.SetGameplayStateController(_gameplayStateController);
 

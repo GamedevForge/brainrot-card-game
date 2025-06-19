@@ -10,6 +10,7 @@ namespace Project.Core.Gameplay
         private readonly CardHandlerRepository _cardHandlerRepository;
         private readonly InputController _inputController;
         private readonly GameplayModel _gameplayModel;
+        private readonly CardCreatedData _playerCard;
         
         private BaseStateController _gameplayStateController;
 
@@ -17,12 +18,14 @@ namespace Project.Core.Gameplay
             AttackController attackController,
             InputController inputController,
             GameplayModel gameplayModel,
-            CardHandlerRepository cardHandlerRepository)
+            CardHandlerRepository cardHandlerRepository,
+            CardCreatedData playerCard)
         {
             _attackController = attackController;
             _inputController = inputController;
             _gameplayModel = gameplayModel;
             _cardHandlerRepository = cardHandlerRepository;
+            _playerCard = playerCard;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -36,7 +39,11 @@ namespace Project.Core.Gameplay
 
             await _attackController.AttackEnemy();
 
-            if (_gameplayModel.CurrentWave.CardCreatedDatas.Count < 
+            if (_playerCard.Health.IsAlive == false)
+            {
+                _gameplayStateController.Translate(typeof(EndLevelState)).Forget();
+            }
+            else if (_gameplayModel.CurrentWave.CardCreatedDatas.Count < 
                 _gameplayModel.CurrentWaveConfig.CardDatas.Length)
             {
                 if (_gameplayModel.CurrentWave !=

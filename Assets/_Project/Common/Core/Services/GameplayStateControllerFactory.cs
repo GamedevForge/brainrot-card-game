@@ -18,6 +18,7 @@ namespace Project.Core.Sevices
         private readonly GameplayController _gameplayController;
         private readonly BaseStateController _gameCycleStateController;
         private readonly LevelProgress _levelProgress;
+        private readonly CardCreatedData _playerCard;
 
         public GameplayStateControllerFactory(
             AttackController attackController,
@@ -29,7 +30,8 @@ namespace Project.Core.Sevices
             UpgradeControllerView upgradeControllerView,
             GameplayController gameplayController,
             BaseStateController gameCycleStateController,
-            LevelProgress levelProgress)
+            LevelProgress levelProgress,
+            CardCreatedData playerCard)
         {
             _attackController = attackController;
             _inputController = inputController;
@@ -41,6 +43,7 @@ namespace Project.Core.Sevices
             _gameplayController = gameplayController;
             _gameCycleStateController = gameCycleStateController;
             _levelProgress = levelProgress;
+            _playerCard = playerCard;
         }
 
         public BaseStateController Create()
@@ -51,7 +54,8 @@ namespace Project.Core.Sevices
                         _attackController,
                         _inputController,
                         _gameplayModel,
-                        _cardHandlerRepository),
+                        _cardHandlerRepository,
+                        _playerCard),
                     new EnemyTurnState(
                         _aiActor,
                         _gameplayModel,
