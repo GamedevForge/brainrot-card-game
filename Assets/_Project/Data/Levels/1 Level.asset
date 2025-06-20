@@ -14,38 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WaveConfigs>k__BackingField:
   - CardDatas:
-    - Sprite: {fileID: 0}
+    - EnemyCardData: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
       CardForce: 6
-    - Sprite: {fileID: 0}
+    - EnemyCardData: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
       CardForce: 1
     UpgradeRangeConfig:
       From:
+        UpgradeCardData: {fileID: 11400000, guid: b284a7f2863239843a6fde87dedce7f6, type: 2}
         Value: 5
         Type: 0
       To:
+        UpgradeCardData: {fileID: 11400000, guid: b284a7f2863239843a6fde87dedce7f6, type: 2}
         Value: 2
         Type: 1
   - CardDatas:
-    - Sprite: {fileID: 0}
+    - EnemyCardData: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
       CardForce: 5
-    - Sprite: {fileID: 0}
+    - EnemyCardData: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
       CardForce: 5
     UpgradeRangeConfig:
       From:
+        UpgradeCardData: {fileID: 11400000, guid: b284a7f2863239843a6fde87dedce7f6, type: 2}
         Value: 5
         Type: 1
       To:
+        UpgradeCardData: {fileID: 11400000, guid: b284a7f2863239843a6fde87dedce7f6, type: 2}
         Value: 10
         Type: 0
   - CardDatas:
-    - Sprite: {fileID: 0}
+    - EnemyCardData: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
       CardForce: 5
-    - Sprite: {fileID: 0}
+    - EnemyCardData: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
       CardForce: 5
     UpgradeRangeConfig:
       From:
+        UpgradeCardData: {fileID: 0}
         Value: 0
         Type: 0
       To:
+        UpgradeCardData: {fileID: 0}
         Value: 0
         Type: 0

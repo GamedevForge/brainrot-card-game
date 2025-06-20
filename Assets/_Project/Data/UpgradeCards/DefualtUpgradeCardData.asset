@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DefualtUpgradeCardData
   m_EditorClassIdentifier: 
   <CardSprite>k__BackingField: {fileID: 0}
+  <UpgradeCardTo>k__BackingField: {fileID: 11400000, guid: 54ceed63560b9be41981b5d30cc16324, type: 2}
