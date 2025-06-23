@@ -30,6 +30,7 @@ namespace Project.Core.Sevices
                 createdCard.Health.SetMaxHealth(cardData.CardForce);
                 createdCard.Health.Revive();
                 createdCard.CardStats.CardForce = cardData.CardForce;
+                createdCard.CanvasGroup.alpha = 1f;
             }
 
             return cardDatasList;

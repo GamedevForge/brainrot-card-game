@@ -53,7 +53,12 @@ namespace Project.Core.Sevices
             _playerCard.CardComponents.CardForceIndex.text = _cardData.CardForce.ToString();
             _playerCard.Health = new CardHealth(
                 _playerCard, 
-                new UI.CardHealthView(_playerCard, _animationsData.OnAttackDuration, _animationsData.OnAttackRotateDelta));
+                new UI.CardHealthView(
+                    _playerCard, 
+                    _animationsData.OnAttackDuration, 
+                    _animationsData.OnAttackRotateDelta,
+                    _animationsData.OnDeadMoveOffset,
+                    _animationsData.OnDeadDuration));
             _playerCard.Health.SetMaxHealth(_cardData.CardForce);
             _playerCard.Health.Revive();
             _playerCard.CardView.Initialize();

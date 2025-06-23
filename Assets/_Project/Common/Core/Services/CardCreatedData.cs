@@ -14,5 +14,6 @@ namespace Project.Core.Sevices
         public Vector3 StartPosition;
         public CardView CardView;
         public CardSelectionView CardSelectionView;
+        public CanvasGroup CanvasGroup;
     }
 }

@@ -59,6 +59,7 @@ namespace Project.Core.Card
             if (_health == 0)
             {
                 IsAlive = false;
+                await _view.OnKill();
                 OnDead?.Invoke(_cardCreatedData);
             }
         }

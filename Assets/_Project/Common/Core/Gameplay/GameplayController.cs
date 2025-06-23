@@ -76,6 +76,7 @@ namespace Project.Core.Gameplay
 
         public async UniTask AddOnSlotAllCardFromCurrentWave()
         {
+            _cardSlots.GridLayoutGroup.enabled = true;
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
             {
                 cardCreatedData.CardGameObject.SetActive(true);
@@ -84,6 +85,7 @@ namespace Project.Core.Gameplay
 
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
                 cardCreatedData.StartPosition = cardCreatedData.CardGameObject.GetComponent<RectTransform>().position;  
+            _cardSlots.GridLayoutGroup.enabled = false;
         }
 
         private async void RemoveCardOnDead(CardCreatedData card)

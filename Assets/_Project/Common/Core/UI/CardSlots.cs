@@ -10,8 +10,9 @@ namespace Project.Core.UI
         private readonly RectTransform _gridLayoutTransform;
         private readonly MoveAnimation _moveAnimation;
         private readonly AlphaAnimation _alphaAnimation;
-        private readonly GridLayoutGroup _gridLayoutGroup;
 
+        public readonly GridLayoutGroup GridLayoutGroup;
+        
         public CardSlots(
             RectTransform gridLayoutTransform,
             MoveAnimation moveAnimation,
@@ -20,7 +21,7 @@ namespace Project.Core.UI
             _gridLayoutTransform = gridLayoutTransform;
             _moveAnimation = moveAnimation;
             _alphaAnimation = alphaAnimation;
-            _gridLayoutGroup = _gridLayoutTransform.GetComponent<GridLayoutGroup>();
+            GridLayoutGroup = _gridLayoutTransform.GetComponent<GridLayoutGroup>();
         }
 
         public async UniTask Add(GameObject cardGameObject)
@@ -28,10 +29,10 @@ namespace Project.Core.UI
             RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
             cardRectTransform.SetParent(_gridLayoutTransform);
 
-            //_gridLayoutGroup.CalculateLayoutInputHorizontal();
-            //_gridLayoutGroup.CalculateLayoutInputVertical();
-            //_gridLayoutGroup.SetLayoutHorizontal();
-            //_gridLayoutGroup.SetLayoutVertical();
+            GridLayoutGroup.CalculateLayoutInputHorizontal();
+            GridLayoutGroup.CalculateLayoutInputVertical();
+            GridLayoutGroup.SetLayoutHorizontal();
+            GridLayoutGroup.SetLayoutVertical();
 
             //await _moveAnimation.MoveAsync(
             //    cardRectTransform,
