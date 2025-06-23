@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Project.Core.Sevices;
 using Project.Core.UI.Animtions;
 using UnityEngine;
@@ -37,23 +38,29 @@ namespace Project.Core.Gameplay
                     .GetComponent<RectTransform>()
                     .position);
 
+
             if (_handlerRepository.CurrentCardModel.CardStats.CardForce >
                 _playerCard.CardStats.CardForce)
             {
-                _playerCard.Health.TakeDamage(_handlerRepository.CurrentCardModel.CardStats.CardForce);
+                await UniTask.WhenAll(
+                    _playerCard.Health.TakeDamage(_handlerRepository.CurrentCardModel.CardStats.CardForce),
+                    _moveAnimation.MoveAsync(
+                        _playerCardRectTransform,
+                        _playerCardRectTransform.position,
+                        playerCardStartPosition));
             }
             else
             {
-                _handlerRepository
-                    .CurrentCardModel
-                    .Health
-                    .TakeDamage(_playerCard.CardStats.CardForce);
+                _handlerRepository.CurrentCardModel.CardComponents.OnTakeDamageParticleSystem.Play();
+                await UniTask.WhenAll(_handlerRepository
+                        .CurrentCardModel
+                        .Health
+                        .TakeDamage(_playerCard.CardStats.CardForce),
+                        _moveAnimation.MoveAsync(
+                            _playerCardRectTransform,
+                            _playerCardRectTransform.position,
+                            playerCardStartPosition));
             }
-
-            await _moveAnimation.MoveAsync(
-                _playerCardRectTransform,
-                _playerCardRectTransform.position,
-                playerCardStartPosition);
         }
 
         public async UniTask AttackPlayer(CardCreatedData enemyCard)

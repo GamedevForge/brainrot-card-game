@@ -86,7 +86,7 @@ namespace Project.Bootstrap
             _uICreateData = _uIFactory.Create();
             _inputController = new InputController(_graphicRaycaster);
             _cardSlotsGameObject = GameObject.Instantiate(_cardSlotsPrefab, _cardSlotsParent);
-            _cardFactory = new CardFactory(_cardPrefab);
+            _cardFactory = new CardFactory(_cardPrefab, _animationsData);
             _cardObjectPool = new CardObjectPool(_cardFactory, _gameData.MaxCardPoolSize);
             _levelFactory = new LevelFactory(
                 new WaveFactory(
@@ -95,7 +95,8 @@ namespace Project.Bootstrap
             _playerCardFactory = new PlayerCardFactory(
                 _cardFactory,
                 _playerParent,
-                _playerData.DefualtCardData);
+                _playerData.DefualtCardData,
+                _animationsData);
             _playerCard = _playerCardFactory.Create();
             _upgradeControllerFactory = new UpgradeControllerFactory(
                 _playerCard,

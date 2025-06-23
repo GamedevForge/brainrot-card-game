@@ -10,19 +10,22 @@ namespace Project.Core.Sevices
         private readonly CardFactory _cardFactory;
         private readonly RectTransform _playerCardParent;
         private readonly EnemyCardConfig _cardData;
+        private readonly AnimationsData _animationsData;
 
         private CardCreatedData _playerCard;
 
         public PlayerCardFactory(
-            CardFactory cardFactory, 
-            RectTransform playerCardParent, 
-            EnemyCardConfig cardData)
+            CardFactory cardFactory,
+            RectTransform playerCardParent,
+            EnemyCardConfig cardData,
+            AnimationsData animationsData)
         {
             _cardFactory = cardFactory;
             _playerCardParent = playerCardParent;
             _cardData = cardData;
+            _animationsData = animationsData;
         }
-        
+
         public void Dispose()
         {
             _playerCard.CardView.Dispose();
@@ -48,7 +51,9 @@ namespace Project.Core.Sevices
                 .GetComponent<CardComponents>();
             _playerCard.CardComponents.MainImage.sprite = _cardData.EnemyCardData.CardSprite;
             _playerCard.CardComponents.CardForceIndex.text = _cardData.CardForce.ToString();
-            _playerCard.Health = new CardHealth(_playerCard);
+            _playerCard.Health = new CardHealth(
+                _playerCard, 
+                new UI.CardHealthView(_playerCard, _animationsData.OnAttackDuration, _animationsData.OnAttackRotateDelta));
             _playerCard.Health.SetMaxHealth(_cardData.CardForce);
             _playerCard.Health.Revive();
             _playerCard.CardView.Initialize();

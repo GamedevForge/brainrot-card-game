@@ -1,5 +1,7 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Project.Core.Sevices;
+using Project.Core.UI;
 using UnityEngine;
 
 namespace Project.Core.Card
@@ -11,15 +13,20 @@ namespace Project.Core.Card
         public event Action<int> OnRevive;
 
         private readonly CardCreatedData _cardCreatedData;
+        private readonly CardHealthView _view;
         
         private int _health;
         private int _maxHealth;
 
         public bool IsAlive { get; private set; } = true;
-        
-        public CardHealth(CardCreatedData cardCreatedData) =>
+
+        public CardHealth(CardCreatedData cardCreatedData, 
+            CardHealthView view)
+        {
             _cardCreatedData = cardCreatedData;
-        
+            _view = view;
+        }
+
         public void SetHealth(int health)
         {
             _health = health;
@@ -42,10 +49,11 @@ namespace Project.Core.Card
             OnRevive?.Invoke(_health);
         }
         
-        public void TakeDamage(int damage)
+        public async UniTask TakeDamage(int damage)
         {
             _health = Mathf.Max(_health - damage, 0);
             _cardCreatedData.CardStats.CardForce = _health;
+            await _view.OnTakedDamage();
             OnTakedGamage?.Invoke(_health);
 
             if (_health == 0)

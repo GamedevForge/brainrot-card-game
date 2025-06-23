@@ -9,5 +9,7 @@ namespace Project.Configs
         [field: SerializeField] public float PopupShowAndHideDuration { get; private set; }
         [field: SerializeField] public float WindowAnimationDuration { get; private set; }
         [field: SerializeField] public float UpgradeUIElementsShowAndHideDuration { get; private set; }
+        [field: SerializeField] public float OnAttackDuration { get; private set; } = 0.3f;
+        [field: SerializeField] public float OnAttackRotateDelta { get; private set; } = -15f;
     }
 }
