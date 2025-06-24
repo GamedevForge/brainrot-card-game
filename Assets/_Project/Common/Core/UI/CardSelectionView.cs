@@ -2,17 +2,17 @@
 using Project.Core.Sevices;
 using System;
 using Unity.VisualScripting;
-using UnityEngine.UI;
+using UnityEngine;
 
 namespace Project.Core.UI
 {
     public class CardSelectionView : IInitializable, IDisposable
     {
-        private readonly Outline _cardOutLine;
+        private readonly GameObject _cardOutLine;
         private readonly EnemyCardSelectionHandler _enemyCardSelectionHandler;
 
         public CardSelectionView(
-            Outline cardOutLine,
+            GameObject cardOutLine,
             EnemyCardSelectionHandler enemyCardSelectionHandler)
         {
             _cardOutLine = cardOutLine;
@@ -32,9 +32,9 @@ namespace Project.Core.UI
         }
 
         private void Selecet(CardCreatedData _) =>
-            _cardOutLine.enabled = true;
+            _cardOutLine.SetActive(true);
 
         private void Reset() =>
-            _cardOutLine.enabled = false;
+            _cardOutLine.SetActive(false);
     }
 }
