@@ -3,7 +3,7 @@ using Project.Core.UI.Windows;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class UIFactory : IInitializable
     {

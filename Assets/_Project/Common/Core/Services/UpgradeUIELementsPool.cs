@@ -1,4 +1,4 @@
-﻿namespace Project.Core.Sevices
+﻿namespace Project.Core.Services
 {
     public class UpgradeUIELementsPool
     {

@@ -1,5 +1,5 @@
 using System;
-using Project.Core.Sevices;
+using Project.Core.Services;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 

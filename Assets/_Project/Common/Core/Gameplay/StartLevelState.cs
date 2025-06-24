@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Project.Configs;
-using Project.Core.Sevices;
-using Project.Core.Sevices.StateMachine;
+using Project.Core.Services;
+using Project.Core.Services.StateMachine;
 using UnityEngine;
 
 namespace Project.Core.Gameplay

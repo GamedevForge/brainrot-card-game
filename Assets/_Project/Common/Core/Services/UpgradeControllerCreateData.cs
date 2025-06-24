@@ -1,7 +1,7 @@
 ﻿using Project.Core.UI;
 using Project.Core.UpgradeSystem;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public struct UpgradeControllerCreateData
     {

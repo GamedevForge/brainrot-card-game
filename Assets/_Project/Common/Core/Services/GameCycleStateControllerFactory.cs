@@ -1,12 +1,12 @@
 ﻿using Project.Configs;
 using Project.Core.GameCycle;
 using Project.Core.Gameplay;
-using Project.Core.Sevices.StateMachine;
+using Project.Core.Services.StateMachine;
 using Project.Core.UI.Popup;
 using Project.Core.UI.Windows;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class GameCycleStateControllerFactory
     {

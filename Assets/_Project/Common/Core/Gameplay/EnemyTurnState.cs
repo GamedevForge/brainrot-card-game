@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Project.Ai;
-using Project.Core.Sevices;
-using Project.Core.Sevices.StateMachine;
+using Project.Core.Services;
+using Project.Core.Services.StateMachine;
 
 namespace Project.Core.Gameplay
 {

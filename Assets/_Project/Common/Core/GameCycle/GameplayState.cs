@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Project.Core.Gameplay;
-using Project.Core.Sevices;
-using Project.Core.Sevices.StateMachine;
+using Project.Core.Services;
+using Project.Core.Services.StateMachine;
 using Project.Core.UI.Popup;
 using UnityEngine;
 

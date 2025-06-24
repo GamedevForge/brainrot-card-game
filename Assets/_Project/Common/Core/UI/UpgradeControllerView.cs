@@ -1,6 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Project.Core.Sevices;
+using Project.Core.Services;
 using Project.Core.UI.Animtions;
 using Project.Core.UpgradeSystem;
 using Unity.VisualScripting;

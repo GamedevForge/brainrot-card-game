@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Coffee.UIEffects;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Core.Card
@@ -11,5 +12,6 @@ namespace Project.Core.Card
         [field: SerializeField] public ParticleSystem UpgradeParticleSystem { get; private set; }
         [field: SerializeField] public ParticleSystem OnTakeDamageParticleSystem { get; private set; }
         [field: SerializeField] public ParticleSystem OnDeadParticleSystem { get; private set; }
+        [field: SerializeField] public UIEffect GrayScaleEffect { get; private set; }
     }
 }

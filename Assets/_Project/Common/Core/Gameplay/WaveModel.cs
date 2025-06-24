@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Project.Core.Sevices;
+using Project.Core.Services;
 
 namespace Project.Core.Gameplay
 {

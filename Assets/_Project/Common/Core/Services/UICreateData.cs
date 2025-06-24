@@ -1,7 +1,7 @@
 ﻿using Project.Core.UI.Windows;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public struct UICreateData
     {

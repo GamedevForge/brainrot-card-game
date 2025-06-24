@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.Core.Sevices.StateMachine
+namespace Project.Core.Services.StateMachine
 {
     public class Transition<TFrom, TTo> : ITransition
         where TFrom : IState

@@ -1,7 +1,7 @@
 ﻿using Project.Core.Gameplay;
 using Project.Core.UI;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public struct GameplayControllerCreateData
     {

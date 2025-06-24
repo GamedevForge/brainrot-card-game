@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Project.Core.Sevices;
+using Project.Core.Services;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 

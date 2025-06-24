@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Project.Core.Sevices;
+using Project.Core.Services;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 
@@ -39,6 +39,7 @@ namespace Project.Core.Gameplay
             }
 
             _handlerRepository.CurrentCardModel.CardGameObject.transform.SetAsLastSibling();
+            _playerCard.CardGameObject.transform.SetAsLastSibling();
 
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,

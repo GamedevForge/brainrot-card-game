@@ -3,7 +3,7 @@ using Project.Configs;
 using Project.Core.Card;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class PlayerCardFactory : IDisposable
     {

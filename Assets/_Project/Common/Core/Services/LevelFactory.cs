@@ -2,7 +2,7 @@
 using Project.Configs;
 using Project.Core.Gameplay;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class LevelFactory
     {

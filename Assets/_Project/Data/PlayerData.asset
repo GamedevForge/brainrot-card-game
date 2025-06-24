@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   <DefualtCardData>k__BackingField:
-    EnemyCardData: {fileID: 11400000, guid: 309b484d57727e542a647c31eedd402d, type: 2}
+    EnemyCardData: {fileID: 11400000, guid: 047ceccbe560b0841ae7838bdea2bd58, type: 2}
     CardForce: 4

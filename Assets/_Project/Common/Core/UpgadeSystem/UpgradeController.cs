@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using System.Threading;
-using Project.Core.Sevices;
+using Project.Core.Services;
 using Project.Configs;
 using UnityEngine;
 

@@ -1,11 +1,11 @@
 ﻿using Project.Ai;
 using Project.Core.Gameplay;
-using Project.Core.Sevices.StateMachine;
+using Project.Core.Services.StateMachine;
 using Project.Core.UI;
 using Project.Core.UpgradeSystem;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class GameplayStateControllerFactory
     {

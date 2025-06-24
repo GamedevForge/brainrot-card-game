@@ -3,7 +3,7 @@ using Project.Core.UI;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class GameplayControllerFactory
     {

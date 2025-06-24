@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Project.Core.Sevices.StateMachine
+namespace Project.Core.Services.StateMachine
 {
     public interface IState
     {

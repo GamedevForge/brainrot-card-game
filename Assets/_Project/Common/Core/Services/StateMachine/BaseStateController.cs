@@ -2,7 +2,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 
-namespace Project.Core.Sevices.StateMachine
+namespace Project.Core.Services.StateMachine
 {
     public class BaseStateController
     {

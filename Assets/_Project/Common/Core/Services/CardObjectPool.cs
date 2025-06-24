@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class CardObjectPool
     {

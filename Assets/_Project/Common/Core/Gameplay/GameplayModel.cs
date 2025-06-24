@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Project.Configs;
-using Project.Core.Sevices;
+using Project.Core.Services;
 
 namespace Project.Core.Gameplay
 {

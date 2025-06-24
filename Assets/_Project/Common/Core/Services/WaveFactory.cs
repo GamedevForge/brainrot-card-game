@@ -2,7 +2,7 @@
 using Project.Configs;
 using Project.Core.Card;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class WaveFactory
     {
@@ -32,6 +32,7 @@ namespace Project.Core.Sevices
                 createdCard.CardStats.CardForce = cardData.CardForce;
                 createdCard.CanvasGroup.alpha = 1f;
                 createdCard.AudioClip = cardData.EnemyCardData.AudioClip;
+                createdCard.CardComponents.GrayScaleEffect.enabled = false;
             }
 
             return cardDatasList;

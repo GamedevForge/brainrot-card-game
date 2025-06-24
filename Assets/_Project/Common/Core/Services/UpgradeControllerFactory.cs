@@ -3,7 +3,7 @@ using Project.Core.UI;
 using Project.Core.UpgradeSystem;
 using UnityEngine;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class UpgradeControllerFactory
     {

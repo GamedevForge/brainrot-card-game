@@ -1,7 +1,7 @@
 using Project.Ai;
 using Project.Configs;
-using Project.Core.Sevices;
-using Project.Core.Sevices.StateMachine;
+using Project.Core.Services;
+using Project.Core.Services.StateMachine;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -156,6 +156,7 @@ namespace Project.Bootstrap
             _uIFactory.Initialize();
             _gameCycleStateController.Initialize();
             _upgradeControllerCreateData.UpgradeControllerView.Initialize();
+            _cardSlotsGameObject.transform.SetSiblingIndex(1);
         }
 
         private void OnDestroy()

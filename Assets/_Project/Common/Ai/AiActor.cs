@@ -1,5 +1,5 @@
 using Project.Core.Card;
-using Project.Core.Sevices;
+using Project.Core.Services;
 using UnityEngine;
 
 namespace Project.Ai

@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using Project.Core.Card;
 
-namespace Project.Core.Sevices
+namespace Project.Core.Services
 {
     public class CardHandlerRepository : IDisposable
     {
