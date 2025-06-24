@@ -119,7 +119,8 @@ namespace Project.Bootstrap
                 _levelFactory,
                 _cardSlotsGameObject.GetComponent<RectTransform>(),
                 _cardHandlerRepository,
-                _cardObjectPool);
+                _cardObjectPool,
+                _audioSource);
             _gameplayControllerCreateData = _gameplayControllerFactory.Create();
             _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
                 _uICreateData.MenuWindowController,
@@ -144,7 +145,8 @@ namespace Project.Bootstrap
                 _gameplayControllerCreateData.GameplayController,
                 _gameCycleStateController,
                 _saveLoadSystemCreateData.LevelProgress,
-                _playerCard);
+                _playerCard,
+                _audioSource);
             _gameplayStateController = _gameplayStateControllerFactory.Create();
             _gameCycleStateControllerFactory.SetGameplayStateController(_gameplayStateController);
 

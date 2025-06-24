@@ -3,6 +3,7 @@ using Project.Core.Gameplay;
 using Project.Core.Sevices.StateMachine;
 using Project.Core.UI;
 using Project.Core.UpgradeSystem;
+using UnityEngine;
 
 namespace Project.Core.Sevices
 {
@@ -19,6 +20,7 @@ namespace Project.Core.Sevices
         private readonly BaseStateController _gameCycleStateController;
         private readonly LevelProgress _levelProgress;
         private readonly CardCreatedData _playerCard;
+        private readonly AudioSource _audioSource;
 
         public GameplayStateControllerFactory(
             AttackController attackController,
@@ -31,7 +33,8 @@ namespace Project.Core.Sevices
             GameplayController gameplayController,
             BaseStateController gameCycleStateController,
             LevelProgress levelProgress,
-            CardCreatedData playerCard)
+            CardCreatedData playerCard,
+            AudioSource audioSource)
         {
             _attackController = attackController;
             _inputController = inputController;
@@ -44,6 +47,7 @@ namespace Project.Core.Sevices
             _gameCycleStateController = gameCycleStateController;
             _levelProgress = levelProgress;
             _playerCard = playerCard;
+            _audioSource = audioSource;
         }
 
         public BaseStateController Create()
@@ -73,7 +77,9 @@ namespace Project.Core.Sevices
                     new StartLevelState(
                         _gameplayController,
                         _inputController,
-                        _levelProgress)
+                        _levelProgress,
+                        _playerCard,
+                        _audioSource)
             };
             
             BaseStateController stateController = new(
