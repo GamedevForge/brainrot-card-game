@@ -31,6 +31,7 @@ namespace Project.Core.Sevices
                 createdCard.Health.Revive();
                 createdCard.CardStats.CardForce = cardData.CardForce;
                 createdCard.CanvasGroup.alpha = 1f;
+                createdCard.AudioClip = cardData.EnemyCardData.AudioClip;
             }
 
             return cardDatasList;

@@ -59,6 +59,7 @@ namespace Project.Core.Sevices
                     _animationsData.OnAttackRotateDelta,
                     _animationsData.OnDeadMoveOffset,
                     _animationsData.OnDeadDuration));
+            _playerCard.AudioClip = _cardData.EnemyCardData.AudioClip;
             _playerCard.Health.SetMaxHealth(_cardData.CardForce);
             _playerCard.Health.Revive();
             _playerCard.CardView.Initialize();

@@ -53,6 +53,7 @@ namespace Project.Core.Card
         {
             _health = Mathf.Max(_health - damage, 0);
             _cardCreatedData.CardStats.CardForce = _health;
+            _cardCreatedData.CardComponents.CardForceIndex.text = _health.ToString();
             await _view.OnTakedDamage();
             OnTakedGamage?.Invoke(_health);
 

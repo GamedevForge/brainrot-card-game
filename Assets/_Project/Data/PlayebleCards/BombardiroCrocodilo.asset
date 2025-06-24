@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01757bd00c20eb04785427659dcb7783, type: 3}
-  m_Name: DefualtUpgradeCardData
+  m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
+  m_Name: BombardiroCrocodilo
   m_EditorClassIdentifier: 
   <CardSprite>k__BackingField: {fileID: 0}
-  <UpgradeCardTo>k__BackingField: {fileID: 11400000, guid: 309b484d57727e542a647c31eedd402d, type: 2}
+  <AudioClip>k__BackingField: {fileID: 8300000, guid: 31727d69bdc8a9d42b1d93f47257acde, type: 3}

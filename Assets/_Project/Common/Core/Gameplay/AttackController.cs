@@ -12,6 +12,7 @@ namespace Project.Core.Gameplay
         private readonly MoveAnimation _moveAnimation;
         private readonly CardHandlerRepository _handlerRepository;
         private readonly CardCreatedData _playerCard;
+        private readonly AudioSource _audioSource;
 
         public AttackController(
             RectTransform playerCardRectTransform, 
@@ -29,6 +30,12 @@ namespace Project.Core.Gameplay
         {
             Vector3 playerCardStartPosition = _playerCardRectTransform.position;
 
+            if (_handlerRepository.CurrentCardModel.AudioClip != null)
+            {
+                _audioSource.PlayOneShot(_handlerRepository.CurrentCardModel.AudioClip);
+                await UniTask.WaitForSeconds(_handlerRepository.CurrentCardModel.AudioClip.length);
+            }
+
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
                 playerCardStartPosition,
@@ -36,8 +43,7 @@ namespace Project.Core.Gameplay
                     .CurrentCardModel
                     .CardGameObject
                     .GetComponent<RectTransform>()
-                    .position);
-
+                    .position);           
 
             if (_handlerRepository.CurrentCardModel.CardStats.CardForce >
                 _playerCard.CardStats.CardForce)

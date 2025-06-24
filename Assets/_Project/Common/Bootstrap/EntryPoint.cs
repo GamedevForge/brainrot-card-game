@@ -40,6 +40,7 @@ namespace Project.Bootstrap
         [Header("Other:")]
         [SerializeField] private GameObject _gameplayBackgroundGameObject;
         [SerializeField] private GameObject _saveLoadSystemPrefab;
+        [SerializeField] private AudioSource _audioSource;
 
         private readonly CardHandlerRepository _cardHandlerRepository = new();
 
@@ -107,7 +108,8 @@ namespace Project.Bootstrap
                 _leftUIElementStartPositionRectTransform.position,
                 _leftUIElementEndPositionRectTransform.position,
                 _rightUIElementStartPositionRectTransform.position,
-                _rightUIElementEndPositionRectTransform.position);
+                _rightUIElementEndPositionRectTransform.position,
+                _audioSource);
             _upgradeControllerCreateData = _upgradeControllerFactory.Create();
             _aiActor = new AiActor();
             _gameplayControllerFactory = new GameplayControllerFactory(

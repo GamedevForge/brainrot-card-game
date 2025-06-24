@@ -16,17 +16,19 @@ namespace Project.Core.Sevices
         private readonly Vector3 _leftUIElementEndPosition;
         private readonly Vector3 _rightUIElementStartPosition;
         private readonly Vector3 _rightUIElementEndPosition;
+        private readonly AudioSource _audioSource;
 
         public UpgradeControllerFactory(
-            CardCreatedData playerCard, 
-            int upgradeUIElementsPoolSize, 
-            GameObject upgradeUIElementPrefab, 
-            RectTransform upgradeUIElementsParent, 
-            float showAndHideAnimationDuration, 
-            Vector3 leftUIElementStartPosition, 
-            Vector3 leftUIElementEndPosition, 
-            Vector3 rightUIElementStartPosition, 
-            Vector3 rightUIElementEndPosition)
+            CardCreatedData playerCard,
+            int upgradeUIElementsPoolSize,
+            GameObject upgradeUIElementPrefab,
+            RectTransform upgradeUIElementsParent,
+            float showAndHideAnimationDuration,
+            Vector3 leftUIElementStartPosition,
+            Vector3 leftUIElementEndPosition,
+            Vector3 rightUIElementStartPosition,
+            Vector3 rightUIElementEndPosition,
+            AudioSource audioSource)
         {
             _playerCard = playerCard;
             _upgradeUIElementsPoolSize = upgradeUIElementsPoolSize;
@@ -37,6 +39,7 @@ namespace Project.Core.Sevices
             _leftUIElementEndPosition = leftUIElementEndPosition;
             _rightUIElementStartPosition = rightUIElementStartPosition;
             _rightUIElementEndPosition = rightUIElementEndPosition;
+            _audioSource = audioSource;
         }
 
         public UpgradeControllerCreateData Create()
@@ -44,7 +47,7 @@ namespace Project.Core.Sevices
             UpgradeControllerCreateData data = new();
 
             data.UpgradeModel = new UpgradeModel();
-            data.UpgradeController = new UpgradeController(_playerCard, data.UpgradeModel);
+            data.UpgradeController = new UpgradeController(_playerCard, data.UpgradeModel, _audioSource);
             data.UpgradeControllerView = new UpgradeControllerView(
                 new UpgradeUIELementsPool(
                     new UpgradeUIElementsFactory(

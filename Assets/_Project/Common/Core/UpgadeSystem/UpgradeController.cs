@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using Project.Core.Sevices;
 using Project.Configs;
+using UnityEngine;
 
 namespace Project.Core.UpgradeSystem
 {
@@ -12,21 +13,42 @@ namespace Project.Core.UpgradeSystem
         
         private readonly CardCreatedData _playerCard;
         private readonly UpgradeModel _upgradeModel;
+        private readonly AudioSource _audioSource;
 
         public UpgradeController(
-            CardCreatedData playerCard, 
-            UpgradeModel upgradeModel)
+            CardCreatedData playerCard,
+            UpgradeModel upgradeModel,
+            AudioSource audioSource)
         {
             _playerCard = playerCard;
             _upgradeModel = upgradeModel;
+            _audioSource = audioSource;
         }
 
-        public void UpgradeForce(UpgradeValueConfig force)
+        public async void UpgradeForce(UpgradeValueConfig force)
         {
             if (force.Type == UpgradeValueType.Addition)
                 _playerCard.Health.SetHealth(_playerCard.CardStats.CardForce + force.Value);
             else
                 _playerCard.Health.SetHealth(_playerCard.CardStats.CardForce * force.Value);
+            _playerCard.AudioClip = force.UpgradeCardData.UpgradeCardTo.AudioClip;
+
+            _playerCard.CardComponents.UpgradeParticleSystem.Play();
+
+            if (_playerCard.AudioClip != null)
+            {
+                _audioSource.PlayOneShot(_playerCard.AudioClip);
+                //_audioSource.clip = _playerCard.AudioClip;
+                //audioSource.Play();
+                await UniTask.WhenAll(
+                    UniTask.WaitForSeconds(_playerCard.AudioClip.length),
+                    UniTask.WaitForSeconds(_playerCard.CardComponents.UpgradeParticleSystem.main.duration * 3f));
+            }
+            else
+            {
+                await UniTask.WaitForSeconds(_playerCard.CardComponents.UpgradeParticleSystem.main.duration * 3f);
+            }
+
             OnUpgrade?.Invoke();
         }
 
