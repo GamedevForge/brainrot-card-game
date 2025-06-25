@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 300}
+  m_SizeDelta: {x: 310, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5399499044851440701
 CanvasRenderer:
@@ -155,13 +155,13 @@ MonoBehaviour:
   m_SrcBlendMode: 1
   m_DstBlendMode: 10
   m_ShadowMode: 4
-  m_ShadowDistance: {x: 5, y: 5}
+  m_ShadowDistance: {x: 8, y: 8}
   m_ShadowIteration: 5
   m_ShadowFade: 0.055
   m_ShadowMirrorScale: 0.5
   m_ShadowBlurIntensity: 1
   m_ShadowColorFilter: 4
-  m_ShadowColor: {r: 1, g: 0.7640677, b: 0.035294116, a: 1}
+  m_ShadowColor: {r: 1, g: 0.7064444, b: 0, a: 1}
   m_ShadowColorGlow: 0
   m_GradationMode: 0
   m_GradationIntensity: 1
@@ -373,7 +373,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 300}
+  m_SizeDelta: {x: 310, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1044448331553368896
 CanvasRenderer:
@@ -667,10 +667,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 564794853641115488}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -129.9}
-  m_SizeDelta: {x: 70, y: 39.73}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 60, y: 40}
+  m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1366193584254074152
 CanvasRenderer:
@@ -744,8 +744,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 35, y: 35}
-  m_SizeDelta: {x: 70, y: 70}
+  m_AnchoredPosition: {x: 60, y: 40}
+  m_SizeDelta: {x: 120, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &364222773827305758
 CanvasRenderer:
@@ -802,8 +802,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 73.3
+  m_fontSizeBase: 73.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -883,7 +883,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 300}
+  m_SizeDelta: {x: 310, y: 540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1772882673816398422
 CanvasRenderer:
@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_SrcBlendMode: 1
   m_DstBlendMode: 10
   m_ShadowMode: 4
-  m_ShadowDistance: {x: 5.1, y: 5.1}
+  m_ShadowDistance: {x: 11, y: 11}
   m_ShadowIteration: 5
   m_ShadowFade: 0.022
   m_ShadowMirrorScale: 0.5
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_IsTrail: 0
   m_IgnoreCanvasScaler: 0
   m_AbsoluteMode: 0
-  m_Scale3D: {x: 120, y: 120, z: 120}
+  m_Scale3D: {x: 160, y: 160, z: 160}
   m_AnimatableProperties: []
   m_Particles:
   - {fileID: 3803716329153148751}
@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_IsTrail: 0
   m_IgnoreCanvasScaler: 0
   m_AbsoluteMode: 0
-  m_Scale3D: {x: 99.09, y: 99.09, z: 99.09}
+  m_Scale3D: {x: 130, y: 130, z: 130}
   m_AnimatableProperties: []
   m_Particles:
   - {fileID: 6007639312813896144}
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_IsTrail: 0
   m_IgnoreCanvasScaler: 0
   m_AbsoluteMode: 0
-  m_Scale3D: {x: 150, y: 150, z: 150}
+  m_Scale3D: {x: 170, y: 170, z: 170}
   m_AnimatableProperties: []
   m_Particles:
   - {fileID: 1350244921472386397}

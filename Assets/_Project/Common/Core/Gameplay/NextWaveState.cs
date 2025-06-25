@@ -6,7 +6,7 @@ using Project.Core.UpgradeSystem;
 
 namespace Project.Core.Gameplay
 {
-    public class NextWaveState : IAsyncEnterState, IAsyncExitState, ISetableState<BaseStateController>
+    public class NextWaveState : IAsyncEnterState, ISetableState<BaseStateController>
     {
         private readonly UpgradeController _upgradeController;
         private readonly UpgradeControllerView _upgradeControllerView;
@@ -39,21 +39,20 @@ namespace Project.Core.Gameplay
                 _gameplayModel.CurrentWaveConfig.UpgradeRangeConfig.To,
                 _gameplayModel.CurrentWaveConfig.UpgradeRangeConfig.From);
             foreach(CardCreatedData enemyCard in _gameplayModel.CurrentWave.CardCreatedDatas)
+            {
                 enemyCard.CardComponents.GrayScaleEffect.enabled = true;
+                enemyCard.SelectionHandler.Disable();
+            }
 
             await _upgradeControllerView.ShowUpgrades();
             _inputController.EnableInput();
             await _upgradeController.AsyncWaitToUpgrade();
             _inputController.DisableInput();
             await _upgradeControllerView.HideUpgrades();
-            _gameplayStateController.Translate(typeof(PlayerTurnState)).Forget();
-        }
-
-        public async UniTask AsyncExit()
-        {
             await _gameplayController.RemoveAllCardOnCurrentWave();
             _gameplayController.GoToNextWave();
             await _gameplayController.AddOnSlotAllCardFromCurrentWave();
+            _gameplayStateController.Translate(typeof(PlayerTurnState)).Forget();
         }
     }
 }

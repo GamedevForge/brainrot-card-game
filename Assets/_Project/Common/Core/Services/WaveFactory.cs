@@ -33,6 +33,7 @@ namespace Project.Core.Services
                 createdCard.CanvasGroup.alpha = 1f;
                 createdCard.AudioClip = cardData.EnemyCardData.AudioClip;
                 createdCard.CardComponents.GrayScaleEffect.enabled = false;
+                createdCard.SelectionHandler.Enable();
             }
 
             return cardDatasList;

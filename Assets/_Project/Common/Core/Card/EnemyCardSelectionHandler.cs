@@ -15,6 +15,7 @@ namespace Project.Core.Card
         private readonly CardCreatedData _character;
 
         private int _clickCount;
+        private bool _isActive = false;
 
         public bool IsSelection { get; private set; } = false; 
 
@@ -30,8 +31,17 @@ namespace Project.Core.Card
         public void Dispose() =>
             _button.onClick.RemoveListener(OnClick);
 
+        public void Enable() =>
+            _isActive = true;
+
+        public void Disable() =>
+            _isActive = false;
+
         private void OnClick()
         {
+            if (_isActive == false)
+                return;
+            
             _clickCount++;
 
             if (_clickCount == 1)
