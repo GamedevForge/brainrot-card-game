@@ -1,4 +1,5 @@
-﻿using Project.Core.Gameplay;
+﻿using Project.Configs;
+using Project.Core.Gameplay;
 using Project.Core.UI;
 using Project.Core.UI.Animtions;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Project.Core.Services
         private readonly CardHandlerRepository _cardHandlerRepository;
         private readonly CardObjectPool _cardObjectPool;
         private readonly AudioSource _audioSource;
+        private readonly AnimationsData _animationsData;
 
         public GameplayControllerFactory(
             RectTransform playerCardRectTransform,
@@ -24,7 +26,8 @@ namespace Project.Core.Services
             RectTransform cardSlotParent,
             CardHandlerRepository cardHandlerRepository,
             CardObjectPool cardObjectPool,
-            AudioSource audioSource)
+            AudioSource audioSource,
+            AnimationsData animationsData)
         {
             _playerCardRectTransform = playerCardRectTransform;
             _moveAnimation = moveAnimation;
@@ -34,6 +37,7 @@ namespace Project.Core.Services
             _cardHandlerRepository = cardHandlerRepository;
             _cardObjectPool = cardObjectPool;
             _audioSource = audioSource;
+            _animationsData = animationsData;
         }
 
         public GameplayControllerCreateData Create()
@@ -49,8 +53,9 @@ namespace Project.Core.Services
             data.GameplayModel = new GameplayModel(_playerCard);
             data.CardSlots = new CardSlots(
                 _cardSlotParent,
-                new MoveAnimation(0.3f),
-                new AlphaAnimation(0.3f));
+                new MoveAnimation(_animationsData.CardAppearanceAnimationDuration),
+                new AlphaAnimation(_animationsData.CardAppearanceAnimationDuration),
+                _animationsData);
             data.GameplayController = new GameplayController(
                 _levelFactory,
                 data.CardSlots,

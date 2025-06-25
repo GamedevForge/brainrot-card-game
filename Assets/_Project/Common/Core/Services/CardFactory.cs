@@ -37,6 +37,7 @@ namespace Project.Core.Services
                 data.CardComponents.OutLineGameObject,
                 data.SelectionHandler);
             data.CanvasGroup = data.CardGameObject.GetComponentInChildren<CanvasGroup>();
+            data.CardRectTransform = data.CardGameObject.GetComponent<RectTransform>();
 
             return data;
         }

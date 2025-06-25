@@ -13,5 +13,7 @@ namespace Project.Configs
         [field: SerializeField] public float OnAttackRotateDelta { get; private set; } = -15f;
         [field: SerializeField] public float OnDeadDuration { get; private set; } = 0.4f;
         [field: SerializeField] public float OnDeadMoveOffset { get; private set; } = 20f;
+        [field: SerializeField] public float CardAppearanceAnimationDuration { get; private set; } = 0.4f;
+        [field: SerializeField] public float CardAppearanceMoveOffset { get; private set; } = 30f;
     }
 }

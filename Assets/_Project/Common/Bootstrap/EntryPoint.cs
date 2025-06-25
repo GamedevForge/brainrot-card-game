@@ -120,7 +120,8 @@ namespace Project.Bootstrap
                 _cardSlotsGameObject.GetComponent<RectTransform>(),
                 _cardHandlerRepository,
                 _cardObjectPool,
-                _audioSource);
+                _audioSource,
+                _animationsData);
             _gameplayControllerCreateData = _gameplayControllerFactory.Create();
             _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
                 _uICreateData.MenuWindowController,

@@ -80,12 +80,16 @@ namespace Project.Core.Gameplay
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
             {
                 cardCreatedData.CardGameObject.SetActive(true);
-                await _cardSlots.Add(cardCreatedData.CardGameObject);
+                cardCreatedData.CanvasGroup.alpha = 0f;
+                _cardSlots.Add(cardCreatedData.CardRectTransform);
             }
 
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
-                cardCreatedData.StartPosition = cardCreatedData.CardGameObject.GetComponent<RectTransform>().position;  
+                cardCreatedData.StartPosition = cardCreatedData.CardRectTransform.position;  
             _cardSlots.GridLayoutGroup.enabled = false;
+
+            foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
+                await _cardSlots.PlayShowAnimation(cardCreatedData);
         }
 
         private async void RemoveCardOnDead(CardCreatedData card)

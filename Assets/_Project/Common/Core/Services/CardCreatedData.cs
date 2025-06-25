@@ -16,5 +16,6 @@ namespace Project.Core.Services
         public CardSelectionView CardSelectionView;
         public CanvasGroup CanvasGroup;
         public AudioClip AudioClip;
+        public RectTransform CardRectTransform;
     }
 }

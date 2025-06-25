@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Project.Configs;
+using Project.Core.Services;
 using Project.Core.UI.Animtions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,40 +12,42 @@ namespace Project.Core.UI
         private readonly RectTransform _gridLayoutTransform;
         private readonly MoveAnimation _moveAnimation;
         private readonly AlphaAnimation _alphaAnimation;
+        private readonly AnimationsData _animationsData;
 
         public readonly GridLayoutGroup GridLayoutGroup;
-        
+
         public CardSlots(
             RectTransform gridLayoutTransform,
             MoveAnimation moveAnimation,
-            AlphaAnimation alphaAnimation)
+            AlphaAnimation alphaAnimation,
+            AnimationsData animationsData)
         {
             _gridLayoutTransform = gridLayoutTransform;
             _moveAnimation = moveAnimation;
             _alphaAnimation = alphaAnimation;
             GridLayoutGroup = _gridLayoutTransform.GetComponent<GridLayoutGroup>();
+            _animationsData = animationsData;
         }
 
-        public async UniTask Add(GameObject cardGameObject)
+        public void Add(RectTransform cardRectTransform)
         {
-            RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
             cardRectTransform.SetParent(_gridLayoutTransform);
 
             GridLayoutGroup.CalculateLayoutInputHorizontal();
             GridLayoutGroup.CalculateLayoutInputVertical();
             GridLayoutGroup.SetLayoutHorizontal();
             GridLayoutGroup.SetLayoutVertical();
-
-            //await _moveAnimation.MoveAsync(
-            //    cardRectTransform,
-            //    new Vector3(
-            //        cardRectTransform.position.x,
-            //        cardRectTransform.position.y - 50f, 
-            //        cardRectTransform.position.z),
-            //    cardRectTransform.position);
-
-            //cardRectTransform.SetParent(_gridLayoutTransform);
         }
+
+        public UniTask PlayShowAnimation(CardCreatedData card) =>
+            UniTask.WhenAll(
+                _moveAnimation.MoveAsync(
+                    card.CardRectTransform,
+                    card.StartPosition - Vector3.up * _animationsData.CardAppearanceMoveOffset,
+                    card.StartPosition),
+                _alphaAnimation.PlayAnimationAsync(
+                    card.CanvasGroup,
+                    1f));
 
         public async UniTask Remove(GameObject cardGameObject)
         {
