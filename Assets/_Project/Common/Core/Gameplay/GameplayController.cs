@@ -89,7 +89,7 @@ namespace Project.Core.Gameplay
             _cardSlots.GridLayoutGroup.enabled = false;
 
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
-                await _cardSlots.PlayShowAnimation(cardCreatedData);
+                await _cardSlots.PlayShowAnimationAsync(cardCreatedData);
         }
 
         private async void RemoveCardOnDead(CardCreatedData card)
@@ -101,7 +101,7 @@ namespace Project.Core.Gameplay
         private async UniTask RemoveCard(CardCreatedData card)
         {
             _cardHandlerRepository.Remove(card);
-            await _cardSlots.Remove(card.CardGameObject);
+            //await _cardSlots.PlayHideAnimationAsync(card);
             card.Health.OnDead -= RemoveCardOnDead;
             _subscribedCards.Remove(card);
             _cardObjectPool.Release(card);

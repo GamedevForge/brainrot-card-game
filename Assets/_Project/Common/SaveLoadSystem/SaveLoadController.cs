@@ -5,20 +5,17 @@ namespace Project.SaveLoadSystem
 {
     public class SaveLoadController : MonoBehaviour 
     {
-        private SaveLoad _saveLoad;
+        private ISaveLoad _saveLoad;
         private LevelProgress _levelProgress;
         private PlayerSaveData _currentSaveData;
 
         public void Initilialize(
             LevelProgress levelProgress,
-            SaveLoad saveLoad)
+            ISaveLoad saveLoad)
         {
             _levelProgress = levelProgress;
             _saveLoad = saveLoad;
             _currentSaveData = _saveLoad.Load();
-
-            if (_currentSaveData == null) 
-                _currentSaveData = new PlayerSaveData();
 
             _levelProgress.SetCurrentLevelIndex(_currentSaveData.CurrentLevel);
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Project.SaveLoadSystem
 {
-    public class SaveLoad
+    public class SaveLoad : ISaveLoad
     {
         private readonly string _filePath;
 
@@ -18,6 +18,13 @@ namespace Project.SaveLoadSystem
 
         public PlayerSaveData Load()
         {
+            if (File.Exists(_filePath) == false)
+            {
+                PlayerSaveData initialData = new();
+                Save(initialData);
+                return initialData;
+            }
+
             string playerSaveDataJson = File.ReadAllText(_filePath);
             return JsonUtility.FromJson<PlayerSaveData>(playerSaveDataJson);
         }

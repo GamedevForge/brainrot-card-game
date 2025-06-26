@@ -39,7 +39,7 @@ namespace Project.Core.UI
             GridLayoutGroup.SetLayoutVertical();
         }
 
-        public UniTask PlayShowAnimation(CardCreatedData card) =>
+        public UniTask PlayShowAnimationAsync(CardCreatedData card) =>
             UniTask.WhenAll(
                 _moveAnimation.MoveAsync(
                     card.CardRectTransform,
@@ -49,9 +49,14 @@ namespace Project.Core.UI
                     card.CanvasGroup,
                     1f));
 
-        public async UniTask Remove(GameObject cardGameObject)
-        {
-
-        }
+        public UniTask PlayHideAnimationAsync(CardCreatedData card) =>
+            UniTask.WhenAll(
+                _moveAnimation.MoveAsync(
+                    card.CardRectTransform,
+                    card.StartPosition,
+                    card.StartPosition - Vector3.up * _animationsData.CardAppearanceMoveOffset),
+                _alphaAnimation.PlayAnimationAsync(
+                    card.CanvasGroup,
+                    0f));
     }
 }
