@@ -25,6 +25,8 @@ namespace Project.Core.UI
         private RectTransform _leftUIElementRectTransform;
         private RectTransform _rightUIElementRectTransform;
 
+        private bool _upgradeIsActive = false;
+
         public UpgradeControllerView(
             UpgradeUIELementsPool upgradeUIELementsPool,
             MoveAnimation moveAnimation,
@@ -68,6 +70,8 @@ namespace Project.Core.UI
 
         public async UniTask ShowUpgrades()
         {
+            _upgradeIsActive = true;
+            
             if (_upgradeModel.UpgradeFrom.Type == Configs.UpgradeValueType.Addition)
                 _leftUIElement.UIElementComponents.UpgradeIndexText.text = $"+{_upgradeModel.UpgradeFrom.Value}";
             else
@@ -103,6 +107,10 @@ namespace Project.Core.UI
 
         private void UpgradeFromLeftButton()
         {
+            if (_upgradeIsActive == false)
+                return;
+            
+            _upgradeIsActive = false;
             _upgradeController.UpgradeForce(_upgradeModel.UpgradeFrom);
             _playerCard.CardComponents.CardForceIndex.text = _playerCard.CardStats.CardForce.ToString();
             _playerCard.CardComponents.MainImage.sprite = _upgradeModel.UpgradeFrom.UpgradeCardData.UpgradeCardTo.CardSprite;
@@ -110,6 +118,10 @@ namespace Project.Core.UI
 
         private void UpgradeFromRightButton()
         {
+            if (_upgradeIsActive == false)
+                return;
+
+            _upgradeIsActive = false;
             _upgradeController.UpgradeForce((_upgradeModel.UpgradeTo));
             _playerCard.CardComponents.CardForceIndex.text = _playerCard.CardStats.CardForce.ToString();
             _playerCard.CardComponents.MainImage.sprite = _upgradeModel.UpgradeTo.UpgradeCardData.UpgradeCardTo.CardSprite;
