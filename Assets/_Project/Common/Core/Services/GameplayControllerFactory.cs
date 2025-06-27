@@ -59,7 +59,9 @@ namespace Project.Core.Services
                 _cardSlotParent,
                 new MoveAnimation(_animationsData.CardAppearanceAnimationDuration),
                 new AlphaAnimation(_animationsData.CardAppearanceAnimationDuration),
-                _animationsData);
+                _animationsData,
+                _audioSource,
+                _soundsData);
             data.GameplayController = new GameplayController(
                 _levelFactory,
                 data.CardSlots,

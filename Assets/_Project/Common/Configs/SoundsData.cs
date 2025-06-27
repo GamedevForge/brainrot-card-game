@@ -9,5 +9,7 @@ namespace Project.Configs
         [field: SerializeField] public AudioClip CardSelectSFX { get; private set; }
         [field: SerializeField] public AudioClip OnAttackCardSFX { get; private set; }
         [field: SerializeField] public AudioClip OnCardDeadSFX { get; private set; }
+        [field: SerializeField] public AudioClip OnPlayerCardUpgradeSFX { get; private set; }
+        [field: SerializeField] public AudioClip OnShowSFX { get; private set; }
     }
 }

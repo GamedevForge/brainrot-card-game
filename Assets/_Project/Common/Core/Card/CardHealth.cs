@@ -62,14 +62,15 @@ namespace Project.Core.Card
             _health = Mathf.Max(_health - damage, 0);
             _cardCreatedData.CardStats.CardForce = _health;
             _cardCreatedData.CardComponents.CardForceIndex.text = _health.ToString();
-            await _view.OnTakedDamage();
+            await _view.PlayOnTakedDamageAnimationAsync();
             OnTakedGamage?.Invoke(_health);
 
             if (_health == 0)
             {
                 IsAlive = false;
+                await _view.PlayHideAnimationAsync();
                 _audioSource.PlayOneShot(_soundsData.OnCardDeadSFX);
-                await _view.OnKill();
+                await _view.PlayOnDeadParticleSystemAsync();
                 OnDead?.Invoke(_cardCreatedData);
             }
         }

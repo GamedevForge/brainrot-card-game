@@ -32,7 +32,7 @@ namespace Project.Core.UI
             _moveOffsetOnDead = moveOffsetOnDead;
         }
 
-        public async UniTask OnTakedDamage()
+        public async UniTask PlayOnTakedDamageAnimationAsync()
         {
             Vector3 startRotation = _cardRectTransform.rotation.eulerAngles;
             await _cardRectTransform.DORotate(
@@ -43,7 +43,7 @@ namespace Project.Core.UI
                 _takeDamageDuration / 2f).AsyncWaitForCompletion();
         }
 
-        public async UniTask OnKill()
+        public async UniTask PlayOnKillAnimationAsync()
         {
             await UniTask.WhenAll(
                 _alphaAnimation.PlayAnimationAsync(
@@ -53,6 +53,22 @@ namespace Project.Core.UI
                     _cardRectTransform,
                     _cardRectTransform.position, 
                     _cardRectTransform.position - new Vector3(0f, _moveOffsetOnDead, 0f)));
+            _card.CardComponents.OnDeadParticleSystem.Play();
+            await UniTask.WaitForSeconds(_card.CardComponents.OnDeadParticleSystem.main.duration * 3.2f);
+        }
+
+        public UniTask PlayHideAnimationAsync() =>
+            UniTask.WhenAll(
+                _alphaAnimation.PlayAnimationAsync(
+                    _card.CanvasGroup,
+                    0f),
+                _moveAnimation.MoveAsync(
+                    _cardRectTransform,
+                    _cardRectTransform.position,
+                    _cardRectTransform.position - new Vector3(0f, _moveOffsetOnDead, 0f)));
+
+        public async UniTask PlayOnDeadParticleSystemAsync()
+        {
             _card.CardComponents.OnDeadParticleSystem.Play();
             await UniTask.WaitForSeconds(_card.CardComponents.OnDeadParticleSystem.main.duration * 3.2f);
         }

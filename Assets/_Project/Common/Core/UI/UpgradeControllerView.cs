@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Project.Configs;
 using Project.Core.Services;
 using Project.Core.UI.Animtions;
 using Project.Core.UpgradeSystem;
@@ -19,6 +20,8 @@ namespace Project.Core.UI
         private readonly Vector3 _rightUIElementStartPosition;
         private readonly Vector3 _rightUIElementEndPosition;
         private readonly CardCreatedData _playerCard;
+        private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
         private UpgradeUIElementsCreateData _leftUIElement;
         private UpgradeUIElementsCreateData _rightUIElement;
@@ -36,7 +39,9 @@ namespace Project.Core.UI
             Vector3 leftUIElementEndPosition,
             Vector3 rightUIElementStartPosition,
             Vector3 rightUIElementEndPosition,
-            CardCreatedData playerCard)
+            CardCreatedData playerCard,
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _upgradeUIELementsPool = upgradeUIELementsPool;
             _moveAnimation = moveAnimation;
@@ -47,6 +52,8 @@ namespace Project.Core.UI
             _rightUIElementStartPosition = rightUIElementStartPosition;
             _rightUIElementEndPosition = rightUIElementEndPosition;
             _playerCard = playerCard;
+            _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public void Initialize()
@@ -83,7 +90,8 @@ namespace Project.Core.UI
             else
                 _rightUIElement.UIElementComponents.UpgradeIndexText.text = $"*{_upgradeModel.UpgradeTo.Value}";
             _rightUIElement.UIElementComponents.MainImage.sprite = _upgradeModel.UpgradeTo.UpgradeCardData.CardSprite;
-            
+
+            _audioSource.PlayOneShot(_soundsData.OnShowSFX);
             await UniTask.WhenAll(
                 _moveAnimation.MoveAsync(
                     _leftUIElementRectTransform, 
@@ -92,10 +100,13 @@ namespace Project.Core.UI
                 _moveAnimation.MoveAsync(
                     _rightUIElementRectTransform,
                     _rightUIElementRectTransform.position,
-                    _rightUIElementEndPosition));
+                    _rightUIElementEndPosition),
+                UniTask.WaitForSeconds(_soundsData.OnShowSFX.length));
         }
-        public UniTask HideUpgrades() =>
-            UniTask.WhenAll(
+        public async UniTask HideUpgrades()
+        {
+            _audioSource.PlayOneShot(_soundsData.OnShowSFX);
+            await UniTask.WhenAll(
                 _moveAnimation.MoveAsync(
                     _leftUIElementRectTransform,
                     _leftUIElementRectTransform.position,
@@ -103,7 +114,9 @@ namespace Project.Core.UI
                 _moveAnimation.MoveAsync(
                     _rightUIElementRectTransform,
                     _rightUIElementRectTransform.position,
-                    _rightUIElementStartPosition));
+                    _rightUIElementStartPosition),
+                UniTask.WaitForSeconds(_soundsData.OnShowSFX.length));
+        }
 
         private void UpgradeFromLeftButton()
         {

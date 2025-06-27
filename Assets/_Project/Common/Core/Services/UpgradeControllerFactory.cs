@@ -1,4 +1,5 @@
-﻿using Project.Core.Card;
+﻿using Project.Configs;
+using Project.Core.Card;
 using Project.Core.UI;
 using Project.Core.UpgradeSystem;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Project.Core.Services
         private readonly Vector3 _rightUIElementStartPosition;
         private readonly Vector3 _rightUIElementEndPosition;
         private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
         public UpgradeControllerFactory(
             CardCreatedData playerCard,
@@ -28,7 +30,8 @@ namespace Project.Core.Services
             Vector3 leftUIElementEndPosition,
             Vector3 rightUIElementStartPosition,
             Vector3 rightUIElementEndPosition,
-            AudioSource audioSource)
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _playerCard = playerCard;
             _upgradeUIElementsPoolSize = upgradeUIElementsPoolSize;
@@ -40,6 +43,7 @@ namespace Project.Core.Services
             _rightUIElementStartPosition = rightUIElementStartPosition;
             _rightUIElementEndPosition = rightUIElementEndPosition;
             _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public UpgradeControllerCreateData Create()
@@ -47,7 +51,11 @@ namespace Project.Core.Services
             UpgradeControllerCreateData data = new();
 
             data.UpgradeModel = new UpgradeModel();
-            data.UpgradeController = new UpgradeController(_playerCard, data.UpgradeModel, _audioSource);
+            data.UpgradeController = new UpgradeController(
+                _playerCard, 
+                data.UpgradeModel, 
+                _audioSource,
+                _soundsData);
             data.UpgradeControllerView = new UpgradeControllerView(
                 new UpgradeUIELementsPool(
                     new UpgradeUIElementsFactory(
@@ -61,7 +69,9 @@ namespace Project.Core.Services
                 _leftUIElementEndPosition,
                 _rightUIElementStartPosition,
                 _rightUIElementEndPosition,
-                _playerCard);
+                _playerCard,
+                _audioSource,
+                _soundsData);
 
             return data;
         }

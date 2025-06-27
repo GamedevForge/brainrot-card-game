@@ -13,6 +13,8 @@ namespace Project.Core.UI
         private readonly MoveAnimation _moveAnimation;
         private readonly AlphaAnimation _alphaAnimation;
         private readonly AnimationsData _animationsData;
+        private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
         public readonly GridLayoutGroup GridLayoutGroup;
 
@@ -20,13 +22,17 @@ namespace Project.Core.UI
             RectTransform gridLayoutTransform,
             MoveAnimation moveAnimation,
             AlphaAnimation alphaAnimation,
-            AnimationsData animationsData)
+            AnimationsData animationsData,
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _gridLayoutTransform = gridLayoutTransform;
             _moveAnimation = moveAnimation;
             _alphaAnimation = alphaAnimation;
             GridLayoutGroup = _gridLayoutTransform.GetComponent<GridLayoutGroup>();
             _animationsData = animationsData;
+            _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public void Add(RectTransform cardRectTransform)
@@ -58,5 +64,11 @@ namespace Project.Core.UI
                 _alphaAnimation.PlayAnimationAsync(
                     card.CanvasGroup,
                     0f));
+
+        public async UniTask PlayShowSoundSFXAsync()
+        {
+            _audioSource.PlayOneShot(_soundsData.OnShowSFX);
+            await UniTask.WaitForSeconds(_soundsData.OnShowSFX.length);
+        }
     }
 }

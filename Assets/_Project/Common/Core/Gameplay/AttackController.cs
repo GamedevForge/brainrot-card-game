@@ -44,7 +44,6 @@ namespace Project.Core.Gameplay
             _handlerRepository.CurrentCardModel.CardGameObject.transform.SetAsLastSibling();
             _playerCard.CardGameObject.transform.SetAsLastSibling();
 
-            _audioSource.PlayOneShot(_soundsData.OnAttackCardSFX);
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
                 playerCardStartPosition,
@@ -54,6 +53,7 @@ namespace Project.Core.Gameplay
                     .GetComponent<RectTransform>()
                     .position);
 
+            _audioSource.PlayOneShot(_soundsData.OnAttackCardSFX);
             if (_handlerRepository.CurrentCardModel.CardStats.CardForce >
                 _playerCard.CardStats.CardForce)
             {

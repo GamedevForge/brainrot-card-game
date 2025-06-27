@@ -89,7 +89,9 @@ namespace Project.Core.Gameplay
             _cardSlots.GridLayoutGroup.enabled = false;
 
             foreach (CardCreatedData cardCreatedData in _gameplayModel.CurrentWave.CardCreatedDatas)
-                await _cardSlots.PlayShowAnimationAsync(cardCreatedData);
+                await UniTask.WhenAll(
+                    _cardSlots.PlayShowAnimationAsync(cardCreatedData),
+                    _cardSlots.PlayShowSoundSFXAsync());
         }
 
         private async void RemoveCardOnDead(CardCreatedData card)

@@ -14,15 +14,18 @@ namespace Project.Core.UpgradeSystem
         private readonly CardCreatedData _playerCard;
         private readonly UpgradeModel _upgradeModel;
         private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
         public UpgradeController(
             CardCreatedData playerCard,
             UpgradeModel upgradeModel,
-            AudioSource audioSource)
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _playerCard = playerCard;
             _upgradeModel = upgradeModel;
             _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public async void UpgradeForce(UpgradeValueConfig force)
@@ -37,12 +40,11 @@ namespace Project.Core.UpgradeSystem
 
             if (_playerCard.AudioClip != null)
             {
+                _audioSource.PlayOneShot(_soundsData.OnPlayerCardUpgradeSFX);
+                await UniTask.WaitForSeconds(_soundsData.OnPlayerCardUpgradeSFX.length);
+                
                 _audioSource.PlayOneShot(_playerCard.AudioClip);
-                //_audioSource.clip = _playerCard.AudioClip;
-                //audioSource.Play();
-                await UniTask.WhenAll(
-                    UniTask.WaitForSeconds(_playerCard.AudioClip.length),
-                    UniTask.WaitForSeconds(_playerCard.CardComponents.UpgradeParticleSystem.main.duration * 3f));
+                await UniTask.WaitForSeconds(_playerCard.AudioClip.length);
             }
             else
             {

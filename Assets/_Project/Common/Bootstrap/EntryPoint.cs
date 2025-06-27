@@ -118,7 +118,8 @@ namespace Project.Bootstrap
                 _leftUIElementEndPositionRectTransform.position,
                 _rightUIElementStartPositionRectTransform.position,
                 _rightUIElementEndPositionRectTransform.position,
-                _audioSource);
+                _audioSource,
+                _soundsData);
             _upgradeControllerCreateData = _upgradeControllerFactory.Create();
             _aiActor = new AiActor();
             _gameplayControllerFactory = new GameplayControllerFactory(
