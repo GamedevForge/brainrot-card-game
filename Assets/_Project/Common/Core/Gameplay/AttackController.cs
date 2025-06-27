@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using Project.Configs;
 using Project.Core.Services;
 using Project.Core.UI.Animtions;
 using UnityEngine;
@@ -48,7 +48,7 @@ namespace Project.Core.Gameplay
                     .CurrentCardModel
                     .CardGameObject
                     .GetComponent<RectTransform>()
-                    .position);           
+                    .position);
 
             if (_handlerRepository.CurrentCardModel.CardStats.CardForce >
                 _playerCard.CardStats.CardForce)

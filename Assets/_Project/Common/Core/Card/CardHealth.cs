@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Project.Configs;
 using Project.Core.Services;
 using Project.Core.UI;
 using UnityEngine;
@@ -14,17 +15,24 @@ namespace Project.Core.Card
 
         private readonly CardCreatedData _cardCreatedData;
         private readonly CardHealthView _view;
+        private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
         
         private int _health;
         private int _maxHealth;
 
         public bool IsAlive { get; private set; } = true;
 
-        public CardHealth(CardCreatedData cardCreatedData, 
-            CardHealthView view)
+        public CardHealth(
+            CardCreatedData cardCreatedData,
+            CardHealthView view,
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _cardCreatedData = cardCreatedData;
             _view = view;
+            _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public void SetHealth(int health)
@@ -51,6 +59,7 @@ namespace Project.Core.Card
         
         public async UniTask TakeDamage(int damage)
         {
+            _audioSource.PlayOneShot(_soundsData.OnAttackCardSFX);
             _health = Mathf.Max(_health - damage, 0);
             _cardCreatedData.CardStats.CardForce = _health;
             _cardCreatedData.CardComponents.CardForceIndex.text = _health.ToString();
@@ -61,6 +70,7 @@ namespace Project.Core.Card
             {
                 IsAlive = false;
                 await _view.OnKill();
+                _audioSource.PlayOneShot(_soundsData.OnCardDeadSFX);
                 OnDead?.Invoke(_cardCreatedData);
             }
         }

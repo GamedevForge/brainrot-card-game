@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Core.UI.Windows
@@ -11,7 +12,9 @@ namespace Project.Core.UI.Windows
         public MenuWindowController(
             MenuWindowModel menuWindowModel,
             Button playButton,
-            BaseWindowAnimtion animtion) : base(menuWindowModel, playButton)
+            BaseWindowAnimtion animtion,
+            AudioSource audioSource,
+            AudioClip onPressedButtonSFX) : base(menuWindowModel, playButton, onPressedButtonSFX, audioSource)
         {
             _menuWindowModel = menuWindowModel;
             _animtion = animtion;
@@ -23,7 +26,10 @@ namespace Project.Core.UI.Windows
         public override UniTask HideAsync() =>
             _animtion.PlayHideAnimationAsync();       
 
-        protected override void OnClick() =>
+        protected override void OnClick()
+        {
+            PlaySoundOnPressedButton();
             TriggerEvent();
+        }
     }
 }

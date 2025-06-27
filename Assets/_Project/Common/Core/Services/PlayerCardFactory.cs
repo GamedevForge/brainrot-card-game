@@ -11,6 +11,8 @@ namespace Project.Core.Services
         private readonly RectTransform _playerCardParent;
         private readonly EnemyCardConfig _cardData;
         private readonly AnimationsData _animationsData;
+        private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
         private CardCreatedData _playerCard;
 
@@ -18,12 +20,16 @@ namespace Project.Core.Services
             CardFactory cardFactory,
             RectTransform playerCardParent,
             EnemyCardConfig cardData,
-            AnimationsData animationsData)
+            AnimationsData animationsData,
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _cardFactory = cardFactory;
             _playerCardParent = playerCardParent;
             _cardData = cardData;
             _animationsData = animationsData;
+            _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public void Dispose()
@@ -39,7 +45,10 @@ namespace Project.Core.Services
             _playerCard.CardGameObject.transform.localPosition = Vector3.zero;
             _playerCard.SelectionHandler = new EnemyCardSelectionHandler(
                 null,
-                _playerCard);
+                _playerCard,
+                null,
+                null);
+            _playerCard.SelectionHandler.Disable();
             _playerCard.StartPosition = _playerCard
                 .CardGameObject
                 .GetComponent<RectTransform>()
@@ -58,7 +67,9 @@ namespace Project.Core.Services
                     _animationsData.OnAttackDuration, 
                     _animationsData.OnAttackRotateDelta,
                     _animationsData.OnDeadMoveOffset,
-                    _animationsData.OnDeadDuration));
+                    _animationsData.OnDeadDuration),
+                _audioSource,
+                _soundsData);
             _playerCard.AudioClip = _cardData.EnemyCardData.AudioClip;
             _playerCard.Health.SetMaxHealth(_cardData.CardForce);
             _playerCard.Health.Revive();

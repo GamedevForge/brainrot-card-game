@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Core.UI.Windows
@@ -15,13 +16,19 @@ namespace Project.Core.UI.Windows
 
         private readonly IWindowModel _model;
         private readonly Button _button;
-        
+        private readonly AudioClip _sfxOnPreassedButton;
+        private readonly AudioSource _audioSource;
+
         protected BaseWindowController(
             IWindowModel model,
-            Button button)
+            Button button,
+            AudioClip sfxOnPreassedButton,
+            AudioSource audioSource)
         {
             _model = model;
             _button = button;
+            _sfxOnPreassedButton = sfxOnPreassedButton;
+            _audioSource = audioSource;
         }
 
         public void Initialize() =>
@@ -65,5 +72,17 @@ namespace Project.Core.UI.Windows
 
         protected void TriggerEvent() =>
             OnClickButton?.Invoke();
+
+        protected async UniTask PlaySoundOnPressedButtonAsync()
+        {
+            PlaySoundOnPressedButton();
+            await UniTask.WaitForSeconds(_sfxOnPreassedButton.length);
+        }
+
+        protected void PlaySoundOnPressedButton() =>
+            PlaySound(_sfxOnPreassedButton);
+
+        protected void PlaySound(AudioClip audioClip) =>
+            _audioSource.PlayOneShot(audioClip);
     }
 }

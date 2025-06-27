@@ -9,11 +9,19 @@ namespace Project.Core.Services
     {
         private readonly GameObject _basePrefab;
         private readonly AnimationsData _animationsData;
+        private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
-        public CardFactory(GameObject basePrefab, AnimationsData animationsData)
+        public CardFactory(
+            GameObject basePrefab, 
+            AnimationsData animationsData, 
+            AudioSource audioSource, 
+            SoundsData soundsData)
         {
             _basePrefab = basePrefab;
             _animationsData = animationsData;
+            _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public CardCreatedData Create()
@@ -23,13 +31,19 @@ namespace Project.Core.Services
             data.CardGameObject = GameObject.Instantiate(_basePrefab);
             data.SelectionHandler = new EnemyCardSelectionHandler(
                 data.CardGameObject.GetComponentInChildren<Button>(),
-                data);
-            data.Health = new CardHealth(data, new UI.CardHealthView(
+                data,
+                _audioSource,
+                _soundsData.CardSelectSFX);
+            data.Health = new CardHealth(
                 data, 
-                _animationsData.OnAttackDuration, 
-                _animationsData.OnAttackRotateDelta,
-                _animationsData.OnDeadMoveOffset,
-                _animationsData.OnDeadDuration));
+                new UI.CardHealthView(
+                    data, 
+                    _animationsData.OnAttackDuration, 
+                    _animationsData.OnAttackRotateDelta,
+                    _animationsData.OnDeadMoveOffset,
+                    _animationsData.OnDeadDuration),
+                _audioSource,
+                _soundsData);
             data.CardComponents = data.CardGameObject.GetComponent<CardComponents>();
             data.CardStats = new CardStats();
             data.CardView = new UI.CardView(data);

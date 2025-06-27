@@ -1,4 +1,5 @@
-﻿using Project.Core.UI.Animtions;
+﻿using Project.Configs;
+using Project.Core.UI.Animtions;
 using Project.Core.UI.Windows;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Project.Core.Services
         private readonly GameObject _winWindowPrefab;
         private readonly RectTransform _windowsParent;
         private readonly float _windowAnimationDuration;
+        private readonly SoundsData _soundsData;
+        private readonly AudioSource _audioSource;
 
         private UICreateData _data;
 
@@ -20,13 +23,17 @@ namespace Project.Core.Services
             GameObject loseWindowPrefab,
             GameObject winWindowPrefab,
             float windowAnimationDuration,
-            RectTransform windowsParent)
+            RectTransform windowsParent,
+            SoundsData soundsData,
+            AudioSource audioSource)
         {
             _menuWindowPrefab = menuWindowPrefab;
             _loseWindowPrefab = loseWindowPrefab;
             _winWindowPrefab = winWindowPrefab;
             _windowAnimationDuration = windowAnimationDuration;
             _windowsParent = windowsParent;
+            _soundsData = soundsData;
+            _audioSource = audioSource;
         }
 
         public void Initialize()
@@ -50,7 +57,9 @@ namespace Project.Core.Services
                 _data.MenuWindowGameObject.GetComponent<BaseWindowComponents>().Button,
                 new BaseWindowAnimtion(
                     _data.MenuWindowGameObject.GetComponentInChildren<CanvasGroup>(),
-                    new AlphaAnimation(_windowAnimationDuration)));
+                    new AlphaAnimation(_windowAnimationDuration)),
+                _audioSource,
+                _soundsData.WindowButtonSFX);
 
             _data.WinWindowModel = new WinWindowModel(
                 _data.WinWindowGameObject,
@@ -58,7 +67,9 @@ namespace Project.Core.Services
             _data.WinWindowController = new WinWindowController(
                 _data.WinWindowModel,
                 _data.WinWindowGameObject.GetComponent<BaseWindowComponents>().Button,
-                new AlphaAnimation(_windowAnimationDuration));
+                new AlphaAnimation(_windowAnimationDuration),
+                _audioSource,
+                _soundsData.WindowButtonSFX);
 
             _data.LoseWindowModel = new LoseWindowModel(
                 _data.LoseWindowGameObject,
@@ -66,7 +77,9 @@ namespace Project.Core.Services
             _data.LoseWindowController = new LoseWindowController(
                 _data.LoseWindowModel,
                 _data.LoseWindowGameObject.GetComponent<BaseWindowComponents>().Button,
-                new AlphaAnimation(_windowAnimationDuration));
+                new AlphaAnimation(_windowAnimationDuration),
+                _audioSource,
+                _soundsData.WindowButtonSFX);
 
             return _data;
         }

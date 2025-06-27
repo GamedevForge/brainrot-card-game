@@ -1,6 +1,7 @@
 using System;
 using Project.Core.Services;
 using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Core.Card
@@ -13,16 +14,24 @@ namespace Project.Core.Card
 
         private readonly Button _button;
         private readonly CardCreatedData _character;
+        private readonly AudioSource _audioSource;
+        private readonly AudioClip _onSelectSFX;
 
         private int _clickCount;
         private bool _isActive = false;
 
-        public bool IsSelection { get; private set; } = false; 
+        public bool IsSelection { get; private set; } = false;
 
-        public EnemyCardSelectionHandler(Button button, CardCreatedData character)
+        public EnemyCardSelectionHandler(
+            Button button,
+            CardCreatedData character,
+            AudioSource audioSource,
+            AudioClip onSelectSFX)
         {
             _button = button;
             _character = character;
+            _audioSource = audioSource;
+            _onSelectSFX = onSelectSFX;
         }
 
         public void Initialize() =>
@@ -46,6 +55,7 @@ namespace Project.Core.Card
 
             if (_clickCount == 1)
             {
+                _audioSource.PlayOneShot(_onSelectSFX);
                 OnSelect?.Invoke(_character);
                 IsSelection = true;
             }

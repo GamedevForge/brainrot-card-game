@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Project.Core.UI.Animtions;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Core.UI.Windows
@@ -12,7 +13,9 @@ namespace Project.Core.UI.Windows
         public WinWindowController(
             WinWindowModel model,
             Button goToMenu,
-            AlphaAnimation animation) : base(model, goToMenu)
+            AlphaAnimation animation,
+            AudioSource audioSource,
+            AudioClip onPressedbuttonSFX) : base(model, goToMenu, onPressedbuttonSFX, audioSource)
         {
             _model = model;
             _animation = animation;
@@ -24,7 +27,10 @@ namespace Project.Core.UI.Windows
         public override UniTask ShowAsync() =>
             _animation.PlayAnimationAsync(_model.CanvasGroup, 1f);
 
-        protected override void OnClick() =>
+        protected override void OnClick()
+        {
+            PlaySoundOnPressedButton();
             TriggerEvent();
+        }
     }
 }

@@ -10,11 +10,12 @@ namespace Project.Bootstrap
 {
     public class EntryPoint : MonoBehaviour
     {
-        [Header("Datas:")]
+        [Header("Data:")]
         [SerializeField] private LevelsData _levelsData;
         [SerializeField] private PlayerData _playerData;
         [SerializeField] private GameData _gameData;
         [SerializeField] private AnimationsData _animationsData;
+        [SerializeField] private SoundsData _soundsData;
 
         [Header("Cards:")]
         [SerializeField] private GameObject _cardPrefab;
@@ -78,7 +79,9 @@ namespace Project.Bootstrap
                 _loseWindowPrefab, 
                 _winWindowPrefab, 
                 _animationsData.WindowAnimationDuration,
-                _windowsParent);
+                _windowsParent,
+                _soundsData,
+                _audioSource);
             _shadowPopupFactory = new ShadowPopupFactory(
                 _shadowPopupPrefab,
                 _shadowPopupGameObjectParent,
@@ -87,7 +90,11 @@ namespace Project.Bootstrap
             _uICreateData = _uIFactory.Create();
             _inputController = new InputController(_graphicRaycaster);
             _cardSlotsGameObject = GameObject.Instantiate(_cardSlotsPrefab, _cardSlotsParent);
-            _cardFactory = new CardFactory(_cardPrefab, _animationsData);
+            _cardFactory = new CardFactory(
+                _cardPrefab, 
+                _animationsData,
+                _audioSource,
+                _soundsData);
             _cardObjectPool = new CardObjectPool(_cardFactory, _gameData.MaxCardPoolSize);
             _levelFactory = new LevelFactory(
                 new WaveFactory(
@@ -97,7 +104,9 @@ namespace Project.Bootstrap
                 _cardFactory,
                 _playerParent,
                 _playerData.DefualtCardData,
-                _animationsData);
+                _animationsData,
+                _audioSource,
+                _soundsData);
             _playerCard = _playerCardFactory.Create();
             _upgradeControllerFactory = new UpgradeControllerFactory(
                 _playerCard,
