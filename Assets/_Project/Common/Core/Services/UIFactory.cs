@@ -51,7 +51,9 @@ namespace Project.Core.Services
             _data.LoseWindowGameObject = GameObject.Instantiate(_loseWindowPrefab, _windowsParent);
             _data.WinWindowGameObject = GameObject.Instantiate(_winWindowPrefab, _windowsParent);
 
-            _data.MenuWindowModel = new MenuWindowModel(_data.MenuWindowGameObject);
+            _data.MenuWindowModel = new MenuWindowModel(
+                _data.MenuWindowGameObject,
+                _data.MenuWindowGameObject.GetComponent<MenuWindowComponents>());
             _data.MenuWindowController = new MenuWindowController(
                 _data.MenuWindowModel,
                 _data.MenuWindowGameObject.GetComponent<BaseWindowComponents>().Button,

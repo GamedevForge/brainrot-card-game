@@ -59,7 +59,8 @@ namespace Project.Core.Services
                 new MenuState(
                     _menuWindowController,
                     _shadowPopup,
-                    _inputController),
+                    _inputController,
+                    _levelProgress),
                 _gameplayState,
                 new WinState(
                     _winWindowController,

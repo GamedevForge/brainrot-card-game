@@ -19,7 +19,7 @@ namespace Project.Core.Services
         {
             List<CardCreatedData> cardDatasList = new();
             
-            foreach(EnemyCardConfig cardData in waveConfig.CardDatas)
+            foreach(CardConfig cardData in waveConfig.CardDatas)
             {
                 CardCreatedData createdCard = _cardPool.Get();
                 CardComponents cardComponents = createdCard.CardComponents;

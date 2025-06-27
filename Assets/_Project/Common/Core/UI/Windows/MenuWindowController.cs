@@ -31,5 +31,8 @@ namespace Project.Core.UI.Windows
             PlaySoundOnPressedButton();
             TriggerEvent();
         }
+
+        public void SetNextLevelNumber(int levelNumber) =>
+            _menuWindowModel.MenuWindowComponents.NextLevelText.text = $"Level {levelNumber + 1}";
     }
 }

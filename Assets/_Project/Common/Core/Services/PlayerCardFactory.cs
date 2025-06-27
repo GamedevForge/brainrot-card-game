@@ -9,7 +9,7 @@ namespace Project.Core.Services
     {
         private readonly CardFactory _cardFactory;
         private readonly RectTransform _playerCardParent;
-        private readonly EnemyCardConfig _cardData;
+        private readonly CardConfig _cardData;
         private readonly AnimationsData _animationsData;
         private readonly AudioSource _audioSource;
         private readonly SoundsData _soundsData;
@@ -19,7 +19,7 @@ namespace Project.Core.Services
         public PlayerCardFactory(
             CardFactory cardFactory,
             RectTransform playerCardParent,
-            EnemyCardConfig cardData,
+            CardConfig cardData,
             AnimationsData animationsData,
             AudioSource audioSource,
             SoundsData soundsData)

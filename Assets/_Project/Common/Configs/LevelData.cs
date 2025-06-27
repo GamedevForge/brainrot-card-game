@@ -6,13 +6,14 @@ namespace Project.Configs
     [CreateAssetMenu(fileName = "LevelData", menuName = "Project/LevelData")]
     public class LevelData : ScriptableObject
     {
-        [field: SerializeField] public WaveConfig[] WaveConfigs {  get; private set; }
+        [field: SerializeField] public CardConfig PlayerCardConfig {  get; private set; }
+        [field: SerializeField] public WaveConfig[] WaveConfigs { get; private set; }
     }
 
     [Serializable]
     public class WaveConfig
     {
-        public EnemyCardConfig[] CardDatas;
+        public CardConfig[] CardDatas;
         public UpgradeRangeConfig UpgradeRangeConfig;
     }
 

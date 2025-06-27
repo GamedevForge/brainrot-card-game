@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Project.Core.Gameplay;
 using Project.Core.Services;
 using Project.Core.Services.StateMachine;
 using Project.Core.UI.Popup;
@@ -11,17 +12,20 @@ namespace Project.Core.GameCycle
         private readonly MenuWindowController _menuWindowController;
         private readonly ShadowPopup _shadowPopup;   
         private readonly InputController _inputController;
+        private readonly LevelProgress _levelProgress;
         
         private BaseStateController _gameCycleStateController;
 
         public MenuState(
-            MenuWindowController menuWindowController, 
-            ShadowPopup shadowPopup, 
-            InputController inputController)
+            MenuWindowController menuWindowController,
+            ShadowPopup shadowPopup,
+            InputController inputController,
+            LevelProgress levelProgress)
         {
             _menuWindowController = menuWindowController;
             _shadowPopup = shadowPopup;
             _inputController = inputController;
+            _levelProgress = levelProgress;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -30,6 +34,7 @@ namespace Project.Core.GameCycle
         public async UniTask AsyncEnter()
         {
             _menuWindowController.EnableWindowGameObject();
+            _menuWindowController.SetNextLevelNumber(_levelProgress.CurrentLevelIndex);
             await _shadowPopup.HidePopup();
             _inputController.EnableInput();
             await _menuWindowController.AsyncWaitToClickOnGameplayButton();

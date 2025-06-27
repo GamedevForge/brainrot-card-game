@@ -44,11 +44,13 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncEnter()
         {
-            if (_levelsData.LevelDatas.Length - 1 == _levelProgress.CurrentLevelIndex) 
-                _levelProgress.SetCurrentLevelIndex(0);
-            else
-                _levelProgress.SetCurrentLevelIndex(_levelProgress.CurrentLevelIndex + 1);
-            
+            _levelProgress.SetCurrentLevelIndex(_levelProgress.CurrentLevelIndex + 1);
+
+            //if (_levelsData.LevelDatas.Length - 1 == _levelProgress.CurrentLevelIndex) 
+            //    _levelProgress.SetCurrentLevelIndex(0);
+            //else
+            //    _levelProgress.SetCurrentLevelIndex(_levelProgress.CurrentLevelIndex + 1);
+
             _inputController.DisableInput();
             _winWindowController.EnableWindowGameObject();
             await _gameplayController.RemoveAllCardOnCurrentWave();
