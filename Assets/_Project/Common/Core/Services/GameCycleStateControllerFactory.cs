@@ -52,7 +52,8 @@ namespace Project.Core.Services
             _gameplayState = new GameplayState(
                     _shadowPopup,
                     _backgorundGameObject,
-                    _playerCard);
+                    _playerCard,
+                    _levelProgress);
 
             IState[] states = new IState[]
             {

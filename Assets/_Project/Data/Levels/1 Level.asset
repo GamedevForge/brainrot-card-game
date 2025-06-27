@@ -12,40 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9222fff2004db49458fe64b1cde0db29, type: 3}
   m_Name: 1 Level
   m_EditorClassIdentifier: 
+  <PlayerCardConfig>k__BackingField:
+    EnemyCardData: {fileID: 11400000, guid: 047ceccbe560b0841ae7838bdea2bd58, type: 2}
+    CardForce: 5
   <WaveConfigs>k__BackingField:
   - CardDatas:
     - EnemyCardData: {fileID: 11400000, guid: 309b484d57727e542a647c31eedd402d, type: 2}
-      CardForce: 6
-    - EnemyCardData: {fileID: 11400000, guid: 67dc7ea461ba45b43857fa32cb36dbd1, type: 2}
       CardForce: 1
+    - EnemyCardData: {fileID: 11400000, guid: 67dc7ea461ba45b43857fa32cb36dbd1, type: 2}
+      CardForce: 100
     UpgradeRangeConfig:
       From:
         UpgradeCardData: {fileID: 11400000, guid: 64f787495d658f44faa1bb698e05d974, type: 2}
-        Value: 5
+        Value: 10
         Type: 0
       To:
         UpgradeCardData: {fileID: 11400000, guid: 64f787495d658f44faa1bb698e05d974, type: 2}
-        Value: 2
+        Value: 4
         Type: 1
   - CardDatas:
     - EnemyCardData: {fileID: 11400000, guid: 44a1d29ec838fe040bd9140e7cb5e37e, type: 2}
-      CardForce: 5
+      CardForce: 13
     - EnemyCardData: {fileID: 11400000, guid: 43629df9ea04f40469b88a2a4f9eaac0, type: 2}
-      CardForce: 5
+      CardForce: 25
     UpgradeRangeConfig:
       From:
         UpgradeCardData: {fileID: 11400000, guid: 336f9383a37707c4e9e72d5c04f173a1, type: 2}
-        Value: 5
+        Value: 3
         Type: 1
       To:
         UpgradeCardData: {fileID: 11400000, guid: 336f9383a37707c4e9e72d5c04f173a1, type: 2}
-        Value: 10
+        Value: 50
         Type: 0
   - CardDatas:
     - EnemyCardData: {fileID: 11400000, guid: 08a92e7471de6b7428908b823e2485fb, type: 2}
-      CardForce: 5
+      CardForce: 40
     - EnemyCardData: {fileID: 11400000, guid: 8471306f2b08ea141a51f5a029fa411f, type: 2}
-      CardForce: 5
+      CardForce: 80
     UpgradeRangeConfig:
       From:
         UpgradeCardData: {fileID: 0}
