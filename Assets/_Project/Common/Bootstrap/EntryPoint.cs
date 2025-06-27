@@ -130,7 +130,8 @@ namespace Project.Bootstrap
                 _cardHandlerRepository,
                 _cardObjectPool,
                 _audioSource,
-                _animationsData);
+                _animationsData,
+                _soundsData);
             _gameplayControllerCreateData = _gameplayControllerFactory.Create();
             _gameCycleStateControllerFactory = new GameCycleStateControllerFactory(
                 _uICreateData.MenuWindowController,

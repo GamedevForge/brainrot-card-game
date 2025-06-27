@@ -17,6 +17,7 @@ namespace Project.Core.Services
         private readonly CardObjectPool _cardObjectPool;
         private readonly AudioSource _audioSource;
         private readonly AnimationsData _animationsData;
+        private readonly SoundsData _soundsData;
 
         public GameplayControllerFactory(
             RectTransform playerCardRectTransform,
@@ -27,7 +28,8 @@ namespace Project.Core.Services
             CardHandlerRepository cardHandlerRepository,
             CardObjectPool cardObjectPool,
             AudioSource audioSource,
-            AnimationsData animationsData)
+            AnimationsData animationsData,
+            SoundsData soundsData)
         {
             _playerCardRectTransform = playerCardRectTransform;
             _moveAnimation = moveAnimation;
@@ -38,6 +40,7 @@ namespace Project.Core.Services
             _cardObjectPool = cardObjectPool;
             _audioSource = audioSource;
             _animationsData = animationsData;
+            _soundsData = soundsData;
         }
 
         public GameplayControllerCreateData Create()
@@ -49,7 +52,8 @@ namespace Project.Core.Services
                 _moveAnimation,
                 _cardHandlerRepository,
                 _playerCard,
-                _audioSource);
+                _audioSource,
+                _soundsData);
             data.GameplayModel = new GameplayModel(_playerCard);
             data.CardSlots = new CardSlots(
                 _cardSlotParent,

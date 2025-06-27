@@ -13,19 +13,22 @@ namespace Project.Core.Gameplay
         private readonly CardHandlerRepository _handlerRepository;
         private readonly CardCreatedData _playerCard;
         private readonly AudioSource _audioSource;
+        private readonly SoundsData _soundsData;
 
         public AttackController(
             RectTransform playerCardRectTransform,
             MoveAnimation moveAnimation,
             CardHandlerRepository handlerRepository,
             CardCreatedData playerCard,
-            AudioSource audioSource)
+            AudioSource audioSource,
+            SoundsData soundsData)
         {
             _playerCardRectTransform = playerCardRectTransform;
             _moveAnimation = moveAnimation;
             _handlerRepository = handlerRepository;
             _playerCard = playerCard;
             _audioSource = audioSource;
+            _soundsData = soundsData;
         }
 
         public async UniTask AttackEnemy()
@@ -41,6 +44,7 @@ namespace Project.Core.Gameplay
             _handlerRepository.CurrentCardModel.CardGameObject.transform.SetAsLastSibling();
             _playerCard.CardGameObject.transform.SetAsLastSibling();
 
+            _audioSource.PlayOneShot(_soundsData.OnAttackCardSFX);
             await _moveAnimation.MoveAsync(
                 _playerCardRectTransform,
                 playerCardStartPosition,

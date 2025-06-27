@@ -59,7 +59,6 @@ namespace Project.Core.Card
         
         public async UniTask TakeDamage(int damage)
         {
-            _audioSource.PlayOneShot(_soundsData.OnAttackCardSFX);
             _health = Mathf.Max(_health - damage, 0);
             _cardCreatedData.CardStats.CardForce = _health;
             _cardCreatedData.CardComponents.CardForceIndex.text = _health.ToString();
@@ -69,8 +68,8 @@ namespace Project.Core.Card
             if (_health == 0)
             {
                 IsAlive = false;
-                await _view.OnKill();
                 _audioSource.PlayOneShot(_soundsData.OnCardDeadSFX);
+                await _view.OnKill();
                 OnDead?.Invoke(_cardCreatedData);
             }
         }

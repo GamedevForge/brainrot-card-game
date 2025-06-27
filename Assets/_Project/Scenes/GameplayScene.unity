@@ -256,6 +256,7 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 4bee6dffd3d75c54885316917d04a308, type: 2}
   _gameData: {fileID: 11400000, guid: 9a83ad6cf25722048babbcc2c29a81f2, type: 2}
   _animationsData: {fileID: 11400000, guid: fdf27e6e8da7a7246a87cb934dd66a5c, type: 2}
+  _soundsData: {fileID: 11400000, guid: 8ff5d3b798e753e4187f55bb3ff0525c, type: 2}
   _cardPrefab: {fileID: 1769670924833643359, guid: 0dc4a67c95166ea4fba8060dd0d322b6, type: 3}
   _cardSlotsPrefab: {fileID: 5241225890955985093, guid: 5121f1124d0e4fa4ab099e8b20b5dc28, type: 3}
   _graphicRaycaster: {fileID: 152136822}
@@ -1112,8 +1113,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
-  m_Resource: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
