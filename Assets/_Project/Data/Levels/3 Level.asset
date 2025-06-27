@@ -48,7 +48,7 @@ MonoBehaviour:
     - EnemyCardData: {fileID: 11400000, guid: 047ceccbe560b0841ae7838bdea2bd58, type: 2}
       CardForce: 16
     - EnemyCardData: {fileID: 11400000, guid: 43629df9ea04f40469b88a2a4f9eaac0, type: 2}
-      CardForce: 20
+      CardForce: 28
     UpgradeRangeConfig:
       From:
         UpgradeCardData: {fileID: 11400000, guid: a15cb44e39a53784e81b1a529de2c3a3, type: 2}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
   m_Name: BombardiroCrocodilo
   m_EditorClassIdentifier: 
-  <CardSprite>k__BackingField: {fileID: -517388809, guid: 302c5ebf9d6b6a949b82a981538f2bb6, type: 3}
+  <CardSprite>k__BackingField: {fileID: 1961947297, guid: 14732b50513abeb4db7eb523b8709a04, type: 3}
   <AudioClip>k__BackingField: {fileID: 8300000, guid: 31727d69bdc8a9d42b1d93f47257acde, type: 3}
