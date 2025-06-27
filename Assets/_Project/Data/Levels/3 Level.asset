@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9222fff2004db49458fe64b1cde0db29, type: 3}
+  m_Name: 3 Level
+  m_EditorClassIdentifier: 
+  <PlayerCardConfig>k__BackingField:
+    EnemyCardData: {fileID: 11400000, guid: 309b484d57727e542a647c31eedd402d, type: 2}
+    CardForce: 6
+  <WaveConfigs>k__BackingField:
+  - CardDatas:
+    - EnemyCardData: {fileID: 11400000, guid: 8059d9448ed2b284b97bb1f432b3982b, type: 2}
+      CardForce: 4
+    - EnemyCardData: {fileID: 11400000, guid: 8471306f2b08ea141a51f5a029fa411f, type: 2}
+      CardForce: 7
+    UpgradeRangeConfig:
+      From:
+        UpgradeCardData: {fileID: 11400000, guid: 41f096f36bac17741a57f136e524ec03, type: 2}
+        Value: 2
+        Type: 1
+      To:
+        UpgradeCardData: {fileID: 11400000, guid: 41f096f36bac17741a57f136e524ec03, type: 2}
+        Value: 5
+        Type: 0
+  - CardDatas:
+    - EnemyCardData: {fileID: 11400000, guid: 309b484d57727e542a647c31eedd402d, type: 2}
+      CardForce: 14
+    - EnemyCardData: {fileID: 11400000, guid: 5dbeeba14662d684799e11fb0b8935da, type: 2}
+      CardForce: 10
+    UpgradeRangeConfig:
+      From:
+        UpgradeCardData: {fileID: 11400000, guid: a15cb44e39a53784e81b1a529de2c3a3, type: 2}
+        Value: 5
+        Type: 0
+      To:
+        UpgradeCardData: {fileID: 11400000, guid: a15cb44e39a53784e81b1a529de2c3a3, type: 2}
+        Value: 2
+        Type: 1
+  - CardDatas:
+    - EnemyCardData: {fileID: 11400000, guid: 047ceccbe560b0841ae7838bdea2bd58, type: 2}
+      CardForce: 16
+    - EnemyCardData: {fileID: 11400000, guid: 43629df9ea04f40469b88a2a4f9eaac0, type: 2}
+      CardForce: 20
+    UpgradeRangeConfig:
+      From:
+        UpgradeCardData: {fileID: 11400000, guid: a15cb44e39a53784e81b1a529de2c3a3, type: 2}
+        Value: 5
+        Type: 0
+      To:
+        UpgradeCardData: {fileID: 11400000, guid: a15cb44e39a53784e81b1a529de2c3a3, type: 2}
+        Value: 2
+        Type: 1
