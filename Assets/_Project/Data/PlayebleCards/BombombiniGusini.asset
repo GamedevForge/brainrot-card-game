@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
   m_Name: BombombiniGusini
   m_EditorClassIdentifier: 
-  <CardSprite>k__BackingField: {fileID: 1307468191, guid: db58618dee62e5b44aa9c6ea68730c8a, type: 3}
+  <CardSprite>k__BackingField: {fileID: 536475695, guid: 06c0de3b8bb42774991b2143632f51d0, type: 3}
   <AudioClip>k__BackingField: {fileID: 8300000, guid: 5f60df55bbcbb2448be39de5b27378c6, type: 3}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
   m_Name: FrigoCamelo
   m_EditorClassIdentifier: 
-  <CardSprite>k__BackingField: {fileID: 1777772165, guid: 0227c43391c914f40a252246d9e3b4b7, type: 3}
+  <CardSprite>k__BackingField: {fileID: 1865846703, guid: 06c0de3b8bb42774991b2143632f51d0, type: 3}
   <AudioClip>k__BackingField: {fileID: 8300000, guid: 1094e4e32037b9c44af729ebb150d411, type: 3}

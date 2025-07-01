@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
   m_Name: TralaleroTralala
   m_EditorClassIdentifier: 
-  <CardSprite>k__BackingField: {fileID: 134200122, guid: 761defb3b3078e74a81ea788520ab91a, type: 3}
+  <CardSprite>k__BackingField: {fileID: 927177030, guid: 06c0de3b8bb42774991b2143632f51d0, type: 3}
   <AudioClip>k__BackingField: {fileID: 8300000, guid: 150775e56430ef541bd7963ac2881345, type: 3}

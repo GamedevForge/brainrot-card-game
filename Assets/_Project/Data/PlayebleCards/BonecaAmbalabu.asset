@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
   m_Name: BonecaAmbalabu
   m_EditorClassIdentifier: 
-  <CardSprite>k__BackingField: {fileID: -641475063, guid: c14da912c196dce43b5705e8b442ce3e, type: 3}
+  <CardSprite>k__BackingField: {fileID: 1277820292, guid: 06c0de3b8bb42774991b2143632f51d0, type: 3}
   <AudioClip>k__BackingField: {fileID: 8300000, guid: 944e4e262363b434fb4a77f4468847ea, type: 3}

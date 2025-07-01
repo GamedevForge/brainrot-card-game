@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ab305d40ab1ba43baf302cf8c3bd28, type: 3}
   m_Name: "Liril\xECLaril\xE0"
   m_EditorClassIdentifier: 
-  <CardSprite>k__BackingField: {fileID: 1753723409, guid: 2db60be3e70de224a8a264291125b3e3, type: 3}
+  <CardSprite>k__BackingField: {fileID: -1120145417, guid: 06c0de3b8bb42774991b2143632f51d0, type: 3}
   <AudioClip>k__BackingField: {fileID: 8300000, guid: cfadfc251972df149b711d8b66aa918b, type: 3}
