@@ -7,5 +7,6 @@ namespace Project.Configs
     {
         [field: SerializeField] public int MaxCardPoolSize { get; private set; }
         [field: SerializeField] public int MaxUpgradeUIElementsPoolSize { get; private set; }
+        [field: SerializeField] public int LevelCompletedCountBeforeShowingAds { get; private set; } = 1;
     }
 }

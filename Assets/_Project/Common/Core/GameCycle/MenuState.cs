@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using GamePush;
 using Project.Core.Gameplay;
 using Project.Core.Services;
 using Project.Core.Services.StateMachine;
@@ -13,6 +14,7 @@ namespace Project.Core.GameCycle
         private readonly ShadowPopup _shadowPopup;   
         private readonly InputController _inputController;
         private readonly LevelProgress _levelProgress;
+        private readonly InterstitialController _interstitialController = new InterstitialController();
         
         private BaseStateController _gameCycleStateController;
 
@@ -39,6 +41,7 @@ namespace Project.Core.GameCycle
             _inputController.EnableInput();
             await _menuWindowController.AsyncWaitToClickOnGameplayButton();
             _inputController.DisableInput();
+            GP_Analytics.Goal("level_start", _levelProgress.CurrentLevelNumber);
             _gameCycleStateController.Translate(typeof(GameplayState)).Forget();
         }
 
@@ -46,6 +49,7 @@ namespace Project.Core.GameCycle
         {
             await _menuWindowController.HideAsync();
             await _shadowPopup.ShowPopup();
+            await _interstitialController.ShowInterstitial();
             _menuWindowController.DisableWindowGameObject();
         }
     }

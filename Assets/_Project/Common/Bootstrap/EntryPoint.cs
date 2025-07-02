@@ -1,3 +1,4 @@
+using GamePush;
 using Project.Ai;
 using Project.Configs;
 using Project.Core.Services;
@@ -44,6 +45,7 @@ namespace Project.Bootstrap
         [SerializeField] private AudioSource _audioSource;
 
         private readonly CardHandlerRepository _cardHandlerRepository = new();
+        private readonly InterstitialController _interstitialController = new();
 
         private BaseStateController _gameCycleStateController;
         private BaseStateController _gameplayStateController;
@@ -144,7 +146,9 @@ namespace Project.Bootstrap
                 _levelsData,
                 _saveLoadSystemCreateData.LevelProgress,
                 _gameplayControllerCreateData.GameplayController,
-                _playerCard);
+                _playerCard,
+                _gameData,
+                _interstitialController);
             _gameCycleStateController = _gameCycleStateControllerFactory.Create();
             _gameplayStateControllerFactory = new GameplayStateControllerFactory(
                 _gameplayControllerCreateData.AttackController,

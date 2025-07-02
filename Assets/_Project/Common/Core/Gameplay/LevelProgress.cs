@@ -12,6 +12,7 @@ namespace Project.Core.Gameplay
         }
 
         public int CurrentLevelIndex { get; private set; } = 0;
+        public int CurrentLevelNumber => CurrentLevelIndex % _levelsData.LevelDatas.Length;
 
         public void SetCurrentLevelIndex(int levelIndex) =>
             CurrentLevelIndex = levelIndex;

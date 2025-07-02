@@ -20,6 +20,8 @@ namespace Project.Core.Services
         private readonly LevelProgress _levelProgress;
         private readonly GameplayController _gameplayController;
         private readonly CardCreatedData _playerCard;
+        private readonly GameData _gameData;
+        private readonly InterstitialController _interstitialController;
 
         private GameplayState _gameplayState;
 
@@ -33,7 +35,9 @@ namespace Project.Core.Services
             LevelsData levelsData,
             LevelProgress levelProgress,
             GameplayController gameplayController,
-            CardCreatedData playerCard)
+            CardCreatedData playerCard,
+            GameData gameData,
+            InterstitialController interstitialController)
         {
             _menuWindowController = menuWindowController;
             _winWindowController = winWindowController;
@@ -45,6 +49,8 @@ namespace Project.Core.Services
             _levelProgress = levelProgress;
             _gameplayController = gameplayController;
             _playerCard = playerCard;
+            _gameData = gameData;
+            _interstitialController = interstitialController;
         }
 
         public BaseStateController Create()
@@ -70,13 +76,16 @@ namespace Project.Core.Services
                     _shadowPopup,
                     _levelProgress,
                     _levelsData,
-                    _gameplayController),
+                    _gameplayController,
+                    _interstitialController,
+                    _gameData),
                 new LoseState(
                     _loseWindowController,
                     _backgorundGameObject,
                     _inputController,
                     _shadowPopup,
-                    _gameplayController),
+                    _gameplayController,
+                    _levelProgress),
             };
 
             BaseStateController stateController = new(

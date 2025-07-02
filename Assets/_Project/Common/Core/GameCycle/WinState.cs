@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using GamePush;
 using Project.Configs;
 using Project.Core.Gameplay;
 using Project.Core.Services;
@@ -18,8 +19,11 @@ namespace Project.Core.GameCycle
         private readonly LevelProgress _levelProgress;
         private readonly LevelsData _levelsData;
         private readonly GameplayController _gameplayController;
+        private readonly InterstitialController _interstitialController;
+        private readonly GameData _gameData;
         
         private BaseStateController _gameCycleStateController;
+        private int _currentLevelCompletedCountBeforeShowingAds;
 
         public WinState(
             WinWindowController winWindowController,
@@ -28,7 +32,9 @@ namespace Project.Core.GameCycle
             ShadowPopup shadowPopup,
             LevelProgress levelProgress,
             LevelsData levelsData,
-            GameplayController gameplayController)
+            GameplayController gameplayController,
+            InterstitialController interstitialController,
+            GameData gameData)
         {
             _winWindowController = winWindowController;
             _gamePlayBackground = gamePlayBackground;
@@ -37,6 +43,8 @@ namespace Project.Core.GameCycle
             _levelProgress = levelProgress;
             _levelsData = levelsData;
             _gameplayController = gameplayController;
+            _interstitialController = interstitialController;
+            _gameData = gameData;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -44,13 +52,9 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncEnter()
         {
+            GP_Analytics.Goal("level_complete", _levelProgress.CurrentLevelNumber);
             _levelProgress.SetCurrentLevelIndex(_levelProgress.CurrentLevelIndex + 1);
-
-            //if (_levelsData.LevelDatas.Length - 1 == _levelProgress.CurrentLevelIndex) 
-            //    _levelProgress.SetCurrentLevelIndex(0);
-            //else
-            //    _levelProgress.SetCurrentLevelIndex(_levelProgress.CurrentLevelIndex + 1);
-
+            
             _inputController.DisableInput();
             _winWindowController.EnableWindowGameObject();
             await _gameplayController.RemoveAllCardOnCurrentWave();
@@ -59,13 +63,22 @@ namespace Project.Core.GameCycle
             await _winWindowController.AsyncWaitToClickOnGameplayButton();
             _inputController.DisableInput();
             await _winWindowController.HideAsync();
+            await _shadowPopup.ShowPopup();
+
+            if (_currentLevelCompletedCountBeforeShowingAds == _gameData.LevelCompletedCountBeforeShowingAds)
+            {
+                _currentLevelCompletedCountBeforeShowingAds = 0;
+                await _interstitialController.ShowInterstitial();
+            }
+            else
+                _currentLevelCompletedCountBeforeShowingAds++;
+
             _gameCycleStateController.Translate(typeof(MenuState)).Forget();
         }
 
         public async UniTask AsyncExit()
         {
             await _winWindowController.HideAsync();
-            await _shadowPopup.ShowPopup();
             _winWindowController.DisableWindowGameObject();
             _gamePlayBackground.SetActive(false);
         }

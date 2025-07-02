@@ -5,6 +5,9 @@ using Project.Core.Services.StateMachine;
 using Project.Core.UI.Popup;
 using Project.Core.UI.Windows;
 using UnityEngine;
+using GamePush;
+using Project.Configs;
+using System;
 
 namespace Project.Core.GameCycle
 {
@@ -15,6 +18,7 @@ namespace Project.Core.GameCycle
         private readonly InputController _inputController;
         private readonly ShadowPopup _shadowPopup;
         private readonly GameplayController _gameplayController;
+        private readonly LevelProgress _levelProgress;
         
         private BaseStateController _gameCycleStateController;
 
@@ -23,13 +27,15 @@ namespace Project.Core.GameCycle
             GameObject gamePlayBackground,
             InputController inputController,
             ShadowPopup shadowPopup,
-            GameplayController gameplayController)
+            GameplayController gameplayController,
+            LevelProgress levelProgress)
         {
             _loseWindowController = loseWindowController;
             _gamePlayBackground = gamePlayBackground;
             _inputController = inputController;
             _shadowPopup = shadowPopup;
             _gameplayController = gameplayController;
+            _levelProgress = levelProgress;
         }
 
         public void Set(BaseStateController stateController) =>
@@ -37,6 +43,7 @@ namespace Project.Core.GameCycle
 
         public async UniTask AsyncEnter()
         {
+            GP_Analytics.Goal("level_fail", _levelProgress.CurrentLevelNumber);
             _inputController.DisableInput();
             _loseWindowController.EnableWindowGameObject();
             await _loseWindowController.ShowAsync();
