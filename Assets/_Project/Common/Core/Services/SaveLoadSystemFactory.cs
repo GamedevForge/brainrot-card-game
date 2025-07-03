@@ -24,7 +24,7 @@ namespace Project.Core.Services
             data.SaveLoadController = data.SaveLoadSystemGameObject.GetComponent<SaveLoadController>();
             data.LevelProgress = new LevelProgress(_levelsData);
 
-            data.SaveLoadController.Initilialize(data.LevelProgress, new SaveLoad());
+            data.SaveLoadController.Initialize(data.LevelProgress, new GPSaveLoad());
 
             return data;
         }

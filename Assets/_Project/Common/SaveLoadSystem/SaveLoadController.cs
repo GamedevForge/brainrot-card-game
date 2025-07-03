@@ -9,7 +9,7 @@ namespace Project.SaveLoadSystem
         private LevelProgress _levelProgress;
         private PlayerSaveData _currentSaveData;
 
-        public void Initilialize(
+        public void Initialize(
             LevelProgress levelProgress,
             ISaveLoad saveLoad)
         {
