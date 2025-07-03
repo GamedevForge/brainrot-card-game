@@ -70,8 +70,9 @@ namespace Project.Bootstrap
         private PlayerCardFactory _playerCardFactory;
         private CardObjectPool _cardObjectPool;
 
-        private void Start() 
+        private async void Start() 
         {
+            await GP_Init.Ready;
             _saveLoadSystemFactory = new SaveLoadSystemFactory(
                 _saveLoadSystemPrefab,
                 _levelsData);

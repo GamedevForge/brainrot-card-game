@@ -14,8 +14,7 @@ namespace Project.Core.GameCycle
         private readonly ShadowPopup _shadowPopup;   
         private readonly InputController _inputController;
         private readonly LevelProgress _levelProgress;
-        private readonly InterstitialController _interstitialController = new InterstitialController();
-        
+
         private BaseStateController _gameCycleStateController;
 
         public MenuState(
@@ -49,7 +48,6 @@ namespace Project.Core.GameCycle
         {
             await _menuWindowController.HideAsync();
             await _shadowPopup.ShowPopup();
-            await _interstitialController.ShowInterstitial();
             _menuWindowController.DisableWindowGameObject();
         }
     }
